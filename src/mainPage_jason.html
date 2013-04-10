@@ -8,7 +8,9 @@
 <script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
 
 <script type="text/javascript">
-var drugQueue = {};
+	var actionQueue = [];
+	var displayQueue = [];
+	var hiddenDrugQueue = [];
 	$(document).ready(function() {
     	
     	$(".checkbox").click(function(evt){
@@ -29,7 +31,6 @@ var drugQueue = {};
   		});
 
   		$("#add").click(function(evt){
-  			console.log('haha');
   			var row = document.createElement('tr');
   			var td1 = document.createElement('td');
   			$(td1).append($(document.createElement('input')).attr('type','checkbox').addClass('checkbox'));
