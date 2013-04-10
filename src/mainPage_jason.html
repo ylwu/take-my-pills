@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<link rel="stylesheet" type="text/css" href="layout_jason.css" />
+<link rel="stylesheet" type="text/css" href="external-lib/bootstrap/css/bootstrap.min.css" />
+<script type = "text/javascript" src= "external-lib/jquery-1.9.0.min.js"> </script>
+<script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
+<script type="text/javascript">
+	$(document).ready(function() {
+  $(".checkbox").click(function(evt){
+  	$("#actionbar").show();
+  })
+});
+</script>
+</head>
+
+<body>
+	<div class="row" >
+		<div class="span6 centered">
+			See History
+		</div>
+	</div>
+	<div class="row">
+		<label class="span2">
+		<input type = "checkbox"> Select missed
+
+		</label>
+		<button class= "btn btn-primary span2 offset2"> Edit pills
+		</button>	
+	</div>
+	<div class="row">
+		<div class="span6" id="main">
+		<div id="drugs">
+		<table class= "table">
+			<tbody>
+			<tr class="error drug">
+				<td> <input type = "checkbox" class="checkbox"> DrugA   </td>
+				<td> 3/18/13 </td>
+				<td> 2:00pm </td>
+				<td>  2pills </td>
+				<td>  <button class="bth btn-info"> info </button> 
+				</td>
+			</tr>
+			<tr class="success drug">
+				<td> <input type = "checkbox" class="checkbox"> DrugB  </td>
+				<td> 3/18/13 </td>
+				<td> 4:00pm </td>
+				<td>  2pills </td>
+				<td>  <button class="bth btn-info"> info </button> 
+				</td>
+			</tr>
+				
+			</tbody>
+		</table>
+		</div>
+		<div class="row" id="showmore">
+		<button class= "btn-block"> see more pills </button>
+		</div>
+		<div class="row" id="actionbar">
+			<button class="btn btn-success span2"> Take </button>
+			<button class="btn btn-warning span2 offset2"> Miss </button>
+		</div>
+		</div>
+		
+	</div>
+
+
+</body>
+
+</html>

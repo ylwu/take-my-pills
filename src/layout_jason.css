@@ -1,0 +1,13 @@
+.centered{
+	text-align :center;
+	background-color: #eee;
+}
+
+#drugs{
+	overflow: scroll;
+	height: 400px;
+}
+
+#actionbar{
+	display: none;
+}
