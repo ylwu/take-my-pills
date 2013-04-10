@@ -6,12 +6,61 @@
 <link rel="stylesheet" type="text/css" href="external-lib/bootstrap/css/bootstrap.min.css" />
 <script type = "text/javascript" src= "external-lib/jquery-1.9.0.min.js"> </script>
 <script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
+
 <script type="text/javascript">
+var drugQueue = {};
 	$(document).ready(function() {
-  $(".checkbox").click(function(evt){
-  	$("#actionbar").show();
-  })
-});
+    	
+    	$(".checkbox").click(function(evt){
+  		if ($("input:checked").length != 0){
+  			$("#actionbar").show();
+  		} else {
+  			$("#actionbar").hide();
+  		};
+
+  		$("#take").click(function(evt){
+  			$("input:checked").parent().parent().remove();
+  		});
+
+  		$("#miss").click(function(evt){
+  			$("input:checked").parent().parent().remove();
+  		});
+
+  		});
+
+  		$("#add").click(function(evt){
+  			console.log('haha');
+  			var row = document.createElement('tr');
+  			var td1 = document.createElement('td');
+  			$(td1).append($(document.createElement('input')).attr('type','checkbox').addClass('checkbox'));
+  			$(td1).append("DrugD");
+  			$(row).append($(td1));
+  			$(row).append($(document.createElement('td')).append('3/18/13'));
+  			$(row).append($(document.createElement('td')).append('8:00pm'));
+  			$(row).append($(document.createElement('td')).append('2pills'));
+  			$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
+  			$(row).addClass("success").addClass('drug');
+  			$('#drugtable').append($(row));
+
+  			$(".checkbox").click(function(evt){
+  				if ($("input:checked").length != 0){
+  			$("#actionbar").show();
+  			} else {
+  				$("#actionbar").hide();
+  			};
+
+  			$("#take").click(function(evt){
+  				$("input:checked").parent().parent().remove();
+  			});
+
+  			$("#miss").click(function(evt){
+  				$("input:checked").parent().parent().remove();
+  			});
+
+  			});
+
+  		});
+	});
 </script>
 </head>
 
@@ -24,42 +73,48 @@
 	<div class="row">
 		<label class="span2">
 		<input type = "checkbox"> Select missed
-
 		</label>
-		<button class= "btn btn-primary span2 offset2"> Edit pills
-		</button>	
+		<button class= "btn btn-primary span2 offset1"> Edit pills
+		</button>
+		<button class= "btn span1" id="add"> <i class="icon-plus"></i></button>
 	</div>
 	<div class="row">
 		<div class="span6" id="main">
 		<div id="drugs">
-		<table class= "table">
-			<tbody>
+		<table class= "table" id="drugtable">
 			<tr class="error drug">
 				<td> <input type = "checkbox" class="checkbox"> DrugA   </td>
 				<td> 3/18/13 </td>
 				<td> 2:00pm </td>
 				<td>  2pills </td>
-				<td>  <button class="bth btn-info"> info </button> 
+				<td>  <button class="btn btn-info"> info </button> 
 				</td>
 			</tr>
-			<tr class="success drug">
+			<tr class="error drug">
 				<td> <input type = "checkbox" class="checkbox"> DrugB  </td>
 				<td> 3/18/13 </td>
 				<td> 4:00pm </td>
 				<td>  2pills </td>
-				<td>  <button class="bth btn-info"> info </button> 
+				<td>  <button class="btn btn-info"> info </button> 
 				</td>
 			</tr>
-				
-			</tbody>
+
+			<tr class="success drug">
+				<td> <input type = "checkbox" class="checkbox"> DrugB  </td>
+				<td> 3/18/13 </td>
+				<td> 6:00pm </td>
+				<td>  2pills </td>
+				<td>  <button class="btn btn-info"> info </button> 
+				</td>
+			</tr>
 		</table>
 		</div>
 		<div class="row" id="showmore">
 		<button class= "btn-block"> see more pills </button>
 		</div>
 		<div class="row" id="actionbar">
-			<button class="btn btn-success span2"> Take </button>
-			<button class="btn btn-warning span2 offset2"> Miss </button>
+			<button class="btn btn-success span2" id="take"> Take </button>
+			<button class="btn btn-warning span2 offset2" id="miss"> Miss </button>
 		</div>
 		</div>
 		
