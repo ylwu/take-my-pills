@@ -1,87 +1,24 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-<title>Take Your Pills</title>
-<link rel="stylesheet" type="text/css" href="layout_jason.css" />
-<link rel="stylesheet" type="text/css" href="external-lib/bootstrap/css/bootstrap.min.css" />
-<script type = "text/javascript" src= "external-lib/jquery-1.9.0.min.js"> </script>
-<script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
-
-<script type="text/javascript">
-	var actionQueue = [];
-	var displayQueue = [];
-	var hiddenDrugQueue = [];
-	$(document).ready(function() {
-    	
-    	$(".checkbox").click(function(evt){
-  		if ($("input:checked").length != 0){
-  			$("#actionbar").show();
-  		} else {
-  			$("#actionbar").hide();
-  		};
-
-  		$("#take").click(function(evt){
-  			$("input:checked").parent().parent().remove();
-  		});
-
-  		$("#miss").click(function(evt){
-  			$("input:checked").parent().parent().remove();
-  		});
-
-  		});
-
-  		$('#EditPills').click(function(evt){
-  			document.getElementById("home").style.display="none";
-  			document.getElementById("add_new").style.display="none";
-			document.getElementById("edit_main").style.display="block";
-			document.getElementById("edit_title").innerHTML="Edit Your Pills";
-  		})
-
-  		$("#add").click(function(evt){
-  			var row = document.createElement('tr');
-  			var td1 = document.createElement('td');
-  			$(td1).append($(document.createElement('input')).attr('type','checkbox').addClass('checkbox'));
-  			$(td1).append("DrugD");
-  			$(row).append($(td1));
-  			$(row).append($(document.createElement('td')).append('3/18/13'));
-  			$(row).append($(document.createElement('td')).append('8:00pm'));
-  			$(row).append($(document.createElement('td')).append('2pills'));
-  			$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
-  			$(row).addClass("success").addClass('drug');
-  			$('#drugtable').append($(row));
-
-  			$(".checkbox").click(function(evt){
-  				if ($("input:checked").length != 0){
-  			$("#actionbar").show();
-  			} else {
-  				$("#actionbar").hide();
-  			};
-
-  			$("#take").click(function(evt){
-  				$("input:checked").parent().parent().remove();
-  			});
-
-  			$("#miss").click(function(evt){
-  				$("input:checked").parent().parent().remove();
-  			});
-
-  			});
-
-  		});
-	});
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Take Your Pills</title>
+    	 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css" />
+	
+		<script type="text/javascript">
 		
-	/*
-	This is the start of Ty's javascript
-	*/
-
 			$(function() {
-				document.getElementById("edit_main").style.display="none";
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("cycle").style.display="block";
 				document.getElementById("specific_time").style.display="none";
 				document.getElementById("num_dosage").style.display="none";
-
 				
 				function editPill() { // for each drug button on Edit Your Pills page
 				document.getElementById("edit_main").style.display="none";
@@ -124,10 +61,7 @@
 			});
 						
 			function redirectToHome() {
-				document.getElementById("edit_main").style.display="none";
-				document.getElementById("add_new").style.display="none";
-				document.getElementById("edit_title").innerHTML="";
-				document.getElementById('home').style.display='block';
+				alert('link to Home: Take Your Pills page!');
 			}
 			
 			function changeDivToAddNewDrug() {
@@ -161,22 +95,9 @@
 				pdiv.appendChild(del);
 				document.getElementById("drug_section").appendChild(pdiv);
 				
-				// save info into shared object function
-				var pillTimes;
-				if (document.getElementById("add_dosefrequency").value==0) { // cycle = two numbers
-
-				}
-				else if (document.getElementById("add_dosefrequency").value==1) { // specific time = innerHTML type string
-					pillTimes=document.getElementById("selected_times").innerHTML; // <p>some:time am</p> listed
-
-				}
-				else { // number of doses per day = one number (1-10)
-
-					pillTimes=document.getElementById("num_hour").value;
-				}
-
-				var myPill=myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value, document.getElementById("new_drugname").value, document.getElementById("add_dosefrequency").value, pillTimes);
-
+				// TODO: save info into some form
+				// SAVE ALL INFO INTO php?? json object? and then clear all fields
+				alert("how to save to JSON object? php session cookie?");
 				
 				clear_add_new();
 				document.getElementById("add_new").style.display="none";
@@ -206,85 +127,11 @@
 			
 			}
 		</script>
-</head>
+  </head>
 
-<body>
-<<<<<<< HEAD
-	<div>
-		<div class=" header span6 centered">
-			<h4 class="header_text">Take Your Pills</h4>
-		</div>
-	</div>
+  <body>
 
-	<div>
-		<div class= "span6 centered" id="contact-doctor-bar">
-			<button class= "btn btn-primary" id="home_btn"> Home</button>
-			<button class= "btn btn-warning" id="contact_doctor_btn"> Contact Doctor</button>
-			<span>2:00pm 4/20/2013</span>
-			<button class= "btn" id="contact_doctor_btn"> Sign Out</button>
-		</div>
-	</div>
-	
-=======
-	<div id="home">
->>>>>>> ad2ace87c188ee235dc8695c2492771459b52370
-	<div class="row" >
-		<div class="span6 centered">
-			See History
-		</div>
-	</div>
-	<div class="row">
-		<label class="span2">
-		<input type = "checkbox"> Select missed
-		</label>
-		<button id="EditPills" class= "btn btn-primary span2 offset1"> Edit pills
-		</button>
-		<button class= "btn span1" id="add"> <i class="icon-plus"></i></button>
-	</div>
-	<div class="row">
-		<div class="span6" id="main">
-		<div id="drugs">
-		<table class= "table" id="drugtable">
-			<tr class="error drug">
-				<td> <input type = "checkbox" class="checkbox"> DrugA   </td>
-				<td> 3/18/13 </td>
-				<td> 2:00pm </td>
-				<td>  2pills </td>
-				<td>  <button class="btn btn-info"> info </button> 
-				</td>
-			</tr>
-			<tr class="error drug">
-				<td> <input type = "checkbox" class="checkbox"> DrugB  </td>
-				<td> 3/18/13 </td>
-				<td> 4:00pm </td>
-				<td>  2pills </td>
-				<td>  <button class="btn btn-info"> info </button> 
-				</td>
-			</tr>
-
-			<tr class="success drug">
-				<td> <input type = "checkbox" class="checkbox"> DrugB  </td>
-				<td> 3/18/13 </td>
-				<td> 6:00pm </td>
-				<td>  2pills </td>
-				<td>  <button class="btn btn-info"> info </button> 
-				</td>
-			</tr>
-		</table>
-		</div>
-		<div class="row" id="showmore">
-		<button class= "btn-block"> see more pills </button>
-		</div>
-		<div class="row" id="actionbar">
-			<button class="btn btn-success span2" id="take"> Take </button>
-			<button class="btn btn-warning span2 offset2" id="miss"> Miss </button>
-		</div>
-		</div>
-		
-	</div>
-	</div>
-
-	<h1 id="edit_title"></h1>
+    <h1 id="edit_title">Edit Your Pills</h1>
 	<div id="edit_main">
 		<input type="button" id="edit_to_home" onclick="redirectToHome()" value="Back to Home">
 		
@@ -372,7 +219,7 @@
 			<p><input type="button" id="clear_specific" onclick="clearSpecificTime()" value="Clear Times"> <input type="button" id="add_specific" onclick="addSpecificTime()" value="Add This Time"></p>
 			</div>
 			<div id="num_dosage">
-				<p>Take <select id="num_hour">
+				<p>Take <select id="cycle_hour">
 				  <option value="1">1</option>
 				  <option value="2">2</option>
 				  <option value="3">3</option>
@@ -390,7 +237,12 @@
 		</div>
 	</div>
 
+<?php
 
-</body>
+$_SESSION['list_of_pills']="";
+?>
+
+
+  </body>
 
 </html>
