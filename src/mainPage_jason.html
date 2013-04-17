@@ -8,11 +8,13 @@
 <script type = "text/javascript" src= "external-lib/jquery-1.9.0.min.js"> </script>
 <script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
 <script src="myDrug.js"></script>
+<script src="model.js"></script>
 
 <script type = "text/javascript" src="main.js"></script>
 </head>
 
 <body>
+	<div class="span6" id="main-page"> 
 	<div class="row">
 	<div class=" header span6 centered">
 			<h4 class="header_text">Take Your Pills</h4>
@@ -29,9 +31,6 @@
 	</div>
 
 	<div id="home">
-	
-
-	
 	<div class="row" >
 		<div class="span6 centered">
 			See History
@@ -76,7 +75,7 @@
 			</tr>
 		</table>
 		</div>
-		<div class="row" id="showmore">
+		<div id="showmore">
 		<button class= "btn-block"> see more pills </button>
 		</div>
 		<div class="row" id="actionbar">
@@ -90,12 +89,9 @@
 
 	<h1 id="edit_title"></h1>
 	<div id="edit_main">
-		<input type="button" id="edit_to_home" onclick="redirectToHome()" value="Back to Home">
-		
 		<div id="drug_section">
-		</div>
-			
-		<input type="button" id="add_new_drug" onclick="changeDivToAddNewDrug()" value="+">
+		</div>		
+		<input type="button" class="btn span1" id="add_new_drug" onclick="changeDivToAddNewDrug()" value="+">
 	</div>
 		
 		
@@ -115,7 +111,7 @@
 			</select></p>
 
 			<div id="cycle">
-				<p>Take every <select id="cycle_hour">
+				<p>Take every <select id="cycle_hour" class="span1">
 				  <option value="0">0</option>
 				  <option value="1">1</option>
 				  <option value="2">2</option>
@@ -140,7 +136,7 @@
 				  <option value="21">21</option>
 				  <option value="22">22</option>
 				  <option value="23">23</option>
-			</select> hour(s), and <select id="cycle_minute">
+			</select> hour(s), and <select class="span1" id="cycle_minute">
 				  <option value="0">0</option>
 				  <option value="15">15</option>
 				  <option value="30">30</option>
@@ -150,7 +146,7 @@
 			</div>
 			<div id="specific_time">
 				Take every day at: <div id="selected_times"></div>
-				<p><select id="specific_hour">
+				<p><select id="specific_hour" class="span1">
 				  <option value="1">1</option>
 				  <option value="2">2</option>
 				  <option value="3">3</option>
@@ -163,12 +159,12 @@
 				  <option value="10">10</option>
 				  <option value="11">11</option>
 				  <option value="12">12</option>
-			</select> : <select id="specific_minute">
+			</select> : <select id="specific_minute" class="span1" >
 				  <option value="00">00</option>
 				  <option value="15">15</option>
 				  <option value="30">30</option>
 				  <option value="45">45</option>
-			</select> <select id="am_pm">
+			</select> <select id="am_pm" class="span1">
 				  <option value="am">am</option>
 				  <option value="pm">pm</option>
 			</select>
@@ -176,7 +172,7 @@
 			<p><input type="button" id="clear_specific" onclick="clearSpecificTime()" value="Clear Times"> <input type="button" id="add_specific" onclick="addSpecificTime()" value="Add This Time"></p>
 			</div>
 			<div id="num_dosage">
-				<p>Take <select id="num_hour">
+				<p>Take <select id="num_hour" class="span1">
 				  <option value="1">1</option>
 				  <option value="2">2</option>
 				  <option value="3">3</option>
@@ -187,12 +183,13 @@
 				  <option value="8">8</option>
 				  <option value="9">9</option>
 				  <option value="10">10</option>
-			</select> time(s) per day
+			</select > time(s) per day
 			</div>
 			<p><input type="button" id="save_new" onclick="save_new()" value="Save New Pill"></p>
 			
 		</div>
 	</div>
+</div>
 
 
 </body>

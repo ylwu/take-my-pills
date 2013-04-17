@@ -89,4 +89,12 @@
 	float:right;
 }
 
+#main-page{
+	border:3px;
+	border-style:solid;
+	border-color: black;
+	height: 550px;
+}
+}
+
 

@@ -1,9 +1,7 @@
-	var actionQueue = [];
-	var displayQueue = [];
-	var hiddenDrugQueue = [];
-	var drugsQueue=[];
 	$(document).ready(function() {
-    	
+
+		var m = Model();
+
     	$(".checkbox").click(function(evt){
   		if ($("input:checked").length != 0){
   			$("#actionbar").show();
@@ -28,39 +26,45 @@
 			document.getElementById("edit_title").innerHTML="Edit Your Pills";
   		})
 
+  		$('#home_btn').click( function(evt){
+  			redirectToHome();
+  		})
+
   		$("#add").click(function(evt){
-  			var row = document.createElement('tr');
-  			var td1 = document.createElement('td');
-  			$(td1).append($(document.createElement('input')).attr('type','checkbox').addClass('checkbox'));
-  			$(td1).append("DrugD");
-  			$(row).append($(td1));
-  			$(row).append($(document.createElement('td')).append('3/18/13'));
-  			$(row).append($(document.createElement('td')).append('8:00pm'));
-  			$(row).append($(document.createElement('td')).append('2pills'));
-  			$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
-  			$(row).addClass("success").addClass('drug');
-  			$('#drugtable').append($(row));
+  		// 	var row = document.createElement('tr');
+  		// 	var td1 = document.createElement('td');
+  		// 	$(td1).append($(document.createElement('input')).attr('type','checkbox').addClass('checkbox'));
+  		// 	$(td1).append("DrugD");
+  		// 	$(row).append($(td1));
+  		// 	$(row).append($(document.createElement('td')).append('3/18/13'));
+  		// 	$(row).append($(document.createElement('td')).append('8:00pm'));
+  		// 	$(row).append($(document.createElement('td')).append('2pills'));
+  		// 	$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
+  		// 	$(row).addClass("success").addClass('drug');
+  		// 	$('#drugtable').append($(row));
 
-  			$(".checkbox").click(function(evt){
-  				if ($("input:checked").length != 0){
-  			$("#actionbar").show();
-  			} else {
-  				$("#actionbar").hide();
-  			};
+  		// 	$(".checkbox").click(function(evt){
+  		// 		if ($("input:checked").length != 0){
+  		// 	$("#actionbar").show();
+  		// 	} else {
+  		// 		$("#actionbar").hide();
+  		// 	};
 
-  			$("#take").click(function(evt){
-  				$("input:checked").parent().parent().remove();
-  			});
+  		// 	$("#take").click(function(evt){
+  		// 		$("input:checked").parent().parent().remove();
+  		// 	});
 
-  			$("#miss").click(function(evt){
-  				$("input:checked").parent().parent().remove();
-  			});
+  		// 	$("#miss").click(function(evt){
+  		// 		$("input:checked").parent().parent().remove();
+  		// 	});
 
-  			});
+  		// 	});
 
-  		});
-	});
-		
+  		// });
+
+		changeDivToAddNewDrug();
+		});
+	});	
 	/*
 	This is the start of Ty's javascript
 	*/
@@ -113,6 +117,7 @@
 			}
 			
 			function changeDivToAddNewDrug() {
+				document.getElementById("home").style.display="none";
 				document.getElementById("edit_main").style.display="none";
 				document.getElementById("add_new").style.display="block";
 				document.getElementById("edit_title").innerHTML="Add New Pill";
@@ -162,7 +167,7 @@
 
 				var myPill=new myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value, document.getElementById("new_drugname").value, document.getElementById("add_dosefrequency").value, pillTimes);
 
-				drugsQueue.push(myPill);
+				m.drugsQueue.push(myPill);
 				
 				clear_add_new();
 				document.getElementById("add_new").style.display="none";

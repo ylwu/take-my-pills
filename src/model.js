@@ -30,7 +30,7 @@ var Model = function(){
 	}
 
 	this.nextTenDrugs = function(){
-
+		
 	}
 
 
