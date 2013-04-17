@@ -2,7 +2,6 @@
 //This script extracts parameters from the URL
 //from jquery-howto.blogspot.com
 
-
 $.extend({
         getUrlVars : function() {
             var vars = [], hash;

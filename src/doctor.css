@@ -1,13 +1,22 @@
 
+/* doctor_login.html*/
+body {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.fullheight{
+	height:100%;
+}
+
  .login-screen {
     text-align:center; 
-	height:100%
 	vertical-align: middle;
 	display:inline-block;
 	background: linear-gradient(#F6FFFF,#67DDDD);
 	
 }
-
 
 .login-center {
 
@@ -23,21 +32,80 @@
 
 }
 
-.login-left{
-	text-align: left;
-	}
 	
 .login-button{
 	margin-left:10px;
 	margin-right:10px;
 }
 
-
-
+/* doctor_newAccount.html*/
 
 .signup-legend{
 	text-align: left;
 }
+
+.signup-label{
+	vertical-align: bottom;
+	text-align:right;
+	float:left;
+	
+
+}
+
+.signup-text{
+	float: right;
+	vertical-align: bottom;
+	margin-left: 15px;
+
+}
+
+
+/* doctor_addPatient.html */
+
+.addpatient-label{
+	vertical-align: bottom;
+	text-align:right;
+	float:left;
+}
+
+.addpatient-text{
+	float: right;
+	vertical-align: bottom;
+	margin-left: 15px;
+	width:400px;
+}
+
+.addpatient-button{
+	margin-left:10px;
+	margin-right:10px;
+}
+
+.addpatient-screen {
+    text-align:center; 
+	height:100%
+	vertical-align: middle;
+	display:inline-block;
+	background: linear-gradient(white,#67DDDD);
+	
+	
+}
+
+.addpatient-center {
+
+    
+    display:inline-block;
+    text-align:center; 
+	vertical-align: middle;
+	background-color: white; /*#F2F2F2;*/
+	margin: 15px;
+	padding: 15px;
+	border: 1px solid #DDDDDD;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1) inset;
+
+}
+
+
 
 .patient{
 
@@ -79,86 +147,41 @@
 	margin:0px;
 }
 
+/* doctor_messages.html */
 
-
-.addpatient-label{
-	vertical-align: bottom;
-	text-align:right;
-	float:left;
-}
-
-.addpatient-text{
-	float: right;
-	vertical-align: bottom;
-	margin-left: 15px;
-	width:400px;
-}
-
-.signup-label{
-	vertical-align: bottom;
-	text-align:right;
-	float:left;
-	
-
-}
-
-.signup-text{
-	float: right;
-	vertical-align: bottom;
-	margin-left: 15px;
-
-}
-
-.addpatient-button{
-	margin-left:10px;
-	margin-right:10px;
-}
-
-.addpatient-screen {
-    text-align:center; 
-	height:100%
-	vertical-align: middle;
-	display:inline-block;
-	background: linear-gradient(white,#67DDDD);
-	
-}
-.addpatient-center {
-
-    
-    display:inline-block;
-    text-align:center; 
-	vertical-align: middle;
-	background-color: white; /*#F2F2F2;*/
-	margin: 15px;
-	padding: 15px;
-	border: 1px solid #DDDDDD;
-	border-radius: 10px 10px 10px 10px;
-	box-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1) inset;
-
+.chat-img{
+	width:40px;
+	height:40px;
 }
 
 .chat-history{
+	overflow: auto;
 	background-color: #F2F2F2;
 	height:400px;
+	max-height:400px;
 	margin-bottom:10px;
-	width:100%;
 
-}.doctor-chat-box{
+
+}
+.doctor-chat-text{
 	height:150px !important;
+
+
 
 }
 .doctor-chat-right{
-	float:right;
+	width:100%;
+	text-align: right;
 	margin-bottom:10px;
 }
 
 .doctor-chat-left{
+	width:100%;
+	text-align: left;
 	margin-bottom:10px;
 }
 
-.chat-send{
-	margin-bottom:10px;
-}
+
 
 .patient-tabs{
 	height:560px;
@@ -167,7 +190,7 @@
 
 .messages-screen {
 
-	height:100%
+	
 	vertical-align: middle;
 	display:inline-block;
 	background: linear-gradient(white,#67DDDD);
@@ -176,9 +199,9 @@
 .messages-center {
 
 
-    
+    width: 60%;
 	background-color: white; /*#F2F2F2;*/
-	margin: 15px;
+	margin: 10px;
 	padding: 15px;
 	border: 1px solid #DDDDDD;
 	border-radius: 10px 10px 10px 10px;

@@ -14,7 +14,7 @@
 
 <body>
 
-	<div class="container-fluid">
+	<div class="container-fluid fullheight">
 		<div class = "row-fluid">
 				<div class="navbar span12">
 					<div class="navbar-inner">
@@ -27,7 +27,7 @@
 								<form class="navbar-search pull-left form-search">
 									<div class="input-append">
 										<input type="text" id="search_patient" class="search-query" placeholder="Search Patient" autocomplete="off">
-										<button type="submit" class="btn">Search</button>
+										<button type="submit" id="search_patient_btn" class="btn">Search</button>
 									</div>
 								</form>
 							</li>
@@ -40,8 +40,8 @@
 				</div>
 		</div>
 		
-		<div class = "row-fluid">
-			<div class = "span12 addpatient-screen">
+		<div class = "row-fluid fullheight">
+			<div class = "span12 addpatient-screen fullheight">
 				<form class="addpatient-center">
 						<fieldset>
 							<legend class="signup-legend">Add/Edit Patient </legend>
@@ -63,7 +63,7 @@
 							</div>
 							<div>
 								<span class="span2 addpatient-label"></span>
-								<button href='#myModal' role='button' class='btn addpatient-button' data-toggle='modal'">Delete Patient</button>
+								<button href='#myModal' role='button' class='btn addpatient-button' data-toggle='modal'>Delete Patient</button>
 								<button  class="btn addpatient-button">Clear Form</button>
 								<button  class="btn addpatient-button">Save</button>
 							</div>

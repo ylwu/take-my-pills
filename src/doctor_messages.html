@@ -6,6 +6,7 @@
 <script type = "text/javascript" src= "external-lib/jquery-1.9.0.min.js"> </script>
 <script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
 <script type = "text/javascript" src= "doctor_navbar.js"> </script>
+<script type = "text/javascript" src= "doctor_messages.js"> </script>
 <script type = "text/javascript" src= "external-lib/bootstrap/js/bootstrap.js"> </script>
 <link rel="stylesheet" type="text/css" href="doctor.css" />
 
@@ -21,7 +22,7 @@
 
 <body>
 
-	<div class="container-fluid">
+	<div class="container-fluid fullheight ">
 		<div class = "row-fluid">
 			<div class = "row-fluid">
 				<div class="navbar span12">
@@ -35,7 +36,7 @@
 								<form class="navbar-search pull-left form-search">
 									<div class="input-append">
 										<input type="text" id="search_patient" class="search-query" placeholder="Search Patient" autocomplete="off">
-										<button id="search_patient_btn" class="btn" onclick=goToPatient()>Search</button>
+										<button id="search_patient_btn" class="btn" >Search</button>
 									</div>
 								</form>
 							</li>
@@ -49,9 +50,10 @@
 			</div>
 		</div>
 		
-		<div class = "row-fluid">
-			<div class = "span12 messages-screen">
-					<div class="tabbable offset3 tabs-left ">
+		<div class = "row-fluid fullheight">
+			<div class = "span12 messages-screen fullheight">
+					<div class = "offset3">
+						<div class="tabbable tabs-left ">
 						
 							<ul class="nav nav-pills nav-stacked span2 nav-pills-modify patient-tabs" id = "patientTab" >
 								<li class="active"><a data-toggle="tab" href="#">Amy Bxxx</a></li>
@@ -59,32 +61,51 @@
 								<li class=""><a data-toggle="tab" href="#">Eric Fxxx</a></li>
 							</ul>
 						
-						
 							<div class="tab-content">
 								<div class="tab-pane active">
 									<div class="row-fluid">
-										<table  class = "span6 chat-history" >
-											<tr class="doctor-chat-left"><td class = "span6">Amy Bxxx: Hey doctor I have a head ache :(</td></tr>
-											<tr class="doctor-chat-right"><td class = "span6">Dr. Xxxx Xxxxxxxx: You need to start taking extra Drug A.??</td></tr>
-											<tr class="doctor-chat-left"><td class = "span6"> Amy Bxxx: I haven't got better after doubling my Drug A dose for 3 days.</td></tr>
+										<table  class = "chat-history span6" id="chat_history">
+											
+											<tr class="doctor-chat-left">
+												<td class = "span6">
+													<div>
+														<img class="chat-img" src="patient.jpg">
+													</div>
+													<div>Amy Bxxx: Hey doctor I have a head ache :(</div>
+												</td></tr>
+											<tr class="doctor-chat-right">
+												<td class = "span6">
+													<div>
+														<img class="chat-img" src="doctor.jpg">
+													</div>
+													<div>Dr. Xxxx Xxxxxxxx: You need to start taking extra Drug A.??</div>
+												</td></tr>
+											<tr class="doctor-chat-left">
+												<td class = "span6"> 
+													
+													<div>
+														<img class="chat-img" src="patient.jpg">
+													</div>
+													<div>Amy Bxxx: I haven't got better after doubling my Drug A dose for 3 days.</div>
+												</td></tr>
 
 										</table>
 									</div>
 
 									<div class="row-fluid">
 									
-										<input class = "span6 doctor-chat-box" type="text">						
+										<input class = "doctor-chat-text span6" id="chat_text" type="text">						
 										
 									</div>
 									<div class="row-fluid">
-											<button  class="btn offset4 span2 chat-send" >Send</button>
+											<button  class="btn offset4 span2 " id="send_chat" >Send</button>
 									</div>
 									
 								
 								</div>
 
 							</div>
-						
+						</div>
 					</div>
 				
 			</div>
