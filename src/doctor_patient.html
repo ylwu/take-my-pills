@@ -5,7 +5,10 @@
 <link rel="stylesheet" type="text/css" href="external-lib/bootstrap/css/bootstrap.min.css" />
 <script type = "text/javascript" src= "external-lib/jquery-1.9.0.min.js"> </script>
 <script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
-
+<script type = "text/javascript" src= "doctor_navbar.js"> </script>
+<script type = "text/javascript" src= "doctor_patient.js"> </script>
+<script type = "text/javascript" src= "external-lib/bootstrap/js/bootstrap.js"> </script>
+<link rel="stylesheet" type="text/css" href="doctor.css" />
 
 </head>
 
@@ -14,15 +17,13 @@
 
 	<div class="container-fluid">
 		<div class = "row-fluid">
-		
-		
 				<div class="navbar span12">
 					<div class="navbar-inner">
-						<a class="brand" > Dr. Xxxx Xxxxxxxx </a>
-						<ul class="nav nav-tabs">
+						<a class="brand" ><span id="doctor_name"></span> </a>
+						<ul class="nav nav-tabs pull-right">
 							<li class="divider-vertical">    
 								<form class="navbar-search pull-left">
-									<input type="text" class="search-query" placeholder="Search Patient">
+									<input type="text" id="search_patient" class="search-query" placeholder="Search Patient" autocomplete="off">
 								</form>
 							</li>
 							<li class="divider-vertical"><a href="doctor_messages.html">Messages</a></li>
@@ -34,29 +35,32 @@
 				</div>
 		</div>
 	
-		<div class = "row-fluid">
-			Patient <span>Amy Bxxx</span>
-			<button  class="btn">View/Edit patient Info</button>
-		</div>
-	
-		<div class = "row-fluid">
-			<div class="tabbable tabs-left span2">
-				<ul class="nav nav-pills nav-stacked" id = "drugTab">
-					<li class="active"><a data-toggle="tab" href="#DrugA">Drug A</a></li>
-					<li class=""><a data-toggle="tab" href="#DrugB">Drug B</a></li>
-					<li class=""><a data-toggle="tab" href="#DrugC">Drug C</a></li>
-				</ul>
+		<div id="patient_body">
+			<div class = "row-fluid">
+				<span class="patient span2">Patient <span id="patientname"></span></span>
+				<button  class="btn span2">View/Edit patient Info</button>
+			</div>
+			<hr class="bar">
+		
+			<div class = "row-fluid main-container">
+				<div class="tabbable tabs-left span2">
+					<ul class="nav nav-pills nav-stacked" id = "drugTab">
+						<li><a data-toggle="tab" href="#">All</a></li>
+						<li class="active"><a data-toggle="tab" href="#">Drug A</a></li>
+						<li class=""><a data-toggle="tab" href="#">Drug B</a></li>
+						<li class=""><a data-toggle="tab" href="#">Drug C</a></li>
+					</ul>
 
+				</div>
+				
+				<div class = "span7">
+					<iframe class="calendar" src="https://www.google.com/calendar/embed?src=qre47unak4dm77r2c9b9hcacok%40group.calendar.google.com&ctz=America/New_York"  frameborder="0" scrolling="no"></iframe>
+				</div>
+				<div class = "span3 drug-history-box">
+					<textarea  class = "drug-history" readonly>Missed drug history summary:</textarea>
+				</div>
 			</div>
 			
-			<div class = "span10">
-				<iframe src="https://www.google.com/calendar/embed?src=qre47unak4dm77r2c9b9hcacok%40group.calendar.google.com&ctz=America/New_York" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-			</div>
-		</div>
-		<div class = "row-fluid">
-			<textarea class = "span5 offset2" style="height:150px; resize:none;" readonly>Drug history details:</textarea>
-		
-
 		</div>
 	</div>
 </body>

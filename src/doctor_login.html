@@ -6,29 +6,31 @@
 <script type = "text/javascript" src= "external-lib/jquery-1.9.0.min.js"> </script>
 <script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
 <script type = "text/javascript" src= "external-lib/bootstrap/js/bootstrap.js"> </script>
-
-
-
+<link rel="stylesheet" type="text/css" href="doctor.css" />
 
 </head>
 
 
 <body>
-	<div class="container-fluid">
-		<form>
-			<fieldset>
-				<legend>Take Your Pills for doctors</legend>
-				<label>Account Email</label>
-				<input type="text">
-				<label>Password</label>
-				<input type="password">
-				<div>
-					<button type="submit" class="btn" onclick="location.href ='doctor_messages.html'">Submit</button>
-					<button  class="btn">New Account</button>
-				</div>
-			</fieldset>
-		</form>
-	</div>
+	
+		<div class = "row-fluid" >
+			<div class = "span12 login-screen">
+				<form class = "login-center">
+					<fieldset >
+						<legend >Take Your Pills for doctors</legend>
+						<label>Account Email</label>
+						<input type="text">
+						<label>Password</label>
+						<input type="password">
+						<div>
+							<a class="btn login-button" href="doctor_messages.html">Login</a>
+							<a class="btn login-button" href="doctor_newAccount.html">New Account</a>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	
 </body>
 
 
