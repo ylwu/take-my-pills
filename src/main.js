@@ -149,12 +149,7 @@
   			};
 
   			$("#take").click(function(evt){
-  				var d = $("input:checked");
-  				console.log("1");
-  				console.log(d);
-  				// var c = $("input:checked").parent().parent();
-  				// console.log(c);
-  				//$("input:checked").parent().parent().remove();
+  				$("input:checked").parent().parent().remove();
   			});
 
   			$("#miss").click(function(evt){
