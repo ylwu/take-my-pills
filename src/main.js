@@ -1,11 +1,4 @@
-	var m = new Model();
-
-	function redirectToHome() {
-				document.getElementById("edit_main").style.display="none";
-				document.getElementById("add_new").style.display="none";
-				document.getElementById("edit_title").innerHTML="";
-				document.getElementById('home').style.display='block';
-			}
+			var m = new Model();
 			
 			function changeDivToAddNewDrug() {
 				document.getElementById("home").style.display="none";
@@ -23,6 +16,7 @@
 					document.getElementById("edit_title").innerHTML="Edit Your Pills";
 				}
 			}
+
 			
 			var save_new = function() {
 				var pdiv = document.createElement("div");
@@ -104,7 +98,12 @@
 
 	$(document).ready(function() {
 
-
+		var drugA = new myDrug("vatamin A", "2", "4/1/2013", "7/30/2013", 1, "<p>7 : 00 am</p><p>7 : 00 pm</p>");
+		var drugB = new myDrug("Aspirin", "1", "4/6/2013", "7/30/2013", 1, "<p>12 : 00 pm</p>");
+		var drugC = new myDrug("Sulfonylureas", "2", "4/6/2013", "7/30/2013", 1, "<p>3 : 00 pm</p>");
+		m.drugsQueue.push(drugA);
+		m.drugsQueue.push(drugB);
+		m.drugsQueue.push(drugC);
 
     	$(".checkbox").click(function(evt){
   		if ($("input:checked").length != 0){
@@ -169,6 +168,54 @@
 		changeDivToAddNewDrug();
 		});
 
+		var addDrugEvent = function (drugEvent){
+			var row = document.createElement('tr');
+  			var td1 = document.createElement('td');
+  			$(td1).append($(document.createElement('input')).attr('type','checkbox').addClass('checkbox'));
+  			$(td1).append(drugEvent.name);
+  			$(row).append($(td1));
+  			$(row).append($(document.createElement('td')).append(drugEvent.date));
+  			$(row).append($(document.createElement('td')).append(drugEvent.timestring));
+  			$(row).append($(document.createElement('td')).append(drugEvent.dosage));
+  			$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
+  			$(row).addClass("success").addClass('drug');
+  			$('#drugtable').append($(row));
+
+  			$(".checkbox").click(function(evt){
+  				if ($("input:checked").length != 0){
+  			$("#actionbar").show();
+  			} else {
+  				$("#actionbar").hide();
+  			};
+
+  			$("#take").click(function(evt){
+  				$("input:checked").parent().parent().remove();
+  			});
+
+  			$("#miss").click(function(evt){
+  				$("input:checked").parent().parent().remove();
+  			});
+
+  			});
+
+  		}
+
+			var refresh = function(){
+				$('#drugtable').innerHTML='';
+				for (var i=0; i<m.actionQueue.length; i++){
+					addDrugEvent(m.actionQueue[i]);
+				}
+			}
+
+			function redirectToHome() {
+				document.getElementById("edit_main").style.display="none";
+				document.getElementById("add_new").style.display="none";
+				document.getElementById("edit_title").innerHTML="";
+				document.getElementById('home').style.display='block';
+				refresh();
+			}
+
+
 	/*
 	This is the start of Ty's javascript
 	*/
@@ -208,6 +255,10 @@
 						document.getElementById("num_dosage").style.display="block";
 					}
 				});
+
+
+			m.initDrugs();
+			console.log(m.actionQueue);
 
 			});
 

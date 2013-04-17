@@ -3,7 +3,7 @@ var Model = function(){
 	this.drugsQueue = [];
 	this.displayQueue = [];
 	this.actionQueue = [];
-	this.curdate = new Date(2013,4,20,0,0,0,0);
+	this.curdate = new Date(2013,3,20,0,0,0,0);
 
 	this.allHandlers = new Array();
 	
@@ -42,7 +42,7 @@ var Model = function(){
 
 	this.startDate = function(myDrug){
 		n = myDrug.startdate.split("/");
-		sMonth= parseInt(n[0]);
+		sMonth= parseInt(n[0])-1;
 		sDate= parseInt(n[1]);
 		sYear = parseInt(n[2]);
 		d = new Date(sYear,sMonth,sDate,0,0,0,0);
@@ -51,11 +51,12 @@ var Model = function(){
 
 	this.endDate = function(myDrug){
 		n = myDrug.enddate.split("/");
-		eMonth= parseInt(n[0]);
+		eMonth= parseInt(n[0])-1;
 		eDate= parseInt(n[1]);
 		eYear = parseInt(n[2]);
 		d = new Date(eYear,eMonth,eDate,0,0,0,0);
 		return d;
+
 	}
 
 	this.initDrugs = function(){
@@ -67,16 +68,19 @@ var Model = function(){
 						times = this.stringtoTime(x.times);
 						for (var j=0; j<times.length; j++){
 							t = times[j].split(" ");
+							console.log(t);
 							hour = parseInt(t[0]);
 							min = parseInt(t[2]);
 							ex = t[3];
-							if (ex == "pm"){
+							if (ex == "pm" && (! ((hour == 12) && (min == 0)))){
 								hour += 12;
 							}
-							fdate = this.curdate;
-							fdate.setHours(hour,min);
-							this.actionQueue.push(new DrugEvent(x.name,fdate,x.dose,));
-							console.log(this.actionQueue);
+							fdate= new Date(this.curdate.getYear(), this.curdate.getMonth(),this.curdate.getDate(),hour,min);
+							this.actionQueue.push(new DrugEvent(x.name,fdate,x.dose,this.curdate.toDateString(),times[j]));
+							this.actionQueue.sort(function(a,b)
+							{
+								return (a.date - b.date);
+							});
 						}
 				}
 			}
