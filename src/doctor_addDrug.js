@@ -48,10 +48,17 @@ $(function() {
 })
 
 $(document).ready(function() {
-	$( "#add_startdate" ).datepicker();
-	$( "#add_enddate" ).datepicker();
+	$( add_startdate).datepicker();
+	$( add_enddate ).datepicker();
 	
+
+	$(new_drugname).val("");
+	$(dose).val("");
+	$(add_startdate).val("");
+	$(add_enddate).val("");
+	$(cycle_hour).val("");
 	
+	$("#edit_buttons").hide();
 	
 	$( "#add_dosefrequency" ).change(function() {
 					if ($(this).val()==0) {
@@ -75,7 +82,7 @@ $(document).ready(function() {
 			
 			if (drugname.replaceAll(" ","_").length !=0){
 
-				$(drugTab).append("<li class=''><a data-toggle='modal' href='#myModal'>"+drugname+"</a></li>");
+				$(drugTab).append("<li class=''><a data-toggle='tab' href='#' onclick=editDrug() >"+drugname+"</a></li>");
 			}
 		
 	});
@@ -83,6 +90,29 @@ $(document).ready(function() {
 	
 });
 
+function editDrug(){
+	$(legend_name).html("Edit Drug");
+	$(new_drugname).val("Drug A");
+	$(dose).val("2 pills");
+	$(add_startdate).val("3/18/2013");
+	$(add_enddate).val("3/18/2014");
+	$(cycle_hour).val("6");
+	
+	$("#new_buttons").hide();
+	$("#edit_buttons").show();
+}
+
+function addDrug(){
+	$(new_drugname).val("");
+	$(dose).val("");
+	$(add_startdate).val("");
+	$(add_enddate).val("");
+	$(cycle_hour).val("");
+	$(legend_name).html("Add New Drug");
+	
+	$("#new_buttons").show();
+	$("#edit_buttons").hide();
+}
 function addSpecificTime() {
 				var p = document.createElement("p");
 				p.innerHTML=document.getElementById("specific_hour").value+" : "+document.getElementById("specific_minute").value+" "+document.getElementById("am_pm").value;
