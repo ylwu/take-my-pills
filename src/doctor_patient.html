@@ -15,34 +15,43 @@
 
 <body>
 
-	<div class="container-fluid">
+	<div class="container-fluid fullheight">
 		<div class = "row-fluid">
+			<div class = "row-fluid">
 				<div class="navbar span12">
 					<div class="navbar-inner">
-						<a class="brand" ><span id="doctor_name"></span> </a>
+						<a class="brand" >Take Your Pills </a>
 						<ul class="nav nav-tabs pull-right">
+							<li class="">
+								<a href="#"><span id="doctor_name"></span></a>
+							</li>
 							<li class="divider-vertical">    
-								<form class="navbar-search pull-left">
-									<input type="text" id="search_patient" class="search-query" placeholder="Search Patient" autocomplete="off">
+								<form class="navbar-search pull-left form-search">
+									<div class="input-append">
+										<input type="text" id="search_patient" class="search-query" placeholder="Search Patient" autocomplete="off">
+										<button id="search_patient_btn" class="btn" >Search</button>
+									</div>
 								</form>
 							</li>
-							<li class="divider-vertical"><a href="doctor_messages.html">Messages</a></li>
-							<li class="divider-vertical"><a href="doctor_addPatient.html">Add/Edit Patient</a></li>
+							<li class="divider-vertical active"><a href="doctor_messages.html">Messages</a></li>
+							<li class="divider-vertical "><a href="doctor_addPatient.html">Add/Edit Patient</a></li>
 							<li class="divider-vertical"><a href="doctor_login.html">Logout</a></li>
 							
 						</ul>
 					</div>
 				</div>
+			</div>
 		</div>
 	
 		<div id="patient_body">
 			<div class = "row-fluid">
 				<span class="patient span2">Patient <span id="patientname"></span></span>
-				<button  class="btn span2">View/Edit patient Info</button>
+				<a class="btn span2" href="doctor_addPatient.html">View/Edit Patient Info</a>
+				<a class="btn span2" href="doctor_addDrug.html?patient_name=Amy_Bxxx">View/Edit Patient Drugs</a>
 			</div>
 			<hr class="bar">
 		
-			<div class = "row-fluid main-container">
+			<div class = "row-fluid main-container fullheight">
 				<div class="tabbable tabs-left span2">
 					<ul class="nav nav-pills nav-stacked" id = "drugTab">
 						<li><a data-toggle="tab" href="#">All</a></li>
