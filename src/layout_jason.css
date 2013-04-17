@@ -50,15 +50,11 @@
 
 }
 #doctor-message-submit-btn{
-	position: absolute;
-	right:    300px;
-	bottom:   30px;
+
 }
 
 #doctor-message-box{
-	position: absolute;
-	width: 460px;
-	bottom:   55px;
+
 
 }
 
@@ -66,6 +62,31 @@
 	height: 400px;
 }
 
+.doctor-message{
+	text-align: left;
+	background-color: #ffd277;
+	border:5px; 
+	border-style:solid;
+	border-color:#f2f2f2;
 
+}
+
+.patient-message{
+	 text-align: right;
+  	 margin-right: 1em;
+  	 background-color: #67dddd;
+  	 border:5px; 
+	border-style:solid;
+	border-color:#f2f2f2;
+}
+
+.conversation-text{
+	margin-left:auto; 
+    margin-right:auto;
+}
+
+.message-area{
+	float:right;
+}
 
 

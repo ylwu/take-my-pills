@@ -32,30 +32,45 @@
 
 	<div>
 		<div class="span-background span6">
-			<input class="input-block-level" id="doctor-message-box" type="text" placeholder="Enter your message"></input>
-			<button class= "btn" id="doctor-message-submit-btn"> Send Message</button>
 
-			<div class="row">
-
-		<div id="conversation span6">
-		<table class= "" id="conversation-table">
-			<tr class="doctor-message">
+		<table class= "conversation-text" id="conversation-table">
+			<tr class="patient-message">
 				<td> 
-				<div><img src="doctor.jpg" alt="Doctor" width="40" height="40"></div>
-				<div><span class="conversation-text">Please make sure to take the pills according to the instructions</span> </div>
+				<div><img src="patient.jpg" alt="Doctor" width="40" height="40"></div>
+				<div><span class="conversation-text">Dr.Williams, I started to have headache after I started to take Medicine A.</span> </div>
 
 				</td>
 				
 			</tr>
-			<tr class="doctor-message">
-				<td> 
+			<tr>
+				<td class="doctor-message"> 
 				<div><img src="doctor.jpg" alt="Doctor" width="40" height="40"></div>
-				<div><span class="conversation-text">Please make sure to take the pills according to the instructions</span> </div>
+				<div><span>Please make stop taking it as soon as possible and schedule an appointment with me.</span> </div>
+
+				</td>
+				
+			</tr>
+			<tr class="patient-message">
+				<td> 
+				<div><img src="patient.jpg" alt="Doctor" width="40" height="40"></div>
+				<div><span class="conversation-text">Should I stop other medications also?</span> </div>
+
+				</td>
+				
+			</tr>
+			<tr>
+				<td class="doctor-message"> 
+				<div><img src="doctor.jpg" alt="Doctor" width="40" height="40"></div>
+				<div><span>Yes, please stop all other medication except your fish oil pills.</span> </div>
 
 				</td>
 				
 			</tr>
 		</table>
+
+		<div class="mesage-area">
+			<input class="input-block-level" id="doctor-message-box" type="text" placeholder="Enter your message"></input>
+			<button class= "btn" id="doctor-message-submit-btn"> Send Message</button>
 		</div>
 
 		</div>
