@@ -12,3 +12,10 @@
         });      
    });	
 
+    $(document).ready(function(){
+      $(doctor_div).click(function()    {
+            
+                window.location="patient_message.html";
+        });      
+   });  
+
