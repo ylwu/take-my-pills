@@ -83,7 +83,7 @@
 				document.getElementById("specific_time").style.display="none";
 				document.getElementById("num_dosage").style.display="none";
 
-				
+			
 				function editPill() { // for each drug button on Edit Your Pills page
 				document.getElementById("edit_main").style.display="none";
 				document.getElementById("add_new").style.display="block";
@@ -167,7 +167,7 @@
 				// save info into shared object function
 				var pillTimes;
 				if (document.getElementById("add_dosefrequency").value==0) { // cycle = two numbers
-					pillTimes=document.getElementById("cycle_hour").value+","document.getElementById("cycle_minute").value;
+					pillTimes=document.getElementById("cycle_hour").value+","+document.getElementById("cycle_minute").value;
 				}
 				else if (document.getElementById("add_dosefrequency").value==1) { // specific time = innerHTML type string
 					pillTimes=document.getElementById("selected_times").innerHTML; // <p>some:time am</p> listed
