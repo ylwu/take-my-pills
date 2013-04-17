@@ -59,34 +59,49 @@ var Model = function(){
 
 	}
 
-	this.initDrugs = function(){
-		for (var i=0; i<this.drugsQueue.length; i++){
-			x = this.drugsQueue[i];
+	this.dateToDateString = function(date){
+		return (date.getMonth()+1).toString() + "/" + date.getDate() + "/" + date.getFullYear();
+	}
+
+	this.dateToTimeString = function(date){
+		d = date.getMinutes().toString();
+		console.log(d.length);
+		if (d.length == 1){
+			d+= "0";
+		}
+		return date.getHours() + " : " + d;
+	}
+
+	this.initDrug = function(x){
 			if (x.frequency == 1){
 				if ((this.startDate(x) <= this.curdate) && 
 					(this.endDate(x) >= this.curdate)){
 						times = this.stringtoTime(x.times);
 						for (var j=0; j<times.length; j++){
 							t = times[j].split(" ");
-							console.log(t);
 							hour = parseInt(t[0]);
 							min = parseInt(t[2]);
 							ex = t[3];
 							if (ex == "pm" && (! ((hour == 12) && (min == 0)))){
 								hour += 12;
 							}
-							fdate= new Date(this.curdate.getYear(), this.curdate.getMonth(),this.curdate.getDate(),hour,min);
-							this.actionQueue.push(new DrugEvent(x.name,fdate,x.dose,this.curdate.toDateString(),times[j]));
-							this.actionQueue.sort(function(a,b)
+							fdate= new Date(this.curdate.getFullYear(), this.curdate.getMonth(),this.curdate.getDate(),hour,min);
+							this.displayQueue.push(new DrugEvent(x.name,fdate,x.dose,this.dateToDateString(fdate),times[j],"future"));
+							this.displayQueue.sort(function(a,b)
 							{
 								return (a.date - b.date);
 							});
 						}
 				}
 			}
-		}
 	}
 
+	this.initDrugs = function(){
+		for (var i=0; i<this.drugsQueue.length; i++){
+			this.initDrug(this.drugsQueue[i]);
+	}
+
+	}
 
 
 
