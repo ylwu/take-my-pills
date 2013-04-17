@@ -279,10 +279,22 @@
 			console.log(m.displayQueue);
 			});
 
+/*Morgan's jquery for button response 
 
+*/
 
 				
-						
+   $(document).ready(function(){
+  		$(contact_doctor_btn).click(function()    {
+            
+                window.location="patient_message_app.html";
+        });      
+   });						
 
-
+   $(document).ready(function(){
+  		$(app_sign_out_btn).click(function()    {
+            
+                window.location="patient_log_in.html";
+        });      
+   });	
 					
