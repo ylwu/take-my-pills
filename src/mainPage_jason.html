@@ -12,6 +12,7 @@
 	var actionQueue = [];
 	var displayQueue = [];
 	var hiddenDrugQueue = [];
+	var drugsQueue=[];
 	$(document).ready(function() {
     	
     	$(".checkbox").click(function(evt){
@@ -87,15 +88,15 @@
 				document.getElementById("edit_main").style.display="none";
 				document.getElementById("add_new").style.display="block";
 				document.getElementById("edit_title").innerHTML="Edit Pill";
-				
-				// TODO: RE-save params into fields
-				alert("how to RE-save to JSON object? php session cookie?");
-					
+									
 				}
 				
 				// TODO: remove line in DOM
 				function deletePill() {
-					alert("how to delete this line in DOM");
+					var parent=document.getElementById("drug_section");
+					var child=document.getElementById(document.getElementById(this.id).value+"_pdiv");
+					parent.removeChild(child);
+					
 				}
 				
 				// in Add New Pill
@@ -148,9 +149,11 @@
 			
 			function save_new() {
 				var pdiv = document.createElement("div");
+				pdiv.setAttribute("id",document.getElementById("new_drugname").value+"_pdiv");
+
 				var del = document.createElement("input");
 				del.setAttribute("type", "button");
-				del.setAttribute("value", "-");
+				del.setAttribute("id", document.getElementById("new_drugname").value);
 				del.setAttribute("onclick", "deletePill()");
 				
 				var newButton = document.createElement("input");
@@ -164,7 +167,7 @@
 				// save info into shared object function
 				var pillTimes;
 				if (document.getElementById("add_dosefrequency").value==0) { // cycle = two numbers
-
+					pillTimes=document.getElementById("cycle_hour").value+","document.getElementById("cycle_minute").value;
 				}
 				else if (document.getElementById("add_dosefrequency").value==1) { // specific time = innerHTML type string
 					pillTimes=document.getElementById("selected_times").innerHTML; // <p>some:time am</p> listed
@@ -177,6 +180,7 @@
 
 				var myPill=myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value, document.getElementById("new_drugname").value, document.getElementById("add_dosefrequency").value, pillTimes);
 
+drugsQueue.push(myPill);
 				
 				clear_add_new();
 				document.getElementById("add_new").style.display="none";
