@@ -72,6 +72,8 @@
 
 			var save_new = function() {
 				var pdiv = document.createElement("div");
+				//pdiv.setAttribute("class", "row");
+				//pdiv.setAttribute("align", "center");
 				pdiv.setAttribute("id",document.getElementById("new_drugname").value+"_pdiv");
 
 				var del = document.createElement("input");
@@ -79,11 +81,13 @@
 				del.setAttribute("value", "-");
 				del.setAttribute("id", document.getElementById("new_drugname").value);
 				del.setAttribute("onclick", "deletePill(this);");
+				del.setAttribute("class", "btn");
 				
 				var newButton = document.createElement("input");
 				newButton.setAttribute("type", "button");
 				newButton.setAttribute("value", document.getElementById("new_drugname").value);
-				newButton.setAttribute("onclick", "editPill(this);");				
+				newButton.setAttribute("onclick", "editPill(this);");
+				newButton.setAttribute("class", "btn");
 
 				pdiv.appendChild(newButton);
 				pdiv.appendChild(del);
@@ -277,6 +281,8 @@
 			m.initDrugs();
 			redirectToHome();
 			console.log(m.displayQueue);
+			
+			
 			});
 
 
