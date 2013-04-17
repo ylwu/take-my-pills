@@ -17,7 +17,59 @@
 				}
 			}
 
-			
+			function deletePill(ele) {
+				var parent=document.getElementById("drug_section");
+				var child=document.getElementById(ele.id+"_pdiv");
+				parent.removeChild(child);
+
+				m.drugsQueue = m.drugsQueue.filter(function(pill){
+  					return pill.name !== ele.id;
+				});
+					
+			}
+
+			function editPill(ele) {
+
+				var selectedPill=m.drugsQueue.filter(function(pill){
+  					return pill.name == ele.value;
+				});
+
+				myPill=selectedPill[0];
+
+				document.getElementById("add_new").style.display="block";
+				document.getElementById("edit_main").style.display="none";
+				document.getElementById("edit_title").innerHTML="Edit " + ele.value;
+
+				var pillName = myPill.name;
+				var pillDose = myPill.dose;
+				var pillStart = myPill.startdate;
+				var pillEnd = myPill.enddate;
+				var pillFreq = myPill.frequency;
+				var pillTimes = myPill.times;
+				
+				document.getElementById("new_drugname").value=pillName;
+				document.getElementById("new_drugdose").value=pillDose;
+				document.getElementById("add_startdate").value=pillStart;
+				document.getElementById("add_enddate").value=pillEnd;
+				document.getElementById("add_dosefrequency").value=pillFreq;
+
+				if (pillFreq==0) { // cycle = two numbers
+					parsedTimes=pillTimes.split(",");
+					document.getElementById("cycle_hour").value=parsedTimes[0];
+					document.getElementById("cycle_minute").value=parsedTimes[1];
+				}
+				else if (pillFreq==1) { // specific time = innerHTML type string
+					document.getElementById("selected_times").innerHTML=pillTimes; // <p>some:time am</p> listed
+					console.log(pillTimes);
+
+				}
+				else { // number of doses per day = one number (1-10)
+
+					document.getElementById("num_hour").value=pillTimes;
+				}
+
+			}
+
 			var save_new = function() {
 				var pdiv = document.createElement("div");
 				pdiv.setAttribute("id",document.getElementById("new_drugname").value+"_pdiv");
@@ -31,7 +83,8 @@
 				var newButton = document.createElement("input");
 				newButton.setAttribute("type", "button");
 				newButton.setAttribute("value", document.getElementById("new_drugname").value);
-				
+				newButton.setAttribute("onclick", "editPill(this);");				
+
 				pdiv.appendChild(newButton);
 				pdiv.appendChild(del);
 				document.getElementById("drug_section").appendChild(pdiv);
@@ -52,6 +105,15 @@
 				}
 
 				var myPill=new myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value,  document.getElementById("add_dosefrequency").value, pillTimes);
+
+				// if pill exist already, update (ie delete, save new)
+				var checkPill=m.drugsQueue.filter(function(pill){
+  					return pill.name == document.getElementById("new_drugname").value;
+				});
+				while (checkPill.length>0) {
+					deletePill(document.getElementById(checkPill[0].name));
+					checkPill.pop();
+				}
 
 				m.drugsQueue.push(myPill);
 				m.initDrug(myPill);
@@ -87,16 +149,6 @@
 			
 			}
 
-			function deletePill(ele) {
-				var parent=document.getElementById("drug_section");
-				var child=document.getElementById(ele.id+"_pdiv");
-				parent.removeChild(child);
-
-				model.drugsQueue = model.drugsQueue.filter(function(pill){
-  					return pill.name !== ele.id;
-				});
-					
-			}
 
 	$(document).ready(function() {
 
@@ -222,10 +274,22 @@
 			console.log(m.displayQueue);
 			});
 
+/*Morgan's jquery for button response 
 
+*/
 
 				
-						
+   $(document).ready(function(){
+  		$(contact_doctor_btn).click(function()    {
+            
+                window.location="patient_message_app.html";
+        });      
+   });						
 
-
+   $(document).ready(function(){
+  		$(app_sign_out_btn).click(function()    {
+            
+                window.location="patient_log_in.html";
+        });      
+   });	
 					

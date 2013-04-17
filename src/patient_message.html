@@ -7,6 +7,8 @@
 <script type = "text/javascript" src= "external-lib/jquery-1.9.0.min.js"> </script>
 <script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> 
 </script>
+<script type = "text/javascript" src= "app_message.js"> </script>
+<script type = "text/javascript" src= "patient_message.js"> </script>
 
 <link rel="stylesheet" type="text/css" href="test.css" />
 
@@ -28,7 +30,7 @@
 			<button class= "btn btn-primary" id="home_btn"> Home</button>
 			<button class= "btn btn-warning" id="contact_doctor_btn"> Contact Doctor</button>
 			<span>2:00pm 4/20/2013</span>
-			<button class= "btn" id="contact_doctor_btn"> Sign Out</button>
+			<button class= "btn" id="app_sign_out_btn"> Sign Out</button>
 		</div>
 	</div>
 	</div>
@@ -38,7 +40,7 @@
 		<div class="span-background span6">
 
 			<div id="message-box-size">
-				<table class= "conversation-text" id="conversation-table">
+				<table class= "conversation-text" id="conversation_table">
 					<tr class="patient-message">
 						<td> 
 						<div><img src="patient.jpg" alt="Doctor" width="40" height="40"></div>
@@ -76,8 +78,8 @@
 
 
 			<div class="mesage-area">
-				<input class="input-block-level" id="doctor-message-box" type="text" placeholder="Enter your message"></input>
-				<button class= "btn" id="doctor-message-submit-btn"> Send Message</button>
+				<input class="input-block-level" id="doctor_message_box" type="text" placeholder="Enter your message"></input>
+				<button class= "btn" id="doctor_message_submit_btn"> Send Message</button>
 			</div>
 
 		</div>
