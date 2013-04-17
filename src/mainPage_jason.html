@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="external-lib/bootstrap/css/bootstrap.min.css" />
 <script type = "text/javascript" src= "external-lib/jquery-1.9.0.min.js"> </script>
 <script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
+<script src="myDrug.js"></script>
 
 <script type="text/javascript">
 	var actionQueue = [];
@@ -91,14 +92,6 @@
 									
 				}
 				
-				// TODO: remove line in DOM
-				function deletePill() {
-					var parent=document.getElementById("drug_section");
-					var child=document.getElementById(document.getElementById(this.id).value+"_pdiv");
-					parent.removeChild(child);
-					
-				}
-				
 				// in Add New Pill
 				$( "#add_startdate" ).datepicker();
 				$( "#add_enddate" ).datepicker();
@@ -153,8 +146,9 @@
 
 				var del = document.createElement("input");
 				del.setAttribute("type", "button");
+				del.setAttribute("value", "-");
 				del.setAttribute("id", document.getElementById("new_drugname").value);
-				del.setAttribute("onclick", "deletePill()");
+				del.setAttribute("onclick", "deletePill(this);");
 				
 				var newButton = document.createElement("input");
 				newButton.setAttribute("type", "button");
@@ -178,9 +172,9 @@
 					pillTimes=document.getElementById("num_hour").value;
 				}
 
-				var myPill=myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value, document.getElementById("new_drugname").value, document.getElementById("add_dosefrequency").value, pillTimes);
+				var myPill=new myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value, document.getElementById("new_drugname").value, document.getElementById("add_dosefrequency").value, pillTimes);
 
-drugsQueue.push(myPill);
+				drugsQueue.push(myPill);
 				
 				clear_add_new();
 				document.getElementById("add_new").style.display="none";
@@ -208,6 +202,17 @@ drugsQueue.push(myPill);
 			function clearSpecificTime() {
 				document.getElementById("selected_times").innerHTML="";
 			
+			}
+
+			function deletePill(ele) {
+				var parent=document.getElementById("drug_section");
+				var child=document.getElementById(ele.id+"_pdiv");
+				parent.removeChild(child);
+
+				drugsQueue = drugsQueue.filter(function(pill){
+  return pill.name !== ele.id;
+});
+					
 			}
 		</script>
 </head>
