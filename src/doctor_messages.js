@@ -2,7 +2,9 @@
 // http://dumpsite.com/forum/index.php?topic=4.msg8#msg8
 String.prototype.replaceAll = function(str1, str2, ignore) 
 {
-	return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+	return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.
+		\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string
+	")?str2.replace(/\$/g,"$$$$"):str2);
 }
 
 $(function() {
@@ -12,7 +14,8 @@ $(function() {
 		var newChat = $(chat_text).val();
 		if (newChat.replaceAll(" ","").length !=0){
 
-			var message = "<tr class='doctor-chat-right'><td class = 'span6'><div><img class='chat-img' src='doctor.jpg'></div>";
+			var message = "<tr class='doctor-chat-right'><td class = 'span6'><div>
+			<img class='chat-img' src='doctor.jpg'></div>";
 			message +="<div>Dr. Xxxx Xxxxxxxx: "+newChat+"</div></td></tr>";
 			$(chat_history).append(message);
 			
