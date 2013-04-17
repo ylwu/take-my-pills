@@ -89,4 +89,7 @@
 	float:right;
 }
 
-
+#message-box-size{
+	height: 310px;
+	overflow:scroll;
+}
