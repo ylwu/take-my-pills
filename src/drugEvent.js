@@ -1,6 +1,5 @@
-var DrugEvent = function(name, date, time, dosage){
+var DrugEvent = function(name, date, dosage){
 	this.name = name;
 	this.date = date;
-	this.time = time;
 	this.dosage = dosage;
 }

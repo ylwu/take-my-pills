@@ -1,5 +1,4 @@
 	var m = new Model();
-	drugsQueue = [];
 
 	function redirectToHome() {
 				document.getElementById("edit_main").style.display="none";
@@ -50,6 +49,7 @@
 				}
 				else if (document.getElementById("add_dosefrequency").value==1) { // specific time = innerHTML type string
 					pillTimes=document.getElementById("selected_times").innerHTML; // <p>some:time am</p> listed
+					console.log(pillTimes);
 
 				}
 				else { // number of doses per day = one number (1-10)
@@ -57,15 +57,16 @@
 					pillTimes=document.getElementById("num_hour").value;
 				}
 
-				var myPill=new myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value, document.getElementById("new_drugname").value, document.getElementById("add_dosefrequency").value, pillTimes);
+				var myPill=new myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value,  document.getElementById("add_dosefrequency").value, pillTimes);
 
 				m.drugsQueue.push(myPill);
-				console.log(m);
+				console.log(m.drugsQueue);
 				
 				clear_add_new();
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_main").style.display="block";
 				document.getElementById("edit_title").innerHTML="Edit Your Pills";
+				m.initDrugs();
 			}
 			
 			function clear_add_new() {
@@ -95,7 +96,7 @@
 				var child=document.getElementById(ele.id+"_pdiv");
 				parent.removeChild(child);
 
-				drugsQueue = drugsQueue.filter(function(pill){
+				model.drugsQueue = model.drugsQueue.filter(function(pill){
   					return pill.name !== ele.id;
 				});
 					
