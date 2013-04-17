@@ -2,3 +2,10 @@
 	background-image: -webkit-linear-gradient(top left, #FFFFFF 0%, #3CDDDD 100%);
 	background-color: #3CDDDD;
 }
+
+#main-page{
+	border:3px;
+	border-style:solid;
+	border-color: black;
+	height: 450px;
+}

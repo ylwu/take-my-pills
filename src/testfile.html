@@ -1,0 +1,32 @@
+<html>
+<head>
+<script type="text/javascript">
+function addCell(){
+	var c = $("#myTable tr:first td").length;
+    $("#myTable tr:first").append("<td><a href=''>Delete</a> Col "+(c+1)+"</td>");
+	$("#myTable tr:gt(0)").append("<td>Col</td>");
+}
+</script>
+</head>
+
+<body>
+<table id="myTable" border="1">
+<tr>
+<td>d</td>
+<td>d</td>
+</tr>
+<tr>
+<td>d</td>
+<td>d</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+</tr>
+</table>
+<form>
+<input type="button" onclick="addCell()" value="Add cell">
+</form>
+</body>
+
+</html>

@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
-<link rel="stylesheet" type="text/css" href="external-lib/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="external-lib/bootstrap/css/bootstrap.css" />
 <script type = "text/javascript" src= "external-lib/jquery-1.9.0.min.js"> </script>
 <script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
 <script type = "text/javascript" src= "external-lib/bootstrap/js/bootstrap.js"> </script>
+<script type = "text/javascript" src= "doctor_login.js"> </script>
 <link rel="stylesheet" type="text/css" href="doctor.css" />
 
 </head>
@@ -13,18 +14,18 @@
 
 <body>
 	
-		<div class = "row-fluid" >
-			<div class = "span12 login-screen">
+		<div class = "row-fluid fullheight" >
+			<div class = "span12 login-screen fullheight">
 				<form class = "login-center">
 					<fieldset >
 						<legend >Take Your Pills for doctors</legend>
 						<label>Account Email</label>
-						<input type="text">
+						<input type="text" id="login_email">
 						<label>Password</label>
-						<input type="password">
+						<input type="password" id="login_pw">
 						<div>
-							<a class="btn login-button" href="doctor_messages.html">Login</a>
-							<a class="btn login-button" href="doctor_newAccount.html">New Account</a>
+							<a class="btn login-button" id="login" href="doctor_messages.html">Login</a>
+							<a class="btn login-button" id="new_acc" href="doctor_newAccount.html">New Account</a>
 						</div>
 					</fieldset>
 				</form>
