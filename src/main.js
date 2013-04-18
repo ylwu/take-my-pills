@@ -6,6 +6,11 @@
 				document.getElementById("add_new").style.display="block";
 				document.getElementById("edit_title").innerHTML="Add New Pill";
 			}
+
+			function showHistory(){
+				document.getElementById("history").style.display="block";
+				document.getElementById('home').style.display="none";
+			}
 			
 			function backToEdit() {
 				var noSave=confirm("Your changes have not been saved. Do you still want to go back to Edit My Pills page?");
@@ -117,7 +122,7 @@
 
 				m.drugsQueue.push(myPill);
 				m.initDrug(myPill);
-				console.log(m.actionQueue);
+				//console.log(m.actionQueue);
 
 
 				clear_add_new();
@@ -152,6 +157,8 @@
 
 	$(document).ready(function() {
 
+		document.getElementById("history").style.display="none";
+
 		var drugA = new myDrug("vatamin A", "2", "4/1/2013", "7/30/2013", 1, "<p>7 : 00 am</p><p>7 : 00 pm</p>");
 		var drugB = new myDrug("Aspirin", "1", "4/6/2013", "7/30/2013", 1, "<p>12 : 00 pm</p>");
 		var drugC = new myDrug("Sulfonylureas", "2", "4/6/2013", "7/30/2013", 1, "<p>3 : 00 pm</p>");
@@ -166,6 +173,15 @@
 			document.getElementById("edit_title").innerHTML="Edit Your Pills";
   		})
 
+  		$('#history-header').click(function(evt){
+  			showHistory();
+  		})
+
+
+  		$('#present-header').click(function(evt){
+  			redirectToHome();
+  		})
+
   		$('#home_btn').click( function(evt){
   			redirectToHome();
   		})
@@ -174,6 +190,11 @@
 
 		changeDivToAddNewDrug();
 		});
+
+		$("#morepills").click(function(evt){
+  				m.moreDrugs();
+  				refresh();
+  		});
 
 		var addDrugEvent = function (drugEvent){
 			var row = document.createElement('tr');
@@ -194,6 +215,7 @@
   			$('#drugtable').append($(row));
 
   			$(".checkbox").click(function(evt){
+  				console.log("x");
   				if ($("input:checked").length != 0){
   			$("#actionbar").show();
   			} else {
@@ -214,12 +236,16 @@
 
 			var refresh = function(){
 				$('#drugtable').empty();
+				m.displayQueue[0].state = "past";
+				m.displayQueue[1].state = "past";
 				for (var i=0; i<m.displayQueue.length; i++){
 					addDrugEvent(m.displayQueue[i]);
 				}
+
 			}
 
 			function redirectToHome() {
+				document.getElementById("history").style.display = "none";
 				document.getElementById("edit_main").style.display="none";
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_title").innerHTML="";
@@ -271,7 +297,7 @@
 
 			m.initDrugs();
 			redirectToHome();
-			console.log(m.displayQueue);
+			//console.log(m.displayQueue);
 			});
 
 /*Morgan's jquery for button response 
