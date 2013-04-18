@@ -87,15 +87,15 @@
 				del.setAttribute("id", document.getElementById("new_drugname").value);
 				del.setAttribute("onclick", "deletePill(this);");
 				del.setAttribute("class", "btn");
-				del.setAttribute("class", "btn-large");
+				
 				
 				var newButton = document.createElement("input");
 				newButton.setAttribute("type", "button");
 				newButton.setAttribute("value", document.getElementById("new_drugname").value);
 				newButton.setAttribute("onclick", "editPill(this);");
 				newButton.setAttribute("class", "btn");
-				newButton.setAttribute("class", "btn-large");
 
+				
 				pdiv.appendChild(newButton);
 				pdiv.appendChild(del);
 				document.getElementById("drug_section").appendChild(pdiv);
