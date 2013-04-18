@@ -112,21 +112,44 @@
 		
 	<div id="add_new">
 
-		<input type="button" id="back_to_edit" onclick="backToEdit()" value="Back to Edit">
-
 		<div id="add_new_section">
-			<p>New Pill Name: <input type="text" id="new_drugname" /></p>
-			<p>Dose: <input type="text" id="new_drugdose" /></p>
-			<p>Start Date: <input type="text" id="add_startdate" /></p>
-			<p>End Date: <input type="text" id="add_enddate" /></p>
-			<p>Dose Frequency: <select id="add_dosefrequency">
-				  <option value="0">Set Cycle</option>
-				  <option value="1">Set Specific Time</option>
-				  <option value="2">Set Number of Dose(s) Per Day</option>
-			</select></p>
 
-			<div id="cycle">
-				<p>Take every <select id="cycle_hour" class="span1">
+			<div>
+				<table id="add_new_pill" border="0" align="center">
+
+					<tr>
+					<td>New Pill Name:</td>
+					<td><input type="text" id="new_drugname" /></td>
+					</tr>
+
+					<tr>
+					<td>Dose:</td>
+					<td><input type="text" id="new_drugdose" /></td>
+					</tr>
+
+					<tr>
+					<td>Start Date:</td>
+					<td><input type="text" id="add_startdate" /></td>
+					</tr>
+
+					<tr>
+					<td>End Date:</td>
+					<td><input type="text" id="add_enddate" /></td>
+					</tr>
+
+					<tr>
+					<td>Dose Frequency:</td>
+					<td><select id="add_dosefrequency">
+					  <option value="0">Set Cycle</option>
+					  <option value="1">Set Specific Time</option>
+					  <option value="2">Set Number of Dose(s) Per Day</option>
+					  </select></td>
+					</tr>
+
+
+					<tr>
+					<td>Take every</td>
+					<td><div id="cycle"><select id="cycle_hour" class="span1">
 				  <option value="0">0</option>
 				  <option value="1">1</option>
 				  <option value="2">2</option>
@@ -156,9 +179,26 @@
 				  <option value="15">15</option>
 				  <option value="30">30</option>
 				  <option value="45">45</option>
-			</select> minute(s)
-			</p>
+			</select> minute(s)</div></td>
+					</tr>
+
+					<tr>
+					<td>Take every</td>
+					<td><select id="add_dosefrequency">
+					  <option value="0">Set Cycle</option>
+					  <option value="1">Set Specific Time</option>
+					  <option value="2">Set Number of Dose(s) Per Day</option>
+					  </select></td>
+					</tr>
+
+
+				</table>
+
 			</div>
+
+
+
+
 			<div id="specific_time">
 				Take every day at: <div id="selected_times"></div>
 				<p><select id="specific_hour" class="span1">
@@ -183,9 +223,17 @@
 				  <option value="am">am</option>
 				  <option value="pm">pm</option>
 			</select>
+
+
+
 			</p>
 			<p><input type="button" id="clear_specific" onclick="clearSpecificTime()" value="Clear Times"> <input type="button" id="add_specific" onclick="addSpecificTime()" value="Add This Time"></p>
+
+
 			</div>
+
+
+
 			<div id="num_dosage">
 				<p>Take <select id="num_hour" class="span1">
 				  <option value="1">1</option>
@@ -200,7 +248,13 @@
 				  <option value="10">10</option>
 			</select > time(s) per day
 			</div>
-			<p><input type="button" id="save" onclick="save_new()" value="Save New Pill"></p>
+
+			<div id="add_new_pills_btn">
+
+				<button class="btn btn-success"  type="button" id="save" onclick="save_new()" value="Save New Pill">Save New Pill</button>
+
+				<button class="btn" type="button" id="back_to_edit" onclick="backToEdit()" value="Back to Edit">Back to Edit</button>
+			</div>
 			
 		</div>
 	</div>
