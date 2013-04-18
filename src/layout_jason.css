@@ -17,6 +17,12 @@
 	background-color: #EEEEEE;
 }
 
+#olddrugs{
+	overflow: scroll;
+	background-color: #EEEEEE;
+	height: 390px;
+}
+
 #actionbar{
 	display: none;
 }

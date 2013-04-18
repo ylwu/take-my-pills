@@ -224,18 +224,22 @@
   				console.log("x");
   				if ($("input:checked").length != 0){
   			$("#actionbar").show();
+  			$("#morepills").hide();
   			} else {
   				$("#actionbar").hide();
+  				$("#morepills").show();
   			};
 
   			$("#take").click(function(evt){
   				$("input:checked").parent().parent().remove();
   				$("#actionbar").hide();
+  				$("#morepills").show();
   			});
 
   			$("#miss").click(function(evt){
   				$("input:checked").parent().parent().remove();
   				$("#actionbar").hide();
+  				$("#morepills").show();
   			});
 
   			});
