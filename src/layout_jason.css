@@ -14,6 +14,7 @@
 #drugs{
 	overflow: scroll;
 	height: 330px;
+	background-color: #EEEEEE;
 }
 
 #actionbar{
@@ -106,6 +107,7 @@
 	border-style:solid;
 	border-color: black;
 	height: 500px;
+	background-color: #EEEEEE;
 }
 
 #app_log_in_sign_up_btn{
@@ -139,6 +141,10 @@
 	position:relative;
 	top:-5px;
 	left: 330px
+}
+
+body{
+	font-family: "Akzidenz Grotesk";
 }
 
 
