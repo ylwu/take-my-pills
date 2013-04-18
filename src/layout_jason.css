@@ -3,9 +3,17 @@
 	background-color: #eee;
 }
 
+#history-header{
+	margin-left: 0px;
+}
+
+#present-header{
+	margin-left: 0px;
+}
+
 #drugs{
 	overflow: scroll;
-	height: 345px;
+	height: 330px;
 }
 
 #actionbar{

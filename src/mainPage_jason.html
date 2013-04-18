@@ -32,17 +32,54 @@
     	</div>
 	</div>
 
-	<div id="home">
-	<div class="row" >
-		<div class="span6 centered">
-			See History
-		</div>
+
+	<div id="history">
+
+	<div class="row span6 centered btn btn-block" id= "present-header">
+			See Present
 	</div>
 	<div class="row">
-		<label class="span2">
-		<input type = "checkbox"> Select missed
-		</label>
-		<button id="EditPills" class= "btn btn-primary span2 offset1"> Edit pills
+		<div class="span6" id="main">
+		<div id="drugs">
+		<table class= "table" id="historytable">
+			<tr class="error drug">
+				<td> Vitamin A </td>
+				<td> 4/19/13 </td>
+				<td> 2:00pm </td>
+				<td>  2pills </td>
+				<td>  <button class="btn btn-info"> Missed </button> 
+				</td>
+			</tr>
+			<tr class="error drug">
+				<td> Aspirin  </td>
+				<td> 4/19/13 </td>
+				<td> 4:00pm </td>
+				<td>  2pills </td>
+				<td>  <button class="btn btn-info"> Missed </button> 
+				</td>
+			</tr>
+
+			<tr class="success drug">
+				<td> Aspirin </td>
+				<td> 4/19/13 </td>
+				<td> 6:00pm </td>
+				<td>  2pills </td>
+				<td>  <button class="btn btn-info"> Took </button> 
+				</td>
+			</tr>
+		</table>
+		</div>
+		</div>
+
+	</div>
+	</div>
+
+	<div id="home">
+		<div class="row span6 centered btn btn-block" id= "history-header">
+			See History
+		</div>
+	<div class="row">
+		<button id="EditPills" class= "btn btn-primary span2 offset3"> Edit pills
 		</button>
 		<button class= "btn span1" id="add"> <i class="icon-plus"></i></button>
 	</div>
@@ -53,7 +90,7 @@
 		</table>
 		</div>
 		<div id="showmore">
-		<button class= "btn-block"> see more pills </button>
+		<button class= "btn-block" id="morepills"> see more pills </button>
 		</div>
 		<div class="row" id="actionbar">
 			<button class="btn btn-success span2" id="take"> Take </button>
