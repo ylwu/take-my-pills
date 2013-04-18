@@ -31,7 +31,7 @@
 
 .span-background{
 	background-color:#f2f2f2;
-	height:400px;
+	height:420px;
 }
 
 .doctor-btn{
@@ -122,8 +122,16 @@
 
 }
 
+.mesage-area{
+	position:relative;
+	top:29px;
+}
 
-
+#doctor_message_submit_btn{
+	position:relative;
+	top:-5px;
+	left: 330px
+}
 
 
 
