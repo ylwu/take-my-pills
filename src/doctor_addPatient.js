@@ -27,7 +27,7 @@ String.prototype.replaceAll = function(str1, str2, ignore)
 $(document).ready(function() {
 	
 	//list of all patient
-	var all_patient = ["Amy Bxxx","Cathy Dxxx","Eric Fxxx","Gary Hxxx","Irene Jxxx","Katherine Lxxx"];
+	var all_patient = ["Amy Fox","Cathy Dxxx","Eric Fxxx","Gary Hxxx","Irene Jxxx","Katherine Lxxx"];
 	
 	//patient info from url
 	var patient_name= $.getUrlVar("patient_name");

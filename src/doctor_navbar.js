@@ -7,14 +7,14 @@ String.prototype.replaceAll = function(str1, str2, ignore)
 
 $(document).ready(function() {
 
-	var last_name = "Xxxxxx";
-	var first_name = "Xxxx";
+	var last_name = "Williams";
+	var first_name = "John";
 
 	//display doctor name
 	$(doctor_name).html("Dr. "+first_name+" "+last_name);
 
 	//patient lists
-	var all_patient = ["Amy Bxxx","Cathy Dxxx","Eric Fxxx","Gary Hxxx","Irene Jxxx","Katherine Lxxx"];
+	var all_patient = ["Amy Fox","Cathy Dxxx","Eric Fxxx","Gary Hxxx","Irene Jxxx","Katherine Lxxx"];
 	
 	//auto complete for patient search
 	$(search_patient).val("");
