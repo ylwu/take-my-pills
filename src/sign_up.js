@@ -8,3 +8,15 @@
 
 
    });
+
+
+      $(document).ready(function(){
+
+  		$(app_sign_up_btn).click(function()    {
+            
+                window.location="mainPage_jason.html";
+
+        });      
+
+
+   });
