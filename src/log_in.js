@@ -6,3 +6,14 @@
         });
 
    });
+    
+    $(document).ready(function(){
+
+  		$(app_log_in_btn).click(function()    {
+            
+                window.location="mainPage_jason.html";
+
+        });      
+
+
+   });

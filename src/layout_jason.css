@@ -39,7 +39,7 @@
 
 .span-background{
 	background-color:#f2f2f2;
-	height:400px;
+	height:420px;
 }
 
 .doctor-btn{
@@ -65,7 +65,7 @@
 }
 
 #log-in-page{
-	height: 400px;
+	height: 460px;
 }
 
 .doctor-message{
@@ -111,3 +111,42 @@
 #app_log_in_sign_up_btn{
 	
 }
+
+#log_in_table{
+	padding-top: 60px;
+	position:relative;
+	top:50px;
+}
+
+#log_in_btn_group{
+	position:relative;
+	top:50px;
+
+}
+
+.bar_btn_group{
+	position:relative;
+	top:5px;
+
+}
+
+.mesage-area{
+	position:relative;
+	top:29px;
+}
+
+#doctor_message_submit_btn{
+	position:relative;
+	top:-5px;
+	left: 330px
+}
+
+
+
+
+
+
+
+
+
+
