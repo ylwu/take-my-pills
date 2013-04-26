@@ -182,7 +182,7 @@
 
   		$('#history-header').click(function(evt){
   			showHistory();
-  		$.g('pilldata.json',null, function(data){
+  		$.getJson('pilldata.json',null, function(data){
 			console.log('2');
 		});
   			console.log("fuck");
