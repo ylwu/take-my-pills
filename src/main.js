@@ -168,6 +168,7 @@
 		var drugA = new myDrug("Vitamin A", "2", "4/1/2013", "7/30/2013", 1, "<p>7 : 00 am</p><p>7 : 00 pm</p>");
 		var drugB = new myDrug("Aspirin", "1", "4/6/2013", "7/30/2013", 1, "<p>12 : 00 pm</p>");
 		var drugC = new myDrug("Sulfonylureas", "2", "4/6/2013", "7/30/2013", 1, "<p>3 : 00 pm</p>");
+
 		m.drugsQueue.push(drugA);
 		m.drugsQueue.push(drugB);
 		m.drugsQueue.push(drugC);
@@ -181,6 +182,10 @@
 
   		$('#history-header').click(function(evt){
   			showHistory();
+  		$.g('pilldata.json',null, function(data){
+			console.log('2');
+		});
+  			console.log("fuck");
   		})
 
 
