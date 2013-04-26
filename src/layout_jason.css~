@@ -1,0 +1,111 @@
+.centered{
+	text-align :center;
+	background-color: #eee;
+}
+
+#drugs{
+	overflow: scroll;
+	height: 400px;
+}
+
+#actionbar{
+	display: none;
+}
+
+
+.header{
+	background-color: #3CDDDD;
+	background-image: -moz-linear-gradient(bottom, #027979 0%, #3CDDDD 100%);
+}
+
+.header_text{
+	text-align:center;
+	font-family:"Akzidenz Grotesk";
+	font-size:30px;
+}
+
+#contact-doctor-bar{
+	background-color: #B5B5B5;
+	height:40px;
+}
+
+.span-background{
+	background-color:#f2f2f2;
+	height:400px;
+}
+
+.doctor-btn{
+	background-color:#67dddd;
+	height:100px;
+
+	border-width:1px;
+    border-style:solid;
+    border-color:#027979;
+}
+
+.doctor-name{
+	text-align:left;
+	font-family:"Akzidenz Grotesk";
+	font-size:30px;
+
+}
+#doctor-message-submit-btn{
+
+}
+
+#doctor-message-box{
+
+
+}
+
+#log-in-page{
+	height: 400px;
+}
+
+.doctor-message{
+	text-align: left;
+	background-color: #ffd277;
+	border:5px; 
+	border-style:solid;
+	border-color:#f2f2f2;
+
+}
+
+.patient-message{
+	 text-align: right;
+  	 margin-right: 1em;
+  	 background-color: #67dddd;
+  	 border:5px; 
+	border-style:solid;
+	border-color:#f2f2f2;
+}
+
+.conversation-text{
+	margin-left:auto; 
+    margin-right:auto;
+}
+
+.message-area{
+	float:right;
+}
+
+
+#message-box-size{
+	height: 310px;
+	overflow:scroll;
+}
+
+#main-page{
+	border:3px;
+	border-style:solid;
+	border-color: black;
+	height: 550px;
+}
+
+.del-btn{
+
+}
+
+.edit-drug-btn{
+
+}
