@@ -1,0 +1,7 @@
+{"alldrugs":[
+	{"name":"Vitamin A", "dose": "2", startdate:"4/1/2013", "enddate":"7/30/2013", "frequency":1, "times":"<p>7 : 00 am</p><p>7 : 00 pm</p>",lasttake:""},
+	{"name":"Aspirin", "dose": "1", startdate:"4/6/2013", "enddate":"7/30/2013", "frequency":0, "times":"6,30",lasttake:""},
+	{"name":"Vitamin A", "dose": 2, startdate:"4/1/2013", "enddate":"7/30/2013", "frequency":1, "times":"3",lasttake:""}
+	]
+}
+   
