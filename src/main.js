@@ -160,18 +160,42 @@
 			
 			}
 
+		function returnAllDrugs(){
+			$.getJSON('pilldata.json',null, function(data){
+				return data;
+			})
+		}
+
+		function readDrugsfromJson(){
+			$.getJSON('pilldata.json',null, function(data){
+  			data.forEach(function(entry){
+  				m.drugsQueue.push(entry);
+  				console.log(m.drugsQueue);
+  			})
+			})
+		}
+
+		fucntion readDrugs(){
+			$.ajax({
+  				dataType: "json",
+  				url: url,
+  				data: data,
+  				success: success
+			});
+		}
+
 
 	$(document).ready(function() {
 
 		document.getElementById("history").style.display="none";
 
-		var drugA = new myDrug("Vitamin A", "2", "4/1/2013", "7/30/2013", 1, "<p>7 : 00 am</p><p>7 : 00 pm</p>");
-		var drugB = new myDrug("Aspirin", "1", "4/6/2013", "7/30/2013", 1, "<p>12 : 00 pm</p>");
-		var drugC = new myDrug("Sulfonylureas", "2", "4/6/2013", "7/30/2013", 1, "<p>3 : 00 pm</p>");
+		// var drugA = new myDrug("Vitamin A", "2", "4/1/2013", "7/30/2013", 1, "<p>7 : 00 am</p><p>7 : 00 pm</p>");
+		// var drugB = new myDrug("Aspirin", "1", "4/6/2013", "7/30/2013", 1, "<p>12 : 00 pm</p>");
+		// var drugC = new myDrug("Sulfonylureas", "2", "4/6/2013", "7/30/2013", 1, "<p>3 : 00 pm</p>");
 
-		m.drugsQueue.push(drugA);
-		m.drugsQueue.push(drugB);
-		m.drugsQueue.push(drugC);
+		// m.drugsQueue.push(drugA);
+		// // m.drugsQueue.push(drugB);
+		// // m.drugsQueue.push(drugC);
 
   		$('#EditPills').click(function(evt){
   			document.getElementById("home").style.display="none";
@@ -182,9 +206,6 @@
 
   		$('#history-header').click(function(evt){
   			showHistory();
-  		$.getJSON('pilldata.json',null, function(data){
-  			console.log(data);
-		});
   		})
 
 
@@ -252,8 +273,6 @@
 
 			var refresh = function(){
 				$('#drugtable').empty();
-				m.displayQueue[0].state = "past";
-				m.displayQueue[1].state = "past";
 				for (var i=0; i<m.displayQueue.length; i++){
 					addDrugEvent(m.displayQueue[i]);
 				}
@@ -266,6 +285,7 @@
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_title").innerHTML="";
 				document.getElementById('home').style.display='block';
+				m.initDrugs();
 				refresh();
 			}
 
@@ -319,9 +339,14 @@
 					}
 				});
 
+			$.when(readDrugsfromJson()).done(
+				function(x){
+				m.initDrugs();
+				redirectToHome();
+				}
 
-			m.initDrugs();
-			redirectToHome();
+			)
+			
 	});
 
 /*Morgan's jquery for button response 
