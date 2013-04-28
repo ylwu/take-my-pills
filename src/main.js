@@ -160,27 +160,32 @@
 			
 			}
 
-		function returnAllDrugs(){
-			$.getJSON('pilldata.json',null, function(data){
-				return data;
-			})
-		}
+		// function returnAllDrugs(){
+		// 	$.getJSON('pilldata.json',null, function(data){
+		// 		return data;
+		// 	})
+		// }
 
-		function readDrugsfromJson(){
-			$.getJSON('pilldata.json',null, function(data){
-  			data.forEach(function(entry){
-  				m.drugsQueue.push(entry);
-  				console.log(m.drugsQueue);
-  			})
-			})
-		}
+		// function readDrugsfromJson(){
+		// 	$.getJSON('pilldata.json',null, function(data){
+  // 			data.forEach(function(entry){
+  // 				m.drugsQueue.push(entry);
+  // 				console.log(m.drugsQueue);
+  // 			})
+		// 	})
+		// }
 
-		fucntion readDrugs(){
+		function readDrugs(){
 			$.ajax({
   				dataType: "json",
-  				url: url,
-  				data: data,
-  				success: success
+  				url: 'pilldata.json',
+  				async: false,
+  				success: function(data){
+  					data.forEach(function(entry){
+  						m.drugsQueue.push(entry);
+  						console.log(m.drugsQueue);
+  					})
+				}
 			});
 		}
 
@@ -339,13 +344,10 @@
 					}
 				});
 
-			$.when(readDrugsfromJson()).done(
-				function(x){
+				readDrugs();
 				m.initDrugs();
 				redirectToHome();
-				}
 
-			)
 			
 	});
 
