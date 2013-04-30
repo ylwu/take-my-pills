@@ -41,3 +41,17 @@ function returnAllMessages(){
   });
   return s;
 }
+
+function returnMissedDrugs(){
+  var s;
+  $.ajax({
+          dataType: "json",
+          url: 'missedPillsData.json',
+          async: false,
+          success: function(data){
+            s = data;
+        }
+  });
+  return s;
+}
+

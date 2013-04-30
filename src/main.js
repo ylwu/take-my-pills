@@ -100,6 +100,25 @@
 		document.getElementById("edit_title").innerHTML="Add New Pill";
 	}			
 
+
+	//Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
+function removeDrugEvent(DrugName, dateString, timeString){
+  for (var i = 0; i < m.displayQueue.length; i++) {
+    entry = m.displayQueue[i];
+    if ((entry.name == DrugName) && (entry.dateString == dateString) && (entry.timeString == timeString)){
+      m.historyQueue.push(m.displayQueue[i]);
+      m.displayQueue.remove(i);
+      return entry;
+    };
+  };
+}
+
 	$(document).ready(function() {
 
 			
@@ -223,8 +242,7 @@
   			$('#drugtable').append($(row));
 
   			$(".checkbox").click(function(evt){
-  				console.log("x");
-  				if ($("input:checked").length != 0){
+  			   if ($("input:checked").length != 0){
   			$("#actionbar").show();
   			$("#morepills").hide();
   			} else {
@@ -232,18 +250,7 @@
   				$("#morepills").show();
   			};
 
-  			$("#take").click(function(evt){
-  				$("input:checked").parent().parent().remove();
-  				$("#actionbar").hide();
-  				$("#morepills").show();
-  			});
-
-  			$("#miss").click(function(evt){
-  				$("input:checked").parent().parent().remove();
-  				$("#actionbar").hide();
-  				$("#morepills").show();
-  			});
-
+  			
   			});
 
   		}
@@ -308,5 +315,39 @@
 				});
 
 				redirectToHome();
+
+				$("#take").click(function(evt){
+				var e = $("input:checked");
+				for (var i = 0; i < e.length; i++) {
+					var drugName = e[i].parentNode.parentNode.children[0].textContent;
+					var dateString = e[i].parentNode.parentNode.children[1].innerHTML;
+					var timeString = e[i].parentNode.parentNode.children[2].innerHTML;
+					var drugEvent = removeDrugEvent(drugName,dateString,timeString);
+					console.log(drugEvent);
+					console.log(m.displayQueue);
+
+				}
+  				$("input:checked").parent().parent().remove();
+  				$("#actionbar").hide();
+  				$("#morepills").show();
+  				});
+
+  				$("#miss").click(function(evt){
+  				var e = $("input:checked");
+				for (var i = 0; i < e.length; i++) {
+					var drugName = e[i].parentNode.parentNode.children[0].textContent;
+					var dateString = e[i].parentNode.parentNode.children[1].innerHTML;
+					var timeString = e[i].parentNode.parentNode.children[2].innerHTML;
+					var drugEvent = removeDrugEvent(drugName,dateString,timeString);
+					console.log(drugEvent);
+					console.log(m.displayQueue);
+
+				}
+  					$("input:checked").parent().parent().remove();
+  					$("#actionbar").hide();
+  					$("#morepills").show();
+  				});
+
+
 	})
 					

@@ -133,7 +133,6 @@ var Model = function(){
 
 	this.initDrugs = function(){
 		this.displayQueue.length = 0;
-		console.log(this.drugsQueue.length);
 		for (var i=0; i<this.drugsQueue.length; i++){
 			this.initDrug(this.drugsQueue[i]);
 	}
@@ -146,7 +145,7 @@ var Model = function(){
 
 	}
 
-
+	
 
 
 }
