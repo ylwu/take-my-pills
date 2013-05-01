@@ -4,7 +4,7 @@ function returnAllDrugs(){
       var t;
 			$.ajax({
   				dataType: "json",
-  				url: '/take-my-pills/src/pillData.json',
+  				url: 'pillData.json',
   				async: false,
   				success: function(data){
             t = data;
