@@ -2,6 +2,7 @@
 
 	function writePill(aPill) {
 
+	alert(aPill.name);
 	// need to read json first and then also re-insert
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': '[{"name": "'+aPill.name+'", "dose": "'+aPill.dose+'", "startdate": "'+aPill.startdate+'", "enddate": "'+aPill.enddate+'", "frequency": "'+aPill.frequency+'", "times": "'+aPill.times+'", "lasttake": "'+aPill.lasttake+'"}]' });
 	}
@@ -86,7 +87,7 @@
 				//console.log(m.actionQueue);
 
 
-				//writePill(myPill);
+				writePill(myPill);
 
 				clear_add_new();
 				document.getElementById("add_new").style.display="none";
