@@ -1,3 +1,21 @@
+// TY_GLOBAL WRITE_TO_JSON FUNCTIONS
+
+	function writePill(aPill) {
+
+	// need to read json first and then also re-insert
+		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': '[{"name": "'+aPill.name+'", "dose": "'+aPill.dose+'", "startdate": "'+aPill.startdate+'", "enddate": "'+aPill.enddate+'", "frequency": "'+aPill.frequency+'", "times": "'+aPill.times+'", "lasttake": "'+aPill.lasttake+'"}]' });
+	}
+
+	function deletePill(aPill) {
+		// need to read json first and then delete aPill from list, rewrite to 
+		
+
+	}
+
+
+
+// END TY_GLOBAL
+
 	function addSpecificTime() {
 		var p = document.createElement("p");
 		p.innerHTML=document.getElementById("specific_hour").value+" : "+document.getElementById("specific_minute").value+" "+document.getElementById("am_pm").value;
@@ -12,7 +30,7 @@
 			
 	}
 
-	var save_new = function() {
+	function save_new() {
 				var pdiv = document.createElement("div");
 				//pdiv.setAttribute("class", "row");
 				//pdiv.setAttribute("align", "center");
@@ -68,6 +86,8 @@
 				//console.log(m.actionQueue);
 
 
+				//writePill(myPill);
+
 				clear_add_new();
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_main").style.display="block";
@@ -101,34 +121,7 @@
 	}			
 
 
-	//Array Remove - By John Resig (MIT Licensed)
-Array.prototype.remove = function(from, to) {
-  var rest = this.slice((to || from) + 1 || this.length);
-  this.length = from < 0 ? this.length + from : from;
-  return this.push.apply(this, rest);
-};
-
-function removeDrugEvent(DrugName, dateString, timeString){
-  for (var i = 0; i < m.displayQueue.length; i++) {
-    entry = m.displayQueue[i];
-    if ((entry.name == DrugName) && (entry.dateString == dateString) && (entry.timeString == timeString)){
-      m.historyQueue.push(m.displayQueue[i]);
-      m.displayQueue.remove(i);
-      return entry;
-    };
-  };
-}
-
-	$(document).ready(function() {
-
-			
-
-			function showHistory(){
-				document.getElementById("history").style.display="block";
-				document.getElementById('home').style.display="none";
-			}
-
-			function deletePill(ele) {
+		function deletePill(ele) {
 				var parent=document.getElementById("drug_section");
 				var child=document.getElementById(ele.id+"_pdiv");
 				parent.removeChild(child);
@@ -181,6 +174,38 @@ function removeDrugEvent(DrugName, dateString, timeString){
 
 			}
 
+
+
+
+
+	//Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
+
+function removeDrugEvent(DrugName, dateString, timeString){
+  for (var i = 0; i < m.displayQueue.length; i++) {
+    entry = m.displayQueue[i];
+    if ((entry.name == DrugName) && (entry.dateString == dateString) && (entry.timeString == timeString)){
+      m.historyQueue.push(m.displayQueue[i]);
+      m.displayQueue.remove(i);
+      return entry;
+    };
+  };
+}
+
+	$(document).ready(function() {
+
+			
+
+			function showHistory(){
+				document.getElementById("history").style.display="block";
+				document.getElementById('home').style.display="none";
+			}
+
+			
   		$('#EditPills').click(function(evt){
   			document.getElementById("home").style.display="none";
   			document.getElementById("add_new").style.display="none";
@@ -272,13 +297,6 @@ function removeDrugEvent(DrugName, dateString, timeString){
 				loadDrugs();
 				m.initDrugs();
 				refresh();
-			}
-
-			function editPill() { // for each drug button on Edit Your Pills page
-				document.getElementById("edit_main").style.display="none";
-				document.getElementById("add_new").style.display="block";
-				document.getElementById("edit_title").innerHTML="Edit Pill";
-									
 			}
 
 
