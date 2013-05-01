@@ -6,7 +6,7 @@
 	alert(allPillsList); // HI JASON - THIS RETURNS "undefined". Also I tried allPillsList[0] which should return object object, except it returns error, allPillsList undefined..
 
 	// need to read json first and then also re-insert
-		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': '[{"name": "'+aPill.name+'", "dose": "'+aPill.dose+'", "startdate": "'+aPill.startdate+'", "enddate": "'+aPill.enddate+'", "frequency": "'+aPill.frequency+'", "times": "'+aPill.times+'", "lasttake": "'+aPill.lasttake+'"}]' });
+		//$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': '[{"name": "'+aPill.name+'", "dose": "'+aPill.dose+'", "startdate": "'+aPill.startdate+'", "enddate": "'+aPill.enddate+'", "frequency": "'+aPill.frequency+'", "times": "'+aPill.times+'", "lasttake": "'+aPill.lasttake+'"}]' });
 	}
 
 	function deletePill(aPill) {
