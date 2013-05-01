@@ -1,24 +1,3 @@
-// TY_GLOBAL WRITE_TO_JSON FUNCTIONS
-
-	function writePill(aPill) {
-
-	var allPillsList=returnAllDrugs();
-	alert(allPillsList); // HI JASON - THIS RETURNS "undefined". Also I tried allPillsList[0] which should return object object, except it returns error, allPillsList undefined..
-
-	// need to read json first and then also re-insert
-		//$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': '[{"name": "'+aPill.name+'", "dose": "'+aPill.dose+'", "startdate": "'+aPill.startdate+'", "enddate": "'+aPill.enddate+'", "frequency": "'+aPill.frequency+'", "times": "'+aPill.times+'", "lasttake": "'+aPill.lasttake+'"}]' });
-	}
-
-	function deletePill(aPill) {
-		// need to read json first and then delete aPill from list, rewrite to 
-		
-
-	}
-
-
-
-// END TY_GLOBAL
-
 	function addSpecificTime() {
 		var p = document.createElement("p");
 		p.innerHTML=document.getElementById("specific_hour").value+" : "+document.getElementById("specific_minute").value+" "+document.getElementById("am_pm").value;

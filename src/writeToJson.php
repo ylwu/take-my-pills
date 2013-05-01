@@ -7,4 +7,10 @@
 	  fwrite($file, $newPill);
 	  fclose($file);
   }
+  else if ($function=="writeMsg") {
+	  $newPill = $_POST['input'];
+	  $file = fopen('messageData.json','w+');
+	  fwrite($file, $newPill);
+	  fclose($file);
+  }
 ?>
