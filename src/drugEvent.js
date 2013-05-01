@@ -4,5 +4,5 @@ var DrugEvent = function(name, date, dosage, dateString, timeString,state){
 	this.dosage = dosage;
 	this.dateString = dateString;
 	this.timeString = timeString;
-	this.state = state;  // "future", "take" or "missed"
+	this.state = state;  // "future", "taken" or "missed"
 }

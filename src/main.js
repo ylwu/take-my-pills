@@ -167,11 +167,24 @@ Array.prototype.remove = function(from, to) {
   return this.push.apply(this, rest);
 };
 
-function removeDrugEvent(DrugName, dateString, timeString){
+function missDrugEvent(DrugName, dateString, timeString){
   for (var i = 0; i < m.displayQueue.length; i++) {
     entry = m.displayQueue[i];
     if ((entry.name == DrugName) && (entry.dateString == dateString) && (entry.timeString == timeString)){
-      m.historyQueue.push(m.displayQueue[i]);
+    	entry.state = "missed";
+      m.historyQueue.push(entry);
+      m.displayQueue.remove(i);
+      return entry;
+    };
+  };
+}
+
+function takeDrugEvent(DrugName, dateString, timeString){
+  for (var i = 0; i < m.displayQueue.length; i++) {
+    entry = m.displayQueue[i];
+    if ((entry.name == DrugName) && (entry.dateString == dateString) && (entry.timeString == timeString)){
+    	entry.state = "taken";
+      m.historyQueue.push(entry);
       m.displayQueue.remove(i);
       return entry;
     };
@@ -182,10 +195,7 @@ function removeDrugEvent(DrugName, dateString, timeString){
 
 			
 
-			function showHistory(){
-				document.getElementById("history").style.display="block";
-				document.getElementById('home').style.display="none";
-			}
+
 
 			
   		$('#EditPills').click(function(evt){
@@ -215,7 +225,7 @@ function removeDrugEvent(DrugName, dateString, timeString){
 
 		$("#morepills").click(function(evt){
   				m.moreDrugs();
-  				refresh();
+  				reloadHome();
   		});
 
   		$("#contact_doctor_btn").click(function()    {
@@ -230,7 +240,7 @@ function removeDrugEvent(DrugName, dateString, timeString){
 
 
 
-		var addDrugEvent = function (drugEvent){
+		var addDrugEventToHome = function (drugEvent){
 			var row = document.createElement('tr');
   			var td1 = document.createElement('td');
   			$(td1).append($(document.createElement('input')).attr('type','checkbox').addClass('checkbox'));
@@ -262,10 +272,39 @@ function removeDrugEvent(DrugName, dateString, timeString){
 
   		}
 
-			var refresh = function(){
+
+  		var addDrugEventToHistory = function (drugEvent){
+			var row = document.createElement('tr');
+  			var td1 = document.createElement('td');
+  			$(td1).append(drugEvent.name);
+  			$(row).append($(td1));
+  			$(row).append($(document.createElement('td')).append(drugEvent.dateString));
+  			$(row).append($(document.createElement('td')).append(drugEvent.timeString));
+  			$(row).append($(document.createElement('td')).append(drugEvent.dosage + "pills"));
+  			$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
+  			$(row).addClass('drug');
+  			if (drugEvent.state == "taken"){
+  				$(row).addClass("success");
+  			} else {
+  				$(row).addClass("error");
+  			}
+  			$('#historytable').append($(row));
+
+  		}
+
+			var reloadHome = function(){
 				$('#drugtable').empty();
 				for (var i=0; i<m.displayQueue.length; i++){
-					addDrugEvent(m.displayQueue[i]);
+					addDrugEventToHome(m.displayQueue[i]);
+				}
+
+			}
+
+			var reloadHistory = function(){
+				$('#historytable').empty();
+				for (var i=0; i<m.historyQueue.length; i++){
+					addDrugEventToHistory(m.historyQueue[i]);
+					console.log(m.historyQueue);
 				}
 
 			}
@@ -277,8 +316,26 @@ function removeDrugEvent(DrugName, dateString, timeString){
 				document.getElementById("edit_title").innerHTML="";
 				document.getElementById('home').style.display='block';
 				loadDrugs();
+				//m.initDrugs();
+				reloadHome();
+			}
+
+
+			function startHome() {
+				document.getElementById("history").style.display = "none";
+				document.getElementById("edit_main").style.display="none";
+				document.getElementById("add_new").style.display="none";
+				document.getElementById("edit_title").innerHTML="";
+				document.getElementById('home').style.display='block';
+				loadDrugs();
 				m.initDrugs();
-				refresh();
+				reloadHome();
+			}
+
+			function showHistory(){
+				document.getElementById("history").style.display="block";
+				document.getElementById('home').style.display="none";
+				reloadHistory();
 			}
 
 
@@ -312,9 +369,9 @@ function removeDrugEvent(DrugName, dateString, timeString){
 						//document.getElementById("specific_time").style.display="none";
 						//document.getElementById("num_dosage").style.display="block";
 					}
-				});
+				})
 
-				redirectToHome();
+				startHome();
 
 				$("#take").click(function(evt){
 				var e = $("input:checked");
@@ -322,9 +379,7 @@ function removeDrugEvent(DrugName, dateString, timeString){
 					var drugName = e[i].parentNode.parentNode.children[0].textContent;
 					var dateString = e[i].parentNode.parentNode.children[1].innerHTML;
 					var timeString = e[i].parentNode.parentNode.children[2].innerHTML;
-					var drugEvent = removeDrugEvent(drugName,dateString,timeString);
-					console.log(drugEvent);
-					console.log(m.displayQueue);
+					var drugEvent = takeDrugEvent(drugName,dateString,timeString);
 
 				}
   				$("input:checked").parent().parent().remove();
@@ -338,9 +393,7 @@ function removeDrugEvent(DrugName, dateString, timeString){
 					var drugName = e[i].parentNode.parentNode.children[0].textContent;
 					var dateString = e[i].parentNode.parentNode.children[1].innerHTML;
 					var timeString = e[i].parentNode.parentNode.children[2].innerHTML;
-					var drugEvent = removeDrugEvent(drugName,dateString,timeString);
-					console.log(drugEvent);
-					console.log(m.displayQueue);
+					var drugEvent = missDrugEvent(drugName,dateString,timeString);
 
 				}
   					$("input:checked").parent().parent().remove();
