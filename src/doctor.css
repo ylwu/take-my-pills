@@ -42,6 +42,7 @@ body {
 
 .signup-legend{
 	text-align: left;
+	margin-bottom: 0px;
 }
 
 .signup-label{
@@ -53,7 +54,7 @@ body {
 }
 
 .signup-text{
-	float: right;
+	
 	vertical-align: bottom;
 	margin-left: 15px;
 
@@ -66,13 +67,31 @@ body {
 	vertical-align: bottom;
 	text-align:right;
 	float:left;
+	
 }
 
+
+
 .addpatient-text{
-	float: right;
+	
 	vertical-align: bottom;
 	margin-left: 15px;
 	width:400px;
+	padding:0px;
+
+}
+
+.adddrug-dropdown{
+	width: 400px !important;
+	
+}
+.addpatient-textarea{
+	float: right;
+	vertical-align: bottom;
+	margin-left: 15px;
+	height:150px;
+	resize:none;
+	width: 400px;
 }
 
 .addpatient-button{
@@ -105,7 +124,31 @@ body {
 
 }
 
+.status_message{
+	color: red;
+	margin:10px;
+}
+.float-right{
+	float:right;
+}
 
+.patient-list-title{
+	text-align:left;
+	vertical-align:bottom;
+	height:30px;
+}
+
+.patient-list-div{
+	text-align:left;
+}
+
+.patient-list{
+	margin-top:15px;
+}
+
+.halfcenter{
+	width:30%;
+}
 
 .patient{
 
@@ -166,8 +209,14 @@ body {
 
 
 }
+
+.new_message{
+	background-color: #D6D6D6;
+}
+
 .doctor-chat-text{
 	height:150px !important;
+	resize: none;
 
 
 
@@ -224,6 +273,16 @@ body {
 }
 
 
+
+.nav-texts{
+	line-height:40px !important;
+	height:40px% !important; 
+	vertical-align:middle;
+}
+
+.drug-dropdown{
+	width:20%;
+}
 
 
 

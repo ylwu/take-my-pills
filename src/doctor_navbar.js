@@ -14,7 +14,7 @@ $(document).ready(function() {
 	$(doctor_name).html("Dr. "+first_name+" "+last_name);
 
 	//patient lists
-	var all_patient = ["Amy Fox","Cathy Dxxx","Eric Fxxx","Gary Hxxx","Irene Jxxx","Katherine Lxxx"];
+	var all_patient = ["Amy Fox"];
 	
 	//auto complete for patient search
 	$(search_patient).val("");
@@ -23,16 +23,27 @@ $(document).ready(function() {
 		minLength: 2,
 		});
 	
-	//search button go to patient page TODO
+	//search button go to patient page 
 	$(search_patient_btn).click(function()	{
 			var patient_name = $(search_patient).val();
 			if (patient_name.length >0){
 				patient_name = patient_name.replaceAll(" ","_");
-				console.log("doctor_patient.html?="+patient_name);
 				window.location="doctor_patient.html?patient_name="+patient_name;
 			}
 		
 	});
+	
+	$(search_patient).keyup(function (e) {
+		if (e.keyCode == 13) {
+			var patient_name = $(search_patient).val();
+			if (patient_name.length >0){
+					patient_name = patient_name.replaceAll(" ","_");
+					window.location="doctor_patient.html?patient_name="+patient_name;
+			}
+		}
+	});
+
+
 		
 });
 

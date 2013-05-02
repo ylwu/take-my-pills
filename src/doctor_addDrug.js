@@ -27,7 +27,7 @@ String.prototype.replaceAll = function(str1, str2, ignore)
 $(function() {
 	
 	//list of all patient
-	var all_patient = ["Amy Fox","Cathy Dxxx","Eric Fxxx","Gary Hxxx","Irene Jxxx","Katherine Lxxx"];
+	var all_patient = ["Amy Fox"];
 	
 	//patient info from url
 	var patient_name= $.getUrlVar("patient_name");
@@ -57,6 +57,7 @@ $(document).ready(function() {
 	$(add_startdate).val("");
 	$(add_enddate).val("");
 	$(cycle_hour).val("");
+	$(add_dosefrequency).val(0);
 	
 	$("#edit_buttons").hide();
 	
@@ -114,11 +115,13 @@ function addDrug(){
 	$("#edit_buttons").hide();
 }
 function addSpecificTime() {
-				var p = document.createElement("p");
-				p.innerHTML=document.getElementById("specific_hour").value+" : "+document.getElementById("specific_minute").value+" "+document.getElementById("am_pm").value;
+				var time=document.getElementById("specific_hour").value+" : "+document.getElementById("specific_minute").value+" "+document.getElementById("am_pm").value;
 				
-				var selected=document.getElementById("selected_times");
-				selected.appendChild(p);
+			
+				$(selected_times).append("<div>"+time+"</div>");
+				var height = $(selected_times).height();
+				height+=20;
+				$(everyLabel).css("height",height+20);
 			
 			}
 			
