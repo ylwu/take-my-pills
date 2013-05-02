@@ -55,3 +55,18 @@ function returnMissedDrugs(){
   return s;
 }
 
+
+function returnAllPatients(){
+      var t;
+      $.ajax({
+          dataType: "json",
+          url: 'patientData.json',
+          async: false,
+          success: function(data){
+            t = data;
+        }
+      });
+      return t;
+
+    }
+
