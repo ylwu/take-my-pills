@@ -1,23 +1,32 @@
-// TY_GLOBAL WRITE_TO_JSON FUNCTIONS
+	function updateManagePills() {
 
-	function writePill(aPill) {
+		var myPillsList=returnAllDrugs();
 
-	var allPillsList=returnAllDrugs();
-	alert(allPillsList); // HI JASON - THIS RETURNS "undefined". Also I tried allPillsList[0] which should return object object, except it returns error, allPillsList undefined..
+		for (var i=0; i<myPillsList.length; i++) {
+			var pdiv = document.createElement("div");
+		        pdiv.setAttribute("id",myPillsList[i].name+"_pdiv");
 
-	// need to read json first and then also re-insert
-		//$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': '[{"name": "'+aPill.name+'", "dose": "'+aPill.dose+'", "startdate": "'+aPill.startdate+'", "enddate": "'+aPill.enddate+'", "frequency": "'+aPill.frequency+'", "times": "'+aPill.times+'", "lasttake": "'+aPill.lasttake+'"}]' });
+		        var del = document.createElement("input");
+		        del.setAttribute("type", "button");
+		        del.setAttribute("value", "-");
+		        del.setAttribute("id", myPillsList[i].name);
+		        del.setAttribute("onclick", "deletePill(this);");
+		        del.setAttribute("class", "btn");
+		        
+		        
+		        var newButton = document.createElement("input");
+		        newButton.setAttribute("type", "button");
+		        newButton.setAttribute("value", myPillsList[i].name);
+		        newButton.setAttribute("onclick", "editPill(this);");
+		        newButton.setAttribute("class", "btn");
+
+		        
+		        pdiv.appendChild(newButton);
+		        pdiv.appendChild(del);
+		        document.getElementById("drug_section").appendChild(pdiv);
+		}
 	}
 
-	function deletePill(aPill) {
-		// need to read json first and then delete aPill from list, rewrite to 
-		
-
-	}
-
-
-
-// END TY_GLOBAL
 
 	function addSpecificTime() {
 		var p = document.createElement("p");
@@ -33,71 +42,6 @@
 			
 	}
 
-	function save_new() {
-				var pdiv = document.createElement("div");
-				//pdiv.setAttribute("class", "row");
-				//pdiv.setAttribute("align", "center");
-				pdiv.setAttribute("id",document.getElementById("new_drugname").value+"_pdiv");
-
-				var del = document.createElement("input");
-				del.setAttribute("type", "button");
-				del.setAttribute("value", "-");
-				del.setAttribute("id", document.getElementById("new_drugname").value);
-				del.setAttribute("onclick", "deletePill(this);");
-				del.setAttribute("class", "btn");
-				
-				
-				var newButton = document.createElement("input");
-				newButton.setAttribute("type", "button");
-				newButton.setAttribute("value", document.getElementById("new_drugname").value);
-				newButton.setAttribute("onclick", "editPill(this);");
-				newButton.setAttribute("class", "btn");
-
-				
-				pdiv.appendChild(newButton);
-				pdiv.appendChild(del);
-				document.getElementById("drug_section").appendChild(pdiv);
-				
-				// save info into shared object function
-				var pillTimes;
-				if (document.getElementById("add_dosefrequency").value==0) { // cycle = two numbers
-					pillTimes=document.getElementById("cycle_hour").value+","+document.getElementById("cycle_minute").value;
-				}
-				else if (document.getElementById("add_dosefrequency").value==1) { // specific time = innerHTML type string
-					pillTimes=document.getElementById("selected_times").innerHTML; // <p>some:time am</p> listed
-					console.log(pillTimes);
-
-				}
-				else { // number of doses per day = one number (1-10)
-
-					pillTimes=document.getElementById("num_hour").value;
-				}
-
-				var myPill=new myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value,  document.getElementById("add_dosefrequency").value, pillTimes);
-
-				// if pill exist already, update (ie delete, save new)
-				var checkPill=m.drugsQueue.filter(function(pill){
-  					return pill.name == document.getElementById("new_drugname").value;
-				});
-				while (checkPill.length>0) {
-					deletePill(document.getElementById(checkPill[0].name));
-					checkPill.pop();
-				}
-
-				m.drugsQueue.push(myPill);
-				m.initDrug(myPill);
-				//console.log(m.actionQueue);
-
-
-				writePill(myPill);
-
-				clear_add_new();
-				document.getElementById("add_new").style.display="none";
-				document.getElementById("edit_main").style.display="block";
-				document.getElementById("edit_title").innerHTML="Edit Your Pills";
-				
-			}
-			
 	function clear_add_new() {
 		document.getElementById("new_drugname").value="";
 		document.getElementById("new_drugdose").value="";
@@ -106,10 +50,39 @@
 		document.getElementById("selected_times").innerHTML="";
 	}
 
+	function save_new() {
+				// save info into shared object function
+				var pillTimes;
+				if (document.getElementById("add_dosefrequency").value==0) { // cycle = two numbers
+					pillTimes=document.getElementById("cycle_hour").value+","+document.getElementById("cycle_minute").value;
+				}
+				else if (document.getElementById("add_dosefrequency").value==1) { // specific time = innerHTML type string
+					pillTimes=document.getElementById("selected_times").innerHTML; // <p>some:time am</p> listed
+
+				}
+				else { // number of doses per day = one number (1-10)
+
+					pillTimes=document.getElementById("num_hour").value;
+				}
+
+				var myPill=new myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value,  document.getElementById("add_dosefrequency").value, pillTimes);
+				writePill(myPill);
+
+				clear_add_new();
+
+				updateManagePills();
+				document.getElementById("add_new").style.display="none";
+				document.getElementById("edit_main").style.display="block";
+				document.getElementById("edit_title").innerHTML="Edit Your Pills";
+			}
+			
+
 	function backToEdit() {
 		var noSave=confirm("Your changes have not been saved. Do you still want to go back to Edit My Pills page?");
 		if (noSave==true) {
 			clear_add_new();
+
+			updateManagePills();
 			document.getElementById("add_new").style.display="none";
 			document.getElementById("edit_main").style.display="block";
 			document.getElementById("edit_title").innerHTML="Edit Your Pills";
@@ -222,6 +195,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
 
 			
   		$('#EditPills').click(function(evt){
+			updateManagePills();
   			document.getElementById("home").style.display="none";
   			document.getElementById("add_new").style.display="none";
 			document.getElementById("edit_main").style.display="block";
