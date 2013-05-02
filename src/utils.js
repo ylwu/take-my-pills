@@ -71,6 +71,17 @@ function returnMissedDrugs(){
 			}
 			newPillsList+='{"name": "'+oldPillsList[i].name+'", "dose": "'+oldPillsList[i].dose+'", "startdate": "'+oldPillsList[i].startdate+'", "enddate": "'+oldPillsList[i].enddate+'", "frequency": "'+oldPillsList[i].frequency+'", "times": "'+oldPillsList[i].times+'", "lasttake": "'+oldPillsList[i].lasttake+'"}';
 		}
+
+
+// if pill exist already, update (ie delete, save new)
+				var checkPill=m.drugsQueue.filter(function(pill){
+  					return pill.name == document.getElementById("new_drugname").value;
+				});
+				while (checkPill.length>0) {
+					deletePill(document.getElementById(checkPill[0].name));
+					checkPill.pop();
+				}
+
 		newPillsList+=']';
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': newPillsList });
 	}
