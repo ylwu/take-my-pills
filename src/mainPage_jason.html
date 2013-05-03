@@ -17,17 +17,17 @@
 	<div class="span6" id="main-page"> 
 	<div class="row">
 	<div class=" header span6 centered">
-			<h4 class="header_text">Take Your Pills</h4>
+			<h4 class="header_text"> <button class= "btn btn-primary" id="home_btn"> <i class="icon-home icon-white"></i></button> Take Your Pills <button class= "btn btn-primary" id="app_sign_out_btn"> Sign Out</button></h4>
 	</div>
 	</div>
 
 	<div class="row">
 		<div class= "span6 centered" id="contact-doctor-bar">
 			<div class="bar_btn_group">
-				<button class= "btn btn-primary" id="home_btn"> Home</button>
-				<button class= "btn btn-warning" id="contact_doctor_btn"> Contact Doctor</button>
+				<button class= "btn btn-warning" id="contact_doctor_btn"> Contact Doctor</button> 
 				<span>2:00pm 4/20/2013</span>
-				<button class= "btn" id="app_sign_out_btn"> Sign Out</button>
+				<button class= "btn btn-warning" id="EditPills"> Manage Pills</button>
+				
 			</div>
     	</div>
 	</div>
@@ -47,25 +47,22 @@
 				<td> 4/19/13 </td>
 				<td> 2:00pm </td>
 				<td>  2pills </td>
-				<td>  <button class="btn btn-info"> Missed </button> 
-				</td>
+				<td>  Missed </td>
 			</tr>
 			<tr class="error drug">
 				<td> Aspirin  </td>
 				<td> 4/19/13 </td>
 				<td> 4:00pm </td>
 				<td>  2pills </td>
-				<td>  <button class="btn btn-info"> Missed </button> 
-				</td>
+				<td>  Missed </td>
 			</tr>
 
-			<tr class="success drug">
+			<tr class="info drug">
 				<td> Aspirin </td>
 				<td> 4/19/13 </td>
 				<td> 6:00pm </td>
 				<td>  2pills </td>
-				<td>  <button class="btn btn-info"> Took </button> 
-				</td>
+				<td> Took </td>
 			</tr>
 		</table>
 		</div>
@@ -78,11 +75,7 @@
 		<div class="row span6 centered btn btn-block" id= "history-header">
 			See History
 		</div>
-	<div class="row">
-		<button id="EditPills" class= "btn btn-primary span2 offset3"> Edit pills
-		</button>
-		<button class= "btn span1" id="add"> <i class="icon-plus"></i></button>
-	</div>
+
 	<div class="row">
 		<div class="span6" id="main">
 		<div id="drugs">
@@ -90,7 +83,7 @@
 		</table>
 		</div>
 		<div id="showmore">
-		<button class= "btn-block" id="morepills"> see more pills </button>
+		<button class= "btn-block" id="morepills"> See next day's pills </button>
 		</div>
 		<div class="row" id="actionbar">
 			<button class="btn btn-success span2" id="take"> Take </button>
