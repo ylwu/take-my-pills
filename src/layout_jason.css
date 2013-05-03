@@ -172,6 +172,14 @@ body{
 	position:relative;
 	top:5px;
 	left: 150px
+}
+
+.edit_drug_label{
+	float: left;
+    width: 150px;
+    text-align: right;
+    margin-right: 0.5em;
+}
 
 
 
