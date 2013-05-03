@@ -13,4 +13,10 @@
 	  fwrite($file, $newPill);
 	  fclose($file);
   }
+  else if ($function=="writeMissedDrugEvent") {
+	  $newPill = $_POST['input'];
+	  $file = fopen('missedPillsData.json','w+');
+	  fwrite($file, $newPill);
+	  fclose($file);
+  }
 ?>
