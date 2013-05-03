@@ -6,6 +6,8 @@
 <script type = "text/javascript" src= "external-lib/jquery-1.9.0.min.js"> </script>
 <script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
 <script type = "text/javascript" src= "doctor_navbar.js"> </script>
+<script type = "text/javascript" src= "model.js"> </script>
+<script type = "text/javascript" src= "utils.js"> </script>
 <script type = "text/javascript" src= "doctor_addPatient.js"> </script>
 <script type = "text/javascript" src= "external-lib/bootstrap/js/bootstrap.js"> </script>
 <link rel="stylesheet" type="text/css" href="doctor.css" />
@@ -19,10 +21,10 @@
 		<div class = "row-fluid">
 				<div class="navbar span12">
 					<div class="navbar-inner">
-						<a class="brand" >Take Your Pills </a>
+						<a class="brand" href="doctor_messages.html" >Take Your Pills </a>
 						<ul class="nav nav-tabs pull-right">
-							<li class="">
-								<a ><span id="doctor_name"></span></a>
+							<li class="nav-texts">
+								<div id="doctor_name" class="nav-texts"  ></div>
 							</li>
 							<li class="divider-vertical">    
 								<div class="navbar-search pull-left form-search">
@@ -33,7 +35,7 @@
 								</div>
 							</li>
 							<li class="divider-vertical"><a href="doctor_messages.html">Messages</a></li>
-							<li class="divider-vertical active"><a href="doctor_addPatient.html">Add Patient</a></li>
+							<li class="divider-vertical"><a href="doctor_addPatient.html">Patients</a></li>
 							<li class="divider-vertical"><a href="doctor_login.html">Logout</a></li>
 							
 						</ul>
@@ -41,38 +43,59 @@
 				</div>
 		</div>
 		
-		<div class = "row-fluid fullheight">
-			<div class = "span12 addpatient-screen fullheight">
-				<div class="addpatient-center">
-					<form  id="add_form">
+		<div class = "row-fluid fullheight" id="patient_list_div">
+			<div class = "span12 addpatient-screen fullheight" >
+				<div class="addpatient-center halfcenter" >
+					<div class="patient-list-title">
+						<span class="patient">Patient List</span>
+						<button class="btn float-right" id="go_to_addpatient">Add New Patient</button>
+					</div>
+					<hr class="bar">
+					<ul id="patient_list" class="patient-list patient-list-div">
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class = "row-fluid fullheight" id="add_patient_div">
+			<div class = "span12 addpatient-screen fullheight" >
+				<div class="addpatient-center" >
+					<form  id="add_form" class="form-horizontal">
 							<fieldset>
 								<legend class="signup-legend" id="form_legend">Add Patient </legend>
-								<div class="row-fluid">
-									<label class="addpatient-label" >Patient Name</label>
-									<input class="addpatient-text"  id="pat_name" type="text"> 
-								</div>
-								<div class="row-fluid">
-									<label class="addpatient-label">Age</label>
-									<input class="addpatient-text" id="age" type="text">
-								</div>
-								<div class="row-fluid">
-									<label class="addpatient-label">Patient's Email</label>
+								<div class="control-group">
+									<label class="control-label addpatient-label">Patient Email</label>
 									<input class="addpatient-text" id="email" type="text">
 								</div>
-								<div class="row-fluid">
-									<label class="addpatient-label">Info</label>
-									<input class="addpatient-text" id="info" type="text" style="height:150px;">
+								<div class="control-group">
+									<label class="control-label addpatient-label" >Patient Name</label>
+									<input class="addpatient-text"  id="pat_name" type="text"> 
+								</div>
+								<div class="control-group">
+									<label class="control-label addpatient-label">Age</label>
+									<input class="addpatient-text" id="age" type="text">
+								</div>
+								
+								<div class="control-group">
+									<label class="control-label addpatient-label">Info</label>
+									<textarea class="addpatient-textarea" id="info" type="text" ></textarea>
 								</div>
 								
 							</fieldset>
 					</form>
 					
+					<div id="message" class="status_message">
+					
+					</div>
+					
 					<div>
 									<span class="span2 addpatient-label"></span>
-									<button href='#myModal' role='button' class='btn addpatient-button' data-toggle='modal'>Delete Patient</button>
-									<button  class="btn addpatient-button" onclick="document.getElementById('add_form').reset();">Clear Form</button>
-									<button  class="btn addpatient-button">Save</button>
+									<button href='#myModal' role='button' class='btn addpatient-button' id="delete_patient" data-toggle='modal'>Delete Patient</button>
+									<button  class="btn addpatient-button" id="clear_form" onclick="document.getElementById('add_form').reset();">Clear Form</button>
+									<button  class="btn addpatient-button" id="add_patient">Add</button>
+									<button  class="btn addpatient-button" id="save_patient">Save</button>
 					</div>
+					
 				</div>
 				<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-header">

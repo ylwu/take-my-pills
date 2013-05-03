@@ -1,56 +1,144 @@
-			var m = new Model();
-			
-			function changeDivToAddNewDrug() {
-				document.getElementById("home").style.display="none";
-				document.getElementById("edit_main").style.display="none";
-				document.getElementById("add_new").style.display="block";
-				document.getElementById("edit_title").innerHTML="Add New Pill";
-			}
+	function updateManagePills(myPillsList) { // takes a list of myDrug objects, creates buttons for each on "manage pills" page under div "drug_section"
 
-			function showHistory(){
-				document.getElementById("history").style.display="block";
-				document.getElementById('home').style.display="none";
-			}
+		// clear all childs (ie pill buttons) of div drug_section first
+		document.getElementById("drug_section").innerHTML="";
+
+		//var myPillsList=returnAllDrugs();
+
+		for (var i=0; i<myPillsList.length; i++) {
+			var pdiv = document.createElement("div");
+		        pdiv.setAttribute("id",myPillsList[i].name+"_pdiv");
+
+		        var del = document.createElement("input");
+		        del.setAttribute("type", "button");
+		        del.setAttribute("value", "-");
+		        del.setAttribute("id", myPillsList[i].name);
+		        del.setAttribute("onclick", "deletePill(this);");
+		        del.setAttribute("class", "btn");
+		        
+		        
+		        var newButton = document.createElement("input");
+		        newButton.setAttribute("type", "button");
+		        newButton.setAttribute("value", myPillsList[i].name);
+		        newButton.setAttribute("onclick", "editPill(this);");
+		        newButton.setAttribute("class", "btn");
+
+		        
+		        pdiv.appendChild(newButton);
+		        pdiv.appendChild(del);
+		        document.getElementById("drug_section").appendChild(pdiv);
+		}
+	}
+
+
+	function addSpecificTime() {
+		var p = document.createElement("p");
+		p.innerHTML=document.getElementById("specific_hour").value+" : "+document.getElementById("specific_minute").value+" "+document.getElementById("am_pm").value;
+				
+		var selected=document.getElementById("selected_times");
+		selected.appendChild(p);
 			
-			function backToEdit() {
-				var noSave=confirm("Your changes have not been saved. Do you still want to go back to Edit My Pills page?");
-				if (noSave==true) {
-					clear_add_new();
-					document.getElementById("add_new").style.display="none";
-					document.getElementById("edit_main").style.display="block";
-					document.getElementById("edit_title").innerHTML="Edit Your Pills";
+	}
+			
+	function clearSpecificTime() {
+		document.getElementById("selected_times").innerHTML="";
+			
+	}
+
+	function clear_add_new() {
+		document.getElementById("new_drugname").value="";
+		document.getElementById("new_drugdose").value="";
+		document.getElementById("add_startdate").value="";
+		document.getElementById("add_enddate").value="";
+		document.getElementById("selected_times").innerHTML="";
+	}
+
+	function save_new() {
+				// save info into shared object function
+				var pillTimes;
+				if (document.getElementById("add_dosefrequency").value==0) { // cycle = two numbers
+					pillTimes=document.getElementById("cycle_hour").value+","+document.getElementById("cycle_minute").value;
 				}
-			}
+				else if (document.getElementById("add_dosefrequency").value==1) { // specific time = innerHTML type string
+					pillTimes=document.getElementById("selected_times").innerHTML; // <p>some:time am</p> listed
 
-			function deletePill(ele) {
+				}
+				else { // number of doses per day = one number (1-10)
+
+					pillTimes=document.getElementById("num_hour").value;
+				}
+
+				var myPill=new myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value,  document.getElementById("add_dosefrequency").value, pillTimes);
+
+				var newList=writePill(myPill); // includes updateManagePills
+
+				clear_add_new();
+				document.getElementById("add_new").style.display="none";
+				document.getElementById("edit_main").style.display="block";
+				document.getElementById("edit_title").innerHTML="Edit Your Pills";
+			}
+			
+
+	function backToEdit() {
+		var noSave=confirm("Your changes have not been saved. Do you still want to go back to Edit My Pills page?");
+		if (noSave==true) {
+			clear_add_new();
+
+			var myPillsList=returnAllDrugs();
+			updateManagePills(myPillsList);
+			document.getElementById("add_new").style.display="none";
+			document.getElementById("edit_main").style.display="block";
+			document.getElementById("edit_title").innerHTML="Edit Your Pills";
+		}
+	}
+
+	function changeDivToAddNewDrug() {
+		clear_add_new();
+		document.getElementById("home").style.display="none";
+		document.getElementById("edit_main").style.display="none";
+		document.getElementById("add_new").style.display="block";
+		document.getElementById("edit_title").innerHTML="Add New Pill";
+	}			
+
+
+		function deletePill(ele) {
 				var parent=document.getElementById("drug_section");
 				var child=document.getElementById(ele.id+"_pdiv");
 				parent.removeChild(child);
 
-				m.drugsQueue = m.drugsQueue.filter(function(pill){
-  					return pill.name !== ele.id;
-				});
+				var toDelete=new myDrug(ele.id, "", "", "", 0, 0); // unwritePill only matches by pill.name; but is secure in that only one pill can be named pill.name
+				unwritePill(toDelete);
 					
 			}
 
 			function editPill(ele) {
 
-				var selectedPill=m.drugsQueue.filter(function(pill){
-  					return pill.name == ele.value;
-				});
+				// cool old backend implementation: selects based on filter (ie, if pill.name == ele.value)
 
-				myPill=selectedPill[0];
+				//var selectedPill=m.drugsQueue.filter(function(pill){
+  				//	return pill.name == ele.value;
+				//});
 
+				//myPill=selectedPill[0];
+
+				var pillSelected;
+				var myPillsList=returnAllDrugs();
+				for (var i=0; i<myPillsList.length; i++) {
+					if (ele.value==myPillsList[i].name) {
+						pillSelected=myPillsList[i]; // finds the selected pill
+					}
+				}
+			
 				document.getElementById("add_new").style.display="block";
 				document.getElementById("edit_main").style.display="none";
 				document.getElementById("edit_title").innerHTML="Edit " + ele.value;
 
-				var pillName = myPill.name;
-				var pillDose = myPill.dose;
-				var pillStart = myPill.startdate;
-				var pillEnd = myPill.enddate;
-				var pillFreq = myPill.frequency;
-				var pillTimes = myPill.times;
+				var pillName = pillSelected.name;
+				var pillDose = pillSelected.dose;
+				var pillStart = pillSelected.startdate;
+				var pillEnd = pillSelected.enddate;
+				var pillFreq = pillSelected.frequency;
+				var pillTimes = pillSelected.times;
 				
 				document.getElementById("new_drugname").value=pillName;
 				document.getElementById("new_drugdose").value=pillDose;
@@ -65,7 +153,7 @@
 				}
 				else if (pillFreq==1) { // specific time = innerHTML type string
 					document.getElementById("selected_times").innerHTML=pillTimes; // <p>some:time am</p> listed
-					console.log(pillTimes);
+					//console.log(pillTimes);
 
 				}
 				else { // number of doses per day = one number (1-10)
@@ -75,122 +163,53 @@
 
 			}
 
-			var save_new = function() {
-				var pdiv = document.createElement("div");
-				//pdiv.setAttribute("class", "row");
-				//pdiv.setAttribute("align", "center");
-				pdiv.setAttribute("id",document.getElementById("new_drugname").value+"_pdiv");
-
-				var del = document.createElement("input");
-				del.setAttribute("type", "button");
-				del.setAttribute("value", "-");
-				del.setAttribute("id", document.getElementById("new_drugname").value);
-				del.setAttribute("onclick", "deletePill(this);");
-				del.setAttribute("class", "btn");
-				
-				
-				var newButton = document.createElement("input");
-				newButton.setAttribute("type", "button");
-				newButton.setAttribute("value", document.getElementById("new_drugname").value);
-				newButton.setAttribute("onclick", "editPill(this);");
-				newButton.setAttribute("class", "btn");
-
-				
-				pdiv.appendChild(newButton);
-				pdiv.appendChild(del);
-				document.getElementById("drug_section").appendChild(pdiv);
-				
-				// save info into shared object function
-				var pillTimes;
-				if (document.getElementById("add_dosefrequency").value==0) { // cycle = two numbers
-					pillTimes=document.getElementById("cycle_hour").value+","+document.getElementById("cycle_minute").value;
-				}
-				else if (document.getElementById("add_dosefrequency").value==1) { // specific time = innerHTML type string
-					pillTimes=document.getElementById("selected_times").innerHTML; // <p>some:time am</p> listed
-					console.log(pillTimes);
-
-				}
-				else { // number of doses per day = one number (1-10)
-
-					pillTimes=document.getElementById("num_hour").value;
-				}
-
-				var myPill=new myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value,  document.getElementById("add_dosefrequency").value, pillTimes);
-
-				// if pill exist already, update (ie delete, save new)
-				var checkPill=m.drugsQueue.filter(function(pill){
-  					return pill.name == document.getElementById("new_drugname").value;
-				});
-				while (checkPill.length>0) {
-					deletePill(document.getElementById(checkPill[0].name));
-					checkPill.pop();
-				}
-
-				m.drugsQueue.push(myPill);
-				m.initDrug(myPill);
-				//console.log(m.actionQueue);
 
 
-				clear_add_new();
-				document.getElementById("add_new").style.display="none";
-				document.getElementById("edit_main").style.display="block";
-				document.getElementById("edit_title").innerHTML="Edit Your Pills";
-				
-			}
-			
-			function clear_add_new() {
-				document.getElementById("new_drugname").value="";
-				document.getElementById("new_drugdose").value="";
-				document.getElementById("add_startdate").value="";
-				document.getElementById("add_enddate").value="";
-				document.getElementById("selected_times").innerHTML="";
-			}
-			
-			function addSpecificTime() {
-				var p = document.createElement("p");
-				p.innerHTML=document.getElementById("specific_hour").value+" : "+document.getElementById("specific_minute").value+" "+document.getElementById("am_pm").value;
-				
-				var selected=document.getElementById("selected_times");
-				selected.appendChild(p);
-			
-			}
-			
-			function clearSpecificTime() {
-				document.getElementById("selected_times").innerHTML="";
-			
-			}
 
-		function returnAllDrugs(){
-			$.ajax({
-  				dataType: "json",
-  				url: 'pilldata.json',
-  				async: false,
-  				success: function(data){
-  					return data;
-				}
-			});
-		}
 
-		function loadDrugs(){
-			$.ajax({
-  				dataType: "json",
-  				url: 'pilldata.json',
-  				async: false,
-  				success: function(data){
-  					data.forEach(function(entry){
-  						m.drugsQueue.push(entry);
-  						console.log(m.drugsQueue);
-  					})
-				}
-			});
-		}
+	//Array Remove - By John Resig (MIT Licensed)
+Array.prototype.remove = function(from, to) {
+  var rest = this.slice((to || from) + 1 || this.length);
+  this.length = from < 0 ? this.length + from : from;
+  return this.push.apply(this, rest);
+};
 
+function missDrugEvent(DrugName, dateString, timeString){
+  for (var i = 0; i < m.displayQueue.length; i++) {
+    entry = m.displayQueue[i];
+    if ((entry.name == DrugName) && (entry.dateString == dateString) && (entry.timeString == timeString)){
+    	entry.state = "missed";
+      m.historyQueue.push(entry);
+      m.displayQueue.remove(i);
+
+      //To do: Ty, write *entry* (which is a javascript object in the format of drugevent.js); you'll have to change to format according the format in missedPillsData.json
+      return entry;
+    };
+  };
+}
+
+function takeDrugEvent(DrugName, dateString, timeString){
+  for (var i = 0; i < m.displayQueue.length; i++) {
+    entry = m.displayQueue[i];
+    if ((entry.name == DrugName) && (entry.dateString == dateString) && (entry.timeString == timeString)){
+    	entry.state = "taken";
+      m.historyQueue.push(entry);
+      m.displayQueue.remove(i);
+      return entry;
+    };
+  };
+}
 
 	$(document).ready(function() {
 
-		document.getElementById("history").style.display="none";
+			
 
+
+
+			
   		$('#EditPills').click(function(evt){
+			var myPillsList=returnAllDrugs();
+			updateManagePills(myPillsList);
   			document.getElementById("home").style.display="none";
   			document.getElementById("add_new").style.display="none";
 			document.getElementById("edit_main").style.display="block";
@@ -217,10 +236,22 @@
 
 		$("#morepills").click(function(evt){
   				m.moreDrugs();
-  				refresh();
+  				reloadHome();
   		});
 
-		var addDrugEvent = function (drugEvent){
+  		$("#contact_doctor_btn").click(function()    {
+            		clear_add_new();
+          window.location="patient_message_app.html";
+        });
+
+        $("#app_sign_out_btn").click(function()    {
+            		clear_add_new();
+            window.location="patient_log_in.html";
+        });     
+
+
+
+		var addDrugEventToHome = function (drugEvent){
 			var row = document.createElement('tr');
   			var td1 = document.createElement('td');
   			$(td1).append($(document.createElement('input')).attr('type','checkbox').addClass('checkbox'));
@@ -239,8 +270,7 @@
   			$('#drugtable').append($(row));
 
   			$(".checkbox").click(function(evt){
-  				console.log("x");
-  				if ($("input:checked").length != 0){
+  			   if ($("input:checked").length != 0){
   			$("#actionbar").show();
   			$("#morepills").hide();
   			} else {
@@ -248,58 +278,80 @@
   				$("#morepills").show();
   			};
 
-  			$("#take").click(function(evt){
-  				$("input:checked").parent().parent().remove();
-  				$("#actionbar").hide();
-  				$("#morepills").show();
-  			});
-
-  			$("#miss").click(function(evt){
-  				$("input:checked").parent().parent().remove();
-  				$("#actionbar").hide();
-  				$("#morepills").show();
-  			});
-
+  			
   			});
 
   		}
 
-			var refresh = function(){
+
+  		var addDrugEventToHistory = function (drugEvent){
+			var row = document.createElement('tr');
+  			var td1 = document.createElement('td');
+  			$(td1).append(drugEvent.name);
+  			$(row).append($(td1));
+  			$(row).append($(document.createElement('td')).append(drugEvent.dateString));
+  			$(row).append($(document.createElement('td')).append(drugEvent.timeString));
+  			$(row).append($(document.createElement('td')).append(drugEvent.dosage + "pills"));
+  			$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
+  			$(row).addClass('drug');
+  			if (drugEvent.state == "taken"){
+  				$(row).addClass("success");
+  			} else {
+  				$(row).addClass("error");
+  			}
+  			$('#historytable').append($(row));
+
+  		}
+
+			var reloadHome = function(){
 				$('#drugtable').empty();
 				for (var i=0; i<m.displayQueue.length; i++){
-					addDrugEvent(m.displayQueue[i]);
+					addDrugEventToHome(m.displayQueue[i]);
+				}
+
+			}
+
+			var reloadHistory = function(){
+				$('#historytable').empty();
+				for (var i=0; i<m.historyQueue.length; i++){
+					addDrugEventToHistory(m.historyQueue[i]);
+					console.log(m.historyQueue);
 				}
 
 			}
 
 			function redirectToHome() {
+				clear_add_new();
 				document.getElementById("history").style.display = "none";
 				document.getElementById("edit_main").style.display="none";
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_title").innerHTML="";
 				document.getElementById('home').style.display='block';
-				m.initDrugs();
-				refresh();
+				loadDrugs();
+				//m.initDrugs();
+				reloadHome();
 			}
 
 
-	/*
-	This is the start of Ty's javascript
-	*/	
+			function startHome() {
+				clear_add_new();
+				document.getElementById("history").style.display = "none";
 				document.getElementById("edit_main").style.display="none";
 				document.getElementById("add_new").style.display="none";
-				document.getElementById("cycle").style.display="block";
-				document.getElementById("specific_time").style.display="none";
-				document.getElementById("num_dosage").style.display="none";
+				document.getElementById("edit_title").innerHTML="";
+				document.getElementById('home').style.display='block';
+				loadDrugs();
+				m.initDrugs();
+				reloadHome();
+			}
 
-			
-				function editPill() { // for each drug button on Edit Your Pills page
-				document.getElementById("edit_main").style.display="none";
-				document.getElementById("add_new").style.display="block";
-				document.getElementById("edit_title").innerHTML="Edit Pill";
-									
-				}
-				
+			function showHistory(){
+				document.getElementById("history").style.display="block";
+				document.getElementById('home').style.display="none";
+				reloadHistory();
+			}
+
+
 				// in Add New Pill
 				$( "#add_startdate" ).datepicker();
 				$( "#add_enddate" ).datepicker();
@@ -330,31 +382,38 @@
 						//document.getElementById("specific_time").style.display="none";
 						//document.getElementById("num_dosage").style.display="block";
 					}
-				});
+				})
 
-				loadDrugs();
-				m.initDrugs();
-				redirectToHome();
+				startHome();
 
-			
-	});
+				$("#take").click(function(evt){
+				var e = $("input:checked");
+				for (var i = 0; i < e.length; i++) {
+					var drugName = e[i].parentNode.parentNode.children[0].textContent;
+					var dateString = e[i].parentNode.parentNode.children[1].innerHTML;
+					var timeString = e[i].parentNode.parentNode.children[2].innerHTML;
+					var drugEvent = takeDrugEvent(drugName,dateString,timeString);
 
-/*Morgan's jquery for button response 
+				}
+  				$("input:checked").parent().parent().remove();
+  				$("#actionbar").hide();
+  				$("#morepills").show();
+  				});
 
-*/
+  				$("#miss").click(function(evt){
+  				var e = $("input:checked");
+				for (var i = 0; i < e.length; i++) {
+					var drugName = e[i].parentNode.parentNode.children[0].textContent;
+					var dateString = e[i].parentNode.parentNode.children[1].innerHTML;
+					var timeString = e[i].parentNode.parentNode.children[2].innerHTML;
+					var drugEvent = missDrugEvent(drugName,dateString,timeString);
 
-				
-   $(document).ready(function(){
-  		$(contact_doctor_btn).click(function()    {
-            
-                window.location="patient_message_app.html";
-        });      
-   });						
+				}
+  					$("input:checked").parent().parent().remove();
+  					$("#actionbar").hide();
+  					$("#morepills").show();
+  				});
 
-   $(document).ready(function(){
-  		$(app_sign_out_btn).click(function()    {
-            
-                window.location="patient_log_in.html";
-        });      
-   });	
+
+	})
 					
