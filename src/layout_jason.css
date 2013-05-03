@@ -14,12 +14,12 @@
 #drugs{
 	overflow: scroll;
 	height: 330px;
-	background-color: #EEEEEE;
+	background-color: #ffffff;
 }
 
 #olddrugs{
 	overflow: scroll;
-	background-color: #EEEEEE;
+	background-color: #ffffff;
 	height: 390px;
 }
 
@@ -27,8 +27,12 @@
 	display: none;
 }
 
-
 .header{
+	background-color: #2fb593;
+	
+}
+
+.header1{
 	background-color: #3CDDDD;
 	background-image: -moz-linear-gradient(bottom, #027979 0%, #3CDDDD 100%);
 }
@@ -37,10 +41,20 @@
 	text-align:center;
 	font-family:"Akzidenz Grotesk";
 	font-size:30px;
+	color:#ffffff;
+}
+
+.btn-primary-m {
+    background-color: #2fb593;
+    background-image: linear-gradient(to bottom, #249075, #279D80);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 #contact-doctor-bar{
-	background-color: #B5B5B5;
+	background-color: #FAA732;
 	height:40px;
 }
 
@@ -50,7 +64,7 @@
 }
 
 .doctor-btn{
-	background-color:#67dddd;
+	background-color:#86F6F6;
 	height:100px;
 
 	border-width:1px;
@@ -77,7 +91,7 @@
 
 .doctor-message{
 	text-align: left;
-	background-color: #ffd277;
+	background-color: #DFF0D8;
 	border:5px; 
 	border-style:solid;
 	border-color:#f2f2f2;
@@ -87,7 +101,7 @@
 .patient-message{
 	 text-align: right;
   	 margin-right: 1em;
-  	 background-color: #67dddd;
+  	 background-color: #F9EDBE;
   	 border:5px; 
 	border-style:solid;
 	border-color:#f2f2f2;
