@@ -1,6 +1,7 @@
 [
-	{"from": "patient", "time": "Apr 30 2013 15:14:00", "message": "Dr.Williams, I started to have headache after I started to take Medicine A", "read": "read"},
-	{"from": "doctor", "time": "May 1 2013 9:00:00", "message": "Please make stop taking it as soon as possible and schedule an appointment with me.", "read": "read"},
-	{"from": "patient", "time": "May 1 2013 17:00:00", "message": "Should I stop other medications also?", "read": "read"},
-	{"from": "doctor", "time": "May 2 2013 10:00:00", "message": "Yes, please stop all other medication except your fish oil pills.", "read": "unread"}
+	{"from": "patient", "time": "4/20/2013 15:14:00", "message": "Dr.Williams, I started to have headache after I started to take Medicine A", "read": "true"},
+	{"from": "doctor", "time": "4/21/2013 9:00:00", "message": "Please make stop taking it as soon as possible and schedule an appointment with me.", "read": "true"},
+	{"from": "patient", "time": "4/23/2013 17:00:00", "message": "Should I stop other medications also?", "read": "true"},
+	{"from": "doctor", "time": "4/29/2013 10:00:00", "message": "Yes, please stop all other medication except your fish oil pills.", "read": "true"},
+	{"from": "patient", "time": "4/30/2013 17:00:00", "message": "Done", "read": "false"}
 ]
