@@ -30,7 +30,7 @@ $(document).ready(function() {
 				if (msgObj.read != "true"){ //unread message
 				
 					//TODO: change object read status to false
-					//changeBoolMsg(msgObj, "true");
+					changeBoolMsg(msgObj, "true");
 					code += " new_message";
 				}
 				code += "'><td class = 'span6'>"+
@@ -83,7 +83,7 @@ $(document).ready(function() {
 			//TODO: write to message file
 			var jsonMsg = new myMessage("doctor",datetime,newChat,true);
 			
-			//writeMsg(jsonMsg);
+			writeMsg(jsonMsg);
 		}
 	});
 	
