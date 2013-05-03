@@ -152,18 +152,31 @@ function returnAllPatients(){
 
 	function changeBoolMsg(aMsg, bool) {
 		var oldMsgsList=returnAllMessages();
-		var newMsgsList=[];	
+		var updatedMsgsList=[];	
 
 		for (var i=0; i<oldMsgsList.length; i++) {
 			if (aMsg.message==oldMsgsList[i].message) {
 				var newAMsg = new message(oldMsgsList[i].from, oldMsgsList[i].time, oldMsgsList[i].message, bool);
+				updatedMsgsList.push(newAMsg);
 			}
 			else {
-				newMsgsList.push(oldMsgsList[i]);
+				updatedMsgsList.push(oldMsgsList[i]);
 			}
 		}
 		
+
+var newMsgsList='[';
+
+
+		for (var i=0; i<updatedMsgsList.length; i++) {
+			if (i!=0) {
+				newMsgsList+=', ';
+			}
+			newMsgsList+='{"from": "'+updatedMsgsList[i].from+'", "time": "'+updatedMsgsList[i].time+'", "message": "'+updatedMsgsList[i].message+'", "read": "'+updatedMsgsList[i].read+'"}';
+		}
+		newMsgsList+=']';
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMsg', 'input': newMsgsList });
+		
 	}
 
 
