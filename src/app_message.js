@@ -10,6 +10,18 @@ $(function (){
 		$(doctor_message_box).val("");
 		$(doctor_message_box).focus;
 
+		// messaging php - Ty
+		var currentdate = new Date();
+		var datetime = (currentdate.getMonth()+1)  + "/"
+                + currentdate.getDate() + "/"
+                + currentdate.getFullYear() + " " 
+                + currentdate.getHours() + ":" 
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+
+		var newMsg = new message("patient", datetime, newChat, "false");
+		writeMsg(newMsg);
+
 	});
 	
 

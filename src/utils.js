@@ -140,7 +140,7 @@ function returnAllPatients(){
 		var newMsgsList='[';
 
 
-		for (var i=0; i<oldPillsList.length; i++) {
+		for (var i=0; i<oldMsgsList.length; i++) {
 			if (i!=0) {
 				newMsgsList+=', ';
 			}
@@ -149,4 +149,21 @@ function returnAllPatients(){
 		newMsgsList+=']';
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMsg', 'input': newMsgsList });
 	}
+
+	function changeBoolMsg(aMsg, bool) {
+		var oldMsgsList=returnAllMessages();
+		var newMsgsList=[];	
+
+		for (var i=0; i<oldMsgsList.length; i++) {
+			if (aMsg.message==oldMsgsList[i].message) {
+				var newAMsg = new message(oldMsgsList[i].from, oldMsgsList[i].time, oldMsgsList[i].message, bool);
+			}
+			else {
+				newMsgsList.push(oldMsgsList[i]);
+			}
+		}
+		
+		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMsg', 'input': newMsgsList });
+	}
+
 
