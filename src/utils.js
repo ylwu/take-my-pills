@@ -1,3 +1,5 @@
+$.ajaxSetup({ async: false });
+
 var m = new Model();
 
 function returnAllDrugs(){
@@ -58,36 +60,42 @@ function returnMissedDrugs(){
 
 // TY_GLOBAL WRITE_TO_JSON FUNCTIONS
 
+	function pillToJsonString(aPill) {
+		var pillString='{"name": "'+aPill.name+'", "dose": "'+aPill.dose+'", "startdate": "'+aPill.startdate+'", "enddate": "'+aPill.enddate+'", "frequency": "'+aPill.frequency+'", "times": "'+aPill.times+'", "lasttake": "'+aPill.lasttake+'"}';
+		return pillString;
+	}
+
 	function writePill(aPill) {
 
-		var oldPillsList=returnAllDrugs(); // oldPillsList = list of javascript myPill objects
-		oldPillsList.push(aPill);
+		var oldPillsList=returnAllDrugs(); // oldPillsList = list of javascript myPill *objects*
 
-		var newPillsList='[';
+		var newPillsList='['; // string list
 
 		for (var i=0; i<oldPillsList.length; i++) {
-			if (i!=0) {
-				newPillsList+=', ';
-			}
-			newPillsList+='{"name": "'+oldPillsList[i].name+'", "dose": "'+oldPillsList[i].dose+'", "startdate": "'+oldPillsList[i].startdate+'", "enddate": "'+oldPillsList[i].enddate+'", "frequency": "'+oldPillsList[i].frequency+'", "times": "'+oldPillsList[i].times+'", "lasttake": "'+oldPillsList[i].lasttake+'"}';
-		}
-
-
-// if pill exist already, update (ie delete, save new)
-				var checkPill=m.drugsQueue.filter(function(pill){
-  					return pill.name == document.getElementById("new_drugname").value;
-				});
-				while (checkPill.length>0) {
-					deletePill(document.getElementById(checkPill[0].name));
-					checkPill.pop();
+			if (aPill.name!=oldPillsList[i].name) { // if aPill existed previously, erase old info to write new info == don't write it
+				if (i!=0) {
+					newPillsList+=', ';
 				}
-
+				var stringifyPill=pillToJsonString(oldPillsList[i]);
+				newPillsList+=stringifyPill;
+			}
+		}
+		if (oldPillsList.length!=0) {
+			newPillsList+=', ';
+		}
+		var stringifyPill=pillToJsonString(aPill);
+		newPillsList+=stringifyPill;
+		
 		newPillsList+=']';
+
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': newPillsList });
+
+		
+		alert("writePill - new list: " + newPillsList);
 	}
 
 
-	function deletePill(aPill) {
+	function unwritePill(aPill) {
 		var oldPillsList=returnAllDrugs();
 
 		var newPillsList='[';
@@ -102,6 +110,7 @@ function returnMissedDrugs(){
 		}
 		newPillsList+=']';
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': newPillsList });
+
 	}
 
 

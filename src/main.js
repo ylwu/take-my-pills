@@ -1,6 +1,11 @@
 	function updateManagePills() {
 
+		// clear all childs (ie pill buttons) of div drug_section first
+		document.getElementById("drug_section").innerHTML="";
+
 		var myPillsList=returnAllDrugs();
+
+		alert("updateManagePills check what's in list: " +myPillsList);
 
 		for (var i=0; i<myPillsList.length; i++) {
 			var pdiv = document.createElement("div");
@@ -24,6 +29,8 @@
 		        pdiv.appendChild(newButton);
 		        pdiv.appendChild(del);
 		        document.getElementById("drug_section").appendChild(pdiv);
+
+			alert("updateManagePills created " + myPillsList[i].name + " which is pill " +i + "/" + myPillsList.length + " total pills");
 		}
 	}
 
@@ -69,7 +76,6 @@
 				writePill(myPill);
 
 				clear_add_new();
-
 				updateManagePills();
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_main").style.display="block";
