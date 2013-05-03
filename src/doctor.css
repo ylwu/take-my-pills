@@ -224,13 +224,15 @@ body {
 .doctor-chat-right{
 	width:100%;
 	text-align: right;
-	margin-bottom:10px;
+
+	border-top:10px solid #B6B6B6;
 }
 
 .doctor-chat-left{
 	width:100%;
 	text-align: left;
-	margin-bottom:10px;
+
+	border-top:10px solid #B6B6B6;
 }
 
 

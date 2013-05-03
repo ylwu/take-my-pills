@@ -71,11 +71,14 @@ $(document).ready(function() {
 			var message = "<tr class='doctor-chat-right'><td class = 'span6'><div><span>" +datetime+"</span><span> Dr. John Williams </span><img class='chat-img' src='doctor.jpg'></div>";
 			message +="<div>"+newChat+"</div></td></tr>";
 			$(chat_history).append(message);
+			var objDiv = document.getElementById("chat_history");
+			objDiv.scrollTop = objDiv.scrollHeight;
 			
 			$(chat_text).val("");
 			$(chat_text).focus();
 			
 			//TODO: write to message file
+			var jsonMsg = new myMessage("doctor",datetime,newChat,true);
 		}
 	});
 	
