@@ -50,10 +50,15 @@ $(document).ready(function() {
 		}
 	);
 	
+	$(delete_patient).click(function(){
+		$(message).html("Sorry, patient deletion is not allowed at the moment.");
+		
+	});
 	$(save_patient).click(function()	{
 			
 			$(patient_list_div).hide();
 			$(add_patient_div).show();
+			
 			
 			$(message).html("Patient information successfully saved.");
 			
@@ -75,6 +80,7 @@ $(document).ready(function() {
 	
 	$(yes_delete).click(function()	{
 			
+			//TODO: disconnect from patient
 			window.location="doctor_addPatient.html";
 		}
 	);
