@@ -76,6 +76,7 @@ function returnAllPatients(){
 		return pillString;
 	}
 
+
 	function writePill(aPill) {
 
 		var oldPillsList=returnAllDrugs(); // oldPillsList = list of javascript myPill *objects*
@@ -139,7 +140,6 @@ function returnAllPatients(){
 
 		var newMsgsList='[';
 
-
 		for (var i=0; i<oldMsgsList.length; i++) {
 			if (i!=0) {
 				newMsgsList+=', ';
@@ -150,13 +150,14 @@ function returnAllPatients(){
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMsg', 'input': newMsgsList });
 	}
 
+
 	function changeBoolMsg(aMsg, bool) {
 		var oldMsgsList=returnAllMessages();
 		var updatedMsgsList=[];	
 
 		for (var i=0; i<oldMsgsList.length; i++) {
 			if (aMsg.message==oldMsgsList[i].message) {
-				var newAMsg = new message(oldMsgsList[i].from, oldMsgsList[i].time, oldMsgsList[i].message, bool);
+				var newAMsg = new myMessage(oldMsgsList[i].from, oldMsgsList[i].time, oldMsgsList[i].message, bool);
 				updatedMsgsList.push(newAMsg);
 			}
 			else {
@@ -165,9 +166,7 @@ function returnAllPatients(){
 		}
 		
 
-var newMsgsList='[';
-
-
+		var newMsgsList='[';
 		for (var i=0; i<updatedMsgsList.length; i++) {
 			if (i!=0) {
 				newMsgsList+=', ';
@@ -180,3 +179,19 @@ var newMsgsList='[';
 	}
 
 
+	function writeMissedDrugEvent(missedEvent) {
+		var oldMissedList=returnMissedDrugs();
+		oldMissedList.push(missedEvent);
+
+		var newMissedList='[';
+
+		for (var i=0; i<oldMsgsList.length; i++) {
+			if (i!=0) {
+				newMissedList+=', ';
+			}
+			newMissedList+='{"name": "'+oldMissedList[i].name+'", "date": "'+oldMissedList[i].date+'", "dosage": "'+oldMissedList[i].dosage+'", "dateString": "'+oldMissedList[i].dateString+'", "timeString": "'+oldMissedList[i].timeString+'", "state": "missed"}';
+		}
+		newMissedList+=']';
+		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMissedDrugEvent', 'input': newMissedList });
+
+	}
