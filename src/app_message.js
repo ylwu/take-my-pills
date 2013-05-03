@@ -11,16 +11,10 @@ $(function (){
 				if (msgObj.read != "read"){ //unread message
 					code += " new_message";
 				}
+				code+=msgObj.message + '</span></div></td></tr>';
 
 
-<tr class="patient-message">
-						<td> 
-						<div><img src="patient.jpg" alt="Doctor" width="40" height="40"></div>
-						<div><span class="conversation-text">Should I stop other medications also?</span> </div>
 
-						</td>
-						
-					</tr>
 				code += "'><td class = 'span6'>"+
 						"<div><img class='chat-img' src='patient.jpg'>"+
 						"<span><a href='doctor_patient.html?patient_name="+all_patient[0].replaceAll(' ','_')+

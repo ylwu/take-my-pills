@@ -79,9 +79,9 @@ $(document).ready(function() {
 			
 			$(chat_text).val("");
 			$(chat_text).focus();
-			
+
 			//TODO: write to message file
-			var jsonMsg = new myMessage("doctor",datetime,newChat,true);
+			var jsonMsg = new myMessage("doctor",datetime,newChat,"true");
 			
 			writeMsg(jsonMsg);
 		}
