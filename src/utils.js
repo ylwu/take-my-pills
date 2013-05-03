@@ -195,3 +195,11 @@ function returnAllPatients(){
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMissedDrugEvent', 'input': newMissedList });
 
 	}
+
+{"email": "afox@gmail.com", "name": "Amy Fox", "age": "30","info": "Type II diabetes. Had a heart attack last year.","connect":"true"  }
+
+	function changePatientInfo(newInfo) {
+		var newPatientInfo = '[{"email": "'+newInfo.email+'", "name": "'+newInfo.name+'", "age": "'+newInfo.age+'", "info": "'+newInfo.info+'", "connect": "'+newInfo.connect+'"}]';
+
+		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePatient', 'input': newPatientInfo });
+	}
