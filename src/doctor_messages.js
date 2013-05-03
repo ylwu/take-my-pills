@@ -27,7 +27,10 @@ $(document).ready(function() {
 			
 			if (msgObj.from == "patient"){ //message from patient
 				code += "<tr class='doctor-chat-left";
-				if (msgObj.read != "read"){ //unread message
+				if (msgObj.read != "true"){ //unread message
+				
+					//TODO: change object read status to false
+					changeBoolMsg(msgObj, "true");
 					code += " new_message";
 				}
 				code += "'><td class = 'span6'>"+
@@ -79,6 +82,8 @@ $(document).ready(function() {
 			
 			//TODO: write to message file
 			var jsonMsg = new myMessage("doctor",datetime,newChat,true);
+			
+			writeMsg(jsonMsg);
 		}
 	});
 	

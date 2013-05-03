@@ -125,6 +125,7 @@ $(document).ready(function() {
 						$(top_message).html("New pill added!");
 						
 						//TODO write to json
+						writePill(pill);
 					}
 				}
 			
@@ -152,7 +153,7 @@ $(document).ready(function() {
 			$(top_message).html("Pill info updated!");
 			
 			//TODO: save edit to json
-		
+			writePill(p);
 		}
 		global.editDrugTab=function(index){ //switch to edit drug view
 			clearSpecificTime();
@@ -208,6 +209,9 @@ $(document).ready(function() {
 	
 		global.deleteDrug=function(index){ //delete drug
 		
+			var pill=drugList[index];
+			//TODO: delete in json file
+			unwritePill(pill);
 			
 			var name=drugNameList[index];
 			drugNameList.splice(index, 1);
@@ -225,7 +229,6 @@ $(document).ready(function() {
 			addDrugTab();
 			$(top_message).html("You have deleted: "+name);
 			
-			//TODO: delete in json file
 			
 		}
 
