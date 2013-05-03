@@ -38,6 +38,11 @@ $(document).ready(function() {
 		drugNameList.push(drugList[i].name);
 	}
 		
+	//loadup missed event
+	var missList = returnMissedDrugs();
+	
+	console.log(missList);
+	
 	//list of all patient
 	var all_patient = ["Amy Fox"];
 	
@@ -62,16 +67,34 @@ $(document).ready(function() {
 			}
 		
 		);
-
+		
+		
 	}else{ // patient doesnt exist
 		$(patient_body).html("Given patient "+patient_name+" doesn't exist");
 	}
 	
 	global.showHistoryInfo=function(index){ 
-		
+		$(drug_textarea).html("Missed drug history summary:\n\n");
+		if (index == -1){ // clicked "All" tab
+			
+			for (i=0;i<missList.length;i++){
+				
+					$(drug_textarea).append("Missed "+missList[i].dosage+" dosage(s) of "+missList[i].name+
+											" on "+missList[i].dateString+" at "+missList[i].timeString+".\n");
+				
+			}
+		}else{
+			
+			for (i=0;i<missList.length;i++){
+				if (missList[i].name == drugNameList[index]){
+					$(drug_textarea).append("Missed "+missList[i].dosage+" dosage(s) of "+missList[i].name+
+											" on "+missList[i].dateString+" at "+missList[i].timeString+".\n");
+				}
+			}
+		}
 	}
 	
-	
+	global.showHistoryInfo(-1);
 	
 	
 
