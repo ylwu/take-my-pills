@@ -7,7 +7,7 @@ String.prototype.replaceAll = function(str1, str2, ignore)
 
 
 $(document).ready(function() {
-
+	$(chat_text).val("");
 	//patient lists
 	var all_patient = ["Amy Fox"];
 	
@@ -58,37 +58,37 @@ $(document).ready(function() {
 	}
 	
 	$(function() {
-	$(chat_text).val("");
-	
-	$(send_chat).click(function() {
-		var newChat = $(chat_text).val();
-		if (newChat.replaceAll(" ","").length !=0){
-			var currentdate = new Date(); 
-			var datetime = (currentdate.getMonth()+1)  + "/" 
-				+ currentdate.getDate() + "/"
-                + currentdate.getFullYear() + " "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
+		
+		
+		$(send_chat).click(function() {
+			var newChat = $(chat_text).val();
+			if (newChat.replaceAll(" ","").length !=0){
+				var currentdate = new Date(); 
+				var datetime = (currentdate.getMonth()+1)  + "/" 
+					+ currentdate.getDate() + "/"
+					+ currentdate.getFullYear() + " "  
+					+ currentdate.getHours() + ":"  
+					+ currentdate.getMinutes() + ":" 
+					+ currentdate.getSeconds();
+					
+				var message = "<tr class='doctor-chat-right'><td class = 'span6'><div><span>" +datetime+"</span><span> Dr. John Williams </span><img class='chat-img' src='doctor.jpg'></div>";
+				message +="<div>"+newChat+"</div></td></tr>";
+				$(chat_history).append(message);
+				var objDiv = document.getElementById("chat_history");
+				objDiv.scrollTop = objDiv.scrollHeight;
 				
-			var message = "<tr class='doctor-chat-right'><td class = 'span6'><div><span>" +datetime+"</span><span> Dr. John Williams </span><img class='chat-img' src='doctor.jpg'></div>";
-			message +="<div>"+newChat+"</div></td></tr>";
-			$(chat_history).append(message);
-			var objDiv = document.getElementById("chat_history");
-			objDiv.scrollTop = objDiv.scrollHeight;
-			
-			$(chat_text).val("");
-			$(chat_text).focus();
-			
-			//TODO: write to message file
-			var jsonMsg = new myMessage("doctor",datetime,newChat,true);
-			
-			writeMsg(jsonMsg);
-		}
+				$(chat_text).val("");
+				$(chat_text).focus();
+				
+				//TODO: write to message file
+				var jsonMsg = new myMessage("doctor",datetime,newChat,"false");
+				
+				writeMsg(jsonMsg);
+			}
+		});
+	
+	
 	});
-	
-	
-});
 	
 	
 });

@@ -156,7 +156,7 @@ function returnAllPatients(){
 
 		for (var i=0; i<oldMsgsList.length; i++) {
 			if (aMsg.message==oldMsgsList[i].message) {
-				var newAMsg = new message(oldMsgsList[i].from, oldMsgsList[i].time, oldMsgsList[i].message, bool);
+				var newAMsg = new myMessage(oldMsgsList[i].from, oldMsgsList[i].time, oldMsgsList[i].message, bool);
 				updatedMsgsList.push(newAMsg);
 			}
 			else {
