@@ -57,6 +57,19 @@ function returnMissedDrugs(){
   return s;
 }
 
+function returnAllPatients(){
+      var t;
+      $.ajax({
+          dataType: "json",
+          url: 'patientData.json',
+          async: false,
+          success: function(data){
+            t = data;
+        }
+      });
+      return t;
+
+    }
 
 // TY_GLOBAL WRITE_TO_JSON FUNCTIONS
 
@@ -131,4 +144,3 @@ function returnMissedDrugs(){
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMsg', 'input': newMsgsList });
 	}
 
-// END TY_GLOBAL

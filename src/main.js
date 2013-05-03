@@ -174,6 +174,8 @@ function missDrugEvent(DrugName, dateString, timeString){
     	entry.state = "missed";
       m.historyQueue.push(entry);
       m.displayQueue.remove(i);
+
+      //To do: Ty, write *entry* (which is a javascript object in the format of drugevent.js); you'll have to change to format according the format in missedPillsData.json
       return entry;
     };
   };
