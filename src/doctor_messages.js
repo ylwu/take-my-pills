@@ -77,6 +77,7 @@ $(document).ready(function() {
 				var objDiv = document.getElementById("chat_history");
 				objDiv.scrollTop = objDiv.scrollHeight;
 				
+
 				$(chat_text).val("");
 				$(chat_text).focus();
 				
@@ -86,6 +87,7 @@ $(document).ready(function() {
 				writeMsg(jsonMsg);
 			}
 		});
+
 	
 	
 	});
