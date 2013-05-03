@@ -7,6 +7,8 @@
 <script type = "text/javascript" src= "external-lib/jquery-ui-1.10.0.custom.min.js"> </script>
 <script type = "text/javascript" src= "doctor_navbar.js"> </script>
 <script type = "text/javascript" src= "doctor_patient.js"> </script>
+<script type = "text/javascript" src= "model.js"> </script>
+<script type = "text/javascript" src= "utils.js"> </script>
 <script type = "text/javascript" src= "external-lib/bootstrap/js/bootstrap.js"> </script>
 <link rel="stylesheet" type="text/css" href="doctor.css" />
 
@@ -52,10 +54,8 @@
 			<div class = "row-fluid main-container fullheight">
 				<div class="tabbable tabs-left span2">
 					<ul class="nav nav-pills nav-stacked" id = "drugTab">
-						<li><a data-toggle="tab" href="#">All</a></li>
-						<li class="active"><a data-toggle="tab" href="#">Drug A</a></li>
-						<li class=""><a data-toggle="tab" href="#">Drug B</a></li>
-						<li class=""><a data-toggle="tab" href="#">Drug C</a></li>
+						<li class="active"><a data-toggle="tab" href="#">All</a></li>
+						
 					</ul>
 
 				</div>
@@ -64,7 +64,7 @@
 					<iframe class="calendar" src="https://www.google.com/calendar/embed?src=qre47unak4dm77r2c9b9hcacok%40group.calendar.google.com&ctz=America/New_York"  frameborder="0" scrolling="no"></iframe>
 				</div>
 				<div class = "span3 drug-history-box">
-					<textarea  class = "drug-history" readonly>Missed drug history summary:</textarea>
+					<textarea  class = "drug-history" id="drug_textarea" readonly>Missed drug history summary:</textarea>
 				</div>
 			</div>
 			
