@@ -72,7 +72,7 @@ function returnAllPatients(){
 // TY_GLOBAL WRITE_TO_JSON FUNCTIONS
 
 	function pillToJsonString(aPill) {
-		var pillString='{"name": "'+aPill.name+'", "dose": "'+aPill.dose+'", "startdate": "'+aPill.startdate+'", "enddate": "'+aPill.enddate+'", "frequency": "'+aPill.frequency+'", "times": "'+aPill.times+'", "lasttake": "'+aPill.lasttake+'"}';
+		var pillString='{"name": "'+aPill.name+'", "dose": "'+aPill.dose+'", "startdate": "'+aPill.startdate+'", "enddate": "'+aPill.enddate+'", "frequency": "'+aPill.frequency+'", "times": "'+aPill.times+'", "lasttake": ['+aPill.lasttake+']}';
 		return pillString;
 	}
 
@@ -194,4 +194,11 @@ function returnAllPatients(){
 		newMissedList+=']';
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMissedDrugEvent', 'input': newMissedList });
 
+	}
+
+
+	function changePatientInfo(newInfo) {
+		var newPatientInfo = '[{"email": "'+newInfo.email+'", "name": "'+newInfo.name+'", "age": "'+newInfo.age+'", "info": "'+newInfo.info+'", "connect": "'+newInfo.connect+'"}]';
+
+		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePatient', 'input': newPatientInfo });
 	}

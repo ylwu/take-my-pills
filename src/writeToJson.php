@@ -19,4 +19,11 @@
 	  fwrite($file, $newPill);
 	  fclose($file);
   }
+
+  else if ($function=="writePatient") {
+	  $newPill = $_POST['input'];
+	  $file = fopen('patientData.json','w+');
+	  fwrite($file, $newPill);
+	  fclose($file);
+  }
 ?>
