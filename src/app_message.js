@@ -2,39 +2,27 @@ $(function (){
 
 		var messages = returnAllMessages();
 	
-		for (i=0;i<messages.length;i++){
+		var code = "";
+		for (var i=0;i<messages.length;i++){
 			var msgObj = messages[i];
-			var code = "";
 			
 			if (msgObj.from == "patient"){ //message from patient (right)
-				code += '<tr class="patient-message"><td><div><img src="patient.jpg" alt="Doctor" width="40" height="40"></div><div><span class="conversation-text">";'
-				if (msgObj.read != "read"){ //unread message
-					code += " new_message";
-				}
-				code+=msgObj.message + '</span></div></td></tr>';
-
-
-
-				code += "'><td class = 'span6'>"+
-						"<div><img class='chat-img' src='patient.jpg'>"+
-						"<span><a href='doctor_patient.html?patient_name="+all_patient[0].replaceAll(' ','_')+
-						"'>"+all_patient[0]+" </a></span> <span>" +msgObj.time+"</span></div>";
+				code += '<tr class="patient-message success"><td><div><img src="patient.jpg" alt="Doctor" width="40" height="40"></div><div><span class="conversation-text">"' + msgObj.message + '</span></div></td></tr>';
 			}
 			else{ // message from doctor (left)
-				code += "<tr class='doctor-chat-right";	
+				code += '<tr><td class="doctor-message"><div><img src="doctor.jpg" alt="Doctor" width="40" height="40"></div><div><span>';	
 
-				code += "'><td class = 'span6'>"+
-						"<div><span>" +msgObj.time+"</span><span> Dr. John Williams </span><img class='chat-img' src='doctor.jpg'>"+
-						"</div>";
+				if (msgObj.read != "true"){ //unread message
+					code += "<strong>new message:</strong> "; // can make diff color? red?
+					changeBoolMsg(msgObj, "false");
+				}
+
+				code += msgObj.message + '</span></div></td></tr>';
 			}
-			
 
-			code+= "<div>"+msgObj.message+"</div></td></tr>";	
-				
-			//append the message	
-			$(conversation_table).append(code);
-		}
-
+		}	
+		//append the message	
+		$(conversation_table).append(code);
 
 
 	$(doctor_message_box).val("");
