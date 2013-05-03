@@ -86,13 +86,17 @@ $(document).ready(function() {
 		patient_name= patient_name.replaceAll("_"," ");
 		
 		if (all_patient.indexOf(patient_name) != -1){
+			//load patient info from json
+			var patient = returnAllPatients();
+			console.log(patient);
+			
 			//fill info for patient
 			$(email).attr("disabled",true);
-			$(form_legend).html("Edit Patient "+patient_name);
-			$(pat_name).val(patient_name);
-			$(age).val("34");
-			$(email).val("amybxxx@gmail.com");
-			$(info).val("Type II diabetes, currently taking Drug A,B and C");
+			$(form_legend).html("Edit Patient "+patient.name);
+			$(pat_name).val(patient.name);
+			$(age).val(patient.age);
+			$(email).val(patient.email);
+			$(info).val(patient.info);
 		
 		$(clear_form).hide();
 		
