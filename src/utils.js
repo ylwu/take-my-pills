@@ -1,5 +1,3 @@
-$.ajaxSetup({ async: false });
-
 var m = new Model();
 
 function returnAllDrugs(){
@@ -82,6 +80,14 @@ function returnAllPatients(){
 
 		var oldPillsList=returnAllDrugs(); // oldPillsList = list of javascript myPill *objects*
 
+		// if edit aPill:
+		var managePillsList=[]; // this is actually NOT a string!
+		for (var i=0; i<oldPillsList.length; i++) {
+			if (aPill.name!=oldPillsList[i].name) { // delete myPill
+				managePillsList.push(oldPillsList[i]);
+			}
+		}
+
 		var newPillsList='['; // string list
 
 		for (var i=0; i<oldPillsList.length; i++) {
@@ -102,9 +108,8 @@ function returnAllPatients(){
 		newPillsList+=']';
 
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': newPillsList });
-
-		
-		alert("writePill - new list: " + newPillsList);
+		managePillsList.push(aPill);
+		updateManagePills(managePillsList);
 	}
 
 
@@ -122,7 +127,8 @@ function returnAllPatients(){
 			}
 		}
 		newPillsList+=']';
-		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': newPillsList });
+		
+		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': newPillsList } );
 
 	}
 

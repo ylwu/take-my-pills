@@ -1,11 +1,9 @@
-	function updateManagePills() {
+	function updateManagePills(myPillsList) { // takes a list of myDrug objects, creates buttons for each on "manage pills" page under div "drug_section"
 
 		// clear all childs (ie pill buttons) of div drug_section first
 		document.getElementById("drug_section").innerHTML="";
 
-		var myPillsList=returnAllDrugs();
-
-		alert("updateManagePills check what's in list: " +myPillsList);
+		//var myPillsList=returnAllDrugs();
 
 		for (var i=0; i<myPillsList.length; i++) {
 			var pdiv = document.createElement("div");
@@ -29,8 +27,6 @@
 		        pdiv.appendChild(newButton);
 		        pdiv.appendChild(del);
 		        document.getElementById("drug_section").appendChild(pdiv);
-
-			alert("updateManagePills created " + myPillsList[i].name + " which is pill " +i + "/" + myPillsList.length + " total pills");
 		}
 	}
 
@@ -73,10 +69,10 @@
 				}
 
 				var myPill=new myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value,  document.getElementById("add_dosefrequency").value, pillTimes);
-				writePill(myPill);
+
+				var newList=writePill(myPill); // includes updateManagePills
 
 				clear_add_new();
-				updateManagePills();
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_main").style.display="block";
 				document.getElementById("edit_title").innerHTML="Edit Your Pills";
@@ -88,7 +84,8 @@
 		if (noSave==true) {
 			clear_add_new();
 
-			updateManagePills();
+			var myPillsList=returnAllDrugs();
+			updateManagePills(myPillsList);
 			document.getElementById("add_new").style.display="none";
 			document.getElementById("edit_main").style.display="block";
 			document.getElementById("edit_title").innerHTML="Edit Your Pills";
@@ -96,6 +93,7 @@
 	}
 
 	function changeDivToAddNewDrug() {
+		clear_add_new();
 		document.getElementById("home").style.display="none";
 		document.getElementById("edit_main").style.display="none";
 		document.getElementById("add_new").style.display="block";
@@ -108,30 +106,39 @@
 				var child=document.getElementById(ele.id+"_pdiv");
 				parent.removeChild(child);
 
-				m.drugsQueue = m.drugsQueue.filter(function(pill){
-  					return pill.name !== ele.id;
-				});
+				var toDelete=new myDrug(ele.id, "", "", "", 0, 0); // unwritePill only matches by pill.name; but is secure in that only one pill can be named pill.name
+				unwritePill(toDelete);
 					
 			}
 
 			function editPill(ele) {
 
-				var selectedPill=m.drugsQueue.filter(function(pill){
-  					return pill.name == ele.value;
-				});
+				// cool old backend implementation: selects based on filter (ie, if pill.name == ele.value)
 
-				myPill=selectedPill[0];
+				//var selectedPill=m.drugsQueue.filter(function(pill){
+  				//	return pill.name == ele.value;
+				//});
 
+				//myPill=selectedPill[0];
+
+				var pillSelected;
+				var myPillsList=returnAllDrugs();
+				for (var i=0; i<myPillsList.length; i++) {
+					if (ele.value==myPillsList[i].name) {
+						pillSelected=myPillsList[i]; // finds the selected pill
+					}
+				}
+			
 				document.getElementById("add_new").style.display="block";
 				document.getElementById("edit_main").style.display="none";
 				document.getElementById("edit_title").innerHTML="Edit " + ele.value;
 
-				var pillName = myPill.name;
-				var pillDose = myPill.dose;
-				var pillStart = myPill.startdate;
-				var pillEnd = myPill.enddate;
-				var pillFreq = myPill.frequency;
-				var pillTimes = myPill.times;
+				var pillName = pillSelected.name;
+				var pillDose = pillSelected.dose;
+				var pillStart = pillSelected.startdate;
+				var pillEnd = pillSelected.enddate;
+				var pillFreq = pillSelected.frequency;
+				var pillTimes = pillSelected.times;
 				
 				document.getElementById("new_drugname").value=pillName;
 				document.getElementById("new_drugdose").value=pillDose;
@@ -146,7 +153,7 @@
 				}
 				else if (pillFreq==1) { // specific time = innerHTML type string
 					document.getElementById("selected_times").innerHTML=pillTimes; // <p>some:time am</p> listed
-					console.log(pillTimes);
+					//console.log(pillTimes);
 
 				}
 				else { // number of doses per day = one number (1-10)
@@ -201,7 +208,8 @@ function takeDrugEvent(DrugName, dateString, timeString){
 
 			
   		$('#EditPills').click(function(evt){
-			updateManagePills();
+			var myPillsList=returnAllDrugs();
+			updateManagePills(myPillsList);
   			document.getElementById("home").style.display="none";
   			document.getElementById("add_new").style.display="none";
 			document.getElementById("edit_main").style.display="block";
@@ -232,12 +240,12 @@ function takeDrugEvent(DrugName, dateString, timeString){
   		});
 
   		$("#contact_doctor_btn").click(function()    {
-            
+            		clear_add_new();
           window.location="patient_message_app.html";
         });
 
         $("#app_sign_out_btn").click(function()    {
-            
+            		clear_add_new();
             window.location="patient_log_in.html";
         });     
 
@@ -313,6 +321,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
 			}
 
 			function redirectToHome() {
+				clear_add_new();
 				document.getElementById("history").style.display = "none";
 				document.getElementById("edit_main").style.display="none";
 				document.getElementById("add_new").style.display="none";
@@ -325,6 +334,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
 
 
 			function startHome() {
+				clear_add_new();
 				document.getElementById("history").style.display = "none";
 				document.getElementById("edit_main").style.display="none";
 				document.getElementById("add_new").style.display="none";
