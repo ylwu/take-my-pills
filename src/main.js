@@ -51,6 +51,7 @@
 		document.getElementById("add_startdate").value="";
 		document.getElementById("add_enddate").value="";
 		document.getElementById("selected_times").innerHTML="";
+		document.getElementById("add_dosefrequency").value=0;
 	}
 
 	function save_new() {
@@ -98,6 +99,10 @@
 		document.getElementById("edit_main").style.display="none";
 		document.getElementById("add_new").style.display="block";
 		document.getElementById("edit_title").innerHTML="Add New Pill";
+
+		$("#cycle").show();
+		$("#specific_time").hide();
+		$("#num_dosage").hide();
 	}			
 
 
@@ -201,11 +206,6 @@ function takeDrugEvent(DrugName, dateString, timeString){
 }
 
 	$(document).ready(function() {
-
-			
-
-
-
 			
   		$('#EditPills').click(function(evt){
 			var myPillsList=returnAllDrugs();
