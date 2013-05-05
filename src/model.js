@@ -44,7 +44,6 @@ var Model = function(){
 
 	this.dateToTimeString = function(date){
 		d = date.getMinutes().toString();
-		console.log(d.length);
 		if (d.length == 1){
 			d+= "0";
 		}
@@ -76,11 +75,22 @@ var Model = function(){
 							});
 						}
 				}
-			} else if (x.frequency == 2){                       //cycle drugs
+			} else if (x.frequency == 0){                       //cycle drugs
 				if ((this.startDate(x) <= this.curtime) && 
 					(this.endDate(x) >= this.curtime)){
-				fdate = new Date(this.curtime.getFullYear(), this.curtime.getMonth(),this.curtime.getDate(),9,0);
-				this.displayQueue.push(new DrugEvent(x.name,fdate,x.dose,this.dateToDateString(fdate),x.times.toString()+" times","future"));
+				if (x.nextPillTime == null){
+				drugEventTime = new Date(this.curtime.getFullYear(), this.curtime.getMonth(),this.curtime.getDate(),0,0);
+				this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),x.times.toString()+" times","future"));
+				} else {
+					console.log(x.nextPillTime[0]);
+					console.log(x.nextPillTime[1]);
+					drugEventTime = new Date(this.curtime.getFullYear(), this.curtime.getMonth(),this.curtime.getDate(),x.nextPillTime[0],x.nextPillTime[1]);
+					if (drugEventTime < this.curtime){
+								this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),this.dateToTimeString(drugEventTime),"past"));
+							} else {
+								this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),this.dateToTimeString(drugEventTime),"future"));
+							}
+				}
 				this.displayQueue.sort(function(a,b)
 							{
 								return (a.date - b.date);
@@ -89,8 +99,8 @@ var Model = function(){
 			} else {                                            //times per day drug
 				if ((this.startDate(x) <= this.curtime) && 
 					(this.endDate(x) >= this.curtime)){
-				fdate = new Date(this.curtime.getFullYear(), this.curtime.getMonth(),this.curtime.getDate(),x.lasttake[0],x.lasttake[1]);
-				this.displayQueue.push(new DrugEvent(x.name,fdate,x.dose,this.dateToDateString(fdate),x.lasttake[0].toString()+" : "+x.lasttake[1].toString()+"0 am","future"));
+				drugEventTime = new Date(this.curtime.getFullYear(), this.curtime.getMonth(),this.curtime.getDate(),9,0);
+				this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),this.dateToTimeString(drugEventTime),"future"));
 				this.displayQueue.sort(function(a,b)
 							{
 								return (a.date - b.date);

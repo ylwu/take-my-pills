@@ -76,7 +76,7 @@ function returnAllPatients(){
 // TY_GLOBAL WRITE_TO_JSON FUNCTIONS
 
 	function pillToJsonString(aPill) {
-		var pillString='{"name": "'+aPill.name+'", "dose": "'+aPill.dose+'", "startdate": "'+aPill.startdate+'", "enddate": "'+aPill.enddate+'", "frequency": "'+aPill.frequency+'", "times": "'+aPill.times+'", "lasttake": ['+aPill.lasttake+']}';
+		var pillString='{"name": "'+aPill.name+'", "dose": "'+aPill.dose+'", "startdate": "'+aPill.startdate+'", "enddate": "'+aPill.enddate+'", "frequency": "'+aPill.frequency+'", "times": "'+aPill.times+'", "nextPillTime": ['+aPill.nextPillTime+']}';
 		return pillString;
 	}
 
@@ -164,7 +164,7 @@ function returnAllPatients(){
 				if (i!=0) {
 					newPillsList+=', ';
 				}
-				newPillsList+='{"name": "'+oldPillsList[i].name+'", "dose": "'+oldPillsList[i].dose+'", "startdate": "'+oldPillsList[i].startdate+'", "enddate": "'+oldPillsList[i].enddate+'", "frequency": "'+oldPillsList[i].frequency+'", "times": "'+oldPillsList[i].times+'", "lasttake": "'+oldPillsList[i].lasttake+'"}';
+				newPillsList+='{"name": "'+oldPillsList[i].name+'", "dose": "'+oldPillsList[i].dose+'", "startdate": "'+oldPillsList[i].startdate+'", "enddate": "'+oldPillsList[i].enddate+'", "frequency": "'+oldPillsList[i].frequency+'", "times": "'+oldPillsList[i].times+'", "lasttake": "'+oldPillsList[i].nextPillTime+'"}';
 			}
 		}
 		newPillsList+=']';
