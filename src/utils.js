@@ -11,7 +11,7 @@ function returnAllDrugs(){
   				url: 'pilldata.json',
   				async: false,
   				success: function(data){
-            t = data;
+            	t = data;
 				}
 			});
       return t;
@@ -104,10 +104,11 @@ function returnAllPatients(){
 		// .JSON WRITE (slower than read)
 		var oldPillsList=returnAllDrugs(); // returns list of javascript myPill *objects*
 		var newPillsList='['; // string list
+		var index = 1;
 
 		for (var i=0; i<oldPillsList.length; i++) {
 			if (i!=0) {
-					newPillsList+=', ';
+					newPillsList+=', \n';
 				}
 
 			if (aPill.name!=oldPillsList[i].name) { // if aPill existed previously, erase old info to write new info == don't write it
@@ -115,6 +116,7 @@ function returnAllPatients(){
 				newPillsList+=stringifyPill;
 			}
 			else { // edit
+				index = -1;
 				var stringifyPill=pillToJsonString(aPill);
 				newPillsList+=stringifyPill;
 			}
@@ -123,7 +125,7 @@ function returnAllPatients(){
 
 		if (index!=-1) { // if index==-1, is add not edit
 			if (oldPillsList.length!=0) {
-				newPillsList+=', ';
+				newPillsList+=', \n';
 			}
 			var stringifyPill=pillToJsonString(aPill);
 			newPillsList+=stringifyPill;
@@ -131,6 +133,7 @@ function returnAllPatients(){
 
 		newPillsList+=']';
 
+		console.log(newPillsList);
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': newPillsList });
 		updateManagePills(myJsonPills);
 	}
@@ -158,16 +161,22 @@ function returnAllPatients(){
 		// .JSON WRITE (slower than read)
 		var oldPillsList=returnAllDrugs();
 		var newPillsList='[';
+		var k = 0;
 
 		for (var i=0; i<oldPillsList.length; i++) {
 			if (aPill.name!=oldPillsList[i].name) {
-				if (i!=0) {
-					newPillsList+=', ';
+				console.log(aPill.name);
+				console.log(k);
+				if (k!=0) {
+					newPillsList+=', \n';
 				}
-				newPillsList+='{"name": "'+oldPillsList[i].name+'", "dose": "'+oldPillsList[i].dose+'", "startdate": "'+oldPillsList[i].startdate+'", "enddate": "'+oldPillsList[i].enddate+'", "frequency": "'+oldPillsList[i].frequency+'", "times": "'+oldPillsList[i].times+'", "lasttake": "'+oldPillsList[i].nextPillTime+'"}';
+				newPillsList+='{"name": "'+oldPillsList[i].name+'", "dose": "'+oldPillsList[i].dose+'", "startdate": "'+oldPillsList[i].startdate+'", "enddate": "'+oldPillsList[i].enddate+'", "frequency": "'+oldPillsList[i].frequency+'", "times": "'+oldPillsList[i].times+'", "nextPillTime": ['+oldPillsList[i].nextPillTime+']}';
+				k+=1;
 			}
 		}
 		newPillsList+=']';
+
+		console.log(newPillsList);
 		
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': newPillsList } );
 

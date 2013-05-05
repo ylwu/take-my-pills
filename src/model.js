@@ -84,14 +84,13 @@ var Model = function(){
 						}
 				}
 			} else if (x.frequency == 0){                       //cycle drugs
+
 				if ((this.startDate(x) <= this.curtime) && 
 					(this.endDate(x) >= this.curtime)){
-				if (x.nextPillTime == null){
+				if (x.nextPillTime[0] == -1){
 				drugEventTime = new Date(this.curtime.getFullYear(), this.curtime.getMonth(),this.curtime.getDate(),0,0);
-				this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),x.times.toString()+" times","future"));
+				this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),"Start Cycle","past"));
 				} else {
-					console.log(x.nextPillTime[0]);
-					console.log(x.nextPillTime[1]);
 					drugEventTime = new Date(this.curtime.getFullYear(), this.curtime.getMonth(),this.curtime.getDate(),x.nextPillTime[0],x.nextPillTime[1]);
 					if (drugEventTime < this.curtime){
 								this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),this.dateToTimeString(drugEventTime),"past"));
@@ -108,7 +107,7 @@ var Model = function(){
 				if ((this.startDate(x) <= this.curtime) && 
 					(this.endDate(x) >= this.curtime)){
 				drugEventTime = new Date(this.curtime.getFullYear(), this.curtime.getMonth(),this.curtime.getDate(),9,0);
-				this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),this.dateToTimeString(drugEventTime),"future"));
+				this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),x.times.toString()+" times","future"));
 				this.displayQueue.sort(function(a,b)
 							{
 								return (a.date - b.date);
@@ -144,29 +143,11 @@ var Model = function(){
 						}
 				}
 			} else if (x.frequency == 0){                       //cycle drugs
-				if ((this.startDate(x) <= this.newtime) && 
-					(this.endDate(x) >= this.newtime)){
-				if (x.nextPillTime == null){
-				drugEventTime = new Date(this.newtime.getFullYear(), this.newtime.getMonth(),this.newtime.getDate(),0,0);
-				this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),x.times.toString()+" times","future"));
-				} else {
-					drugEventTime = new Date(this.newtime.getFullYear(), this.newtime.getMonth(),this.newtime.getDate(),x.nextPillTime[0],x.nextPillTime[1]);
-					if (drugEventTime < this.newtime){
-								this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),this.dateToTimeString(drugEventTime),"past"));
-							} else {
-								this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),this.dateToTimeString(drugEventTime),"future"));
-							}
-				}
-				this.displayQueue.sort(function(a,b)
-							{
-								return (a.date - b.date);
-							});
-			    }
 			} else {                                            //times per day drug
 				if ((this.startDate(x) <= this.newtime) && 
 					(this.endDate(x) >= this.newtime)){
 				drugEventTime = new Date(this.newtime.getFullYear(), this.newtime.getMonth(),this.newtime.getDate(),9,0);
-				this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),this.dateToTimeString(drugEventTime),"future"));
+				this.displayQueue.push(new DrugEvent(x.name,drugEventTime,x.dose,this.dateToDateString(drugEventTime),x.times.toString()+" times","future"));
 				this.displayQueue.sort(function(a,b)
 							{
 								return (a.date - b.date);
@@ -180,6 +161,7 @@ var Model = function(){
 		this.displayQueue.length = 0;
 		for (var i=0; i<this.drugsQueue.length; i++){
 			this.initDrug(this.drugsQueue[i]);
+			console.log(this.drugsQueue[i]);
 	}
 	}
 
