@@ -3,8 +3,8 @@ var Model = function(){
 	this.drugsQueue = [];
 	this.displayQueue = [];
 	this.actionQueue = [];
-	this.curdate = new Date(2013,3,20,0,0,0,0);
-	this.newdate = new Date(2013,3,20,0,0,0,0);
+	this.curdate = new Date();
+	this.newdate = new Date();
 
 	this.allHandlers = new Array();
 	
