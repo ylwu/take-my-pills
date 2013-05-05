@@ -43,11 +43,19 @@ var Model = function(){
 	}
 
 	this.dateToTimeString = function(date){
-		d = date.getMinutes().toString();
-		if (d.length == 1){
-			d+= "0";
+		min = date.getMinutes().toString();
+		hour = date.getHours();
+		if (min.length == 1){
+			min+= "0";
 		}
-		return date.getHours() + " : " + d;
+
+		if (hour<12){
+			return hour.toString() + " : " + min + " am"
+		} else if (hour == 12){
+			return 12 + " : " + min + " pm"
+		} else {
+			return (hour-12).toString() + " : " + min + " pm"
+		}
 	}
 
 	this.initDrug = function(x){
@@ -111,7 +119,7 @@ var Model = function(){
 
 
 	this.moreDrug = function(x){
-		this.newtime = new Date(2013,3, this.newtime.getDate()+1,0,0,0,0);
+		this.newtime = new Date(2013,3,this.newtime.getDate()+1,0,0,0,0);
 			if (x.frequency == 1){
 				if ((this.startDate(x) <= this.newtime) && 
 					(this.endDate(x) >= this.newtime)){
@@ -128,7 +136,7 @@ var Model = function(){
 							this.displayQueue.push(new DrugEvent(x.name,fdate,x.dose,this.dateToDateString(fdate),times[j],"future"));
 							this.displayQueue.sort(function(a,b)
 							{
-								return (a.date - b.date);
+								return (a.dat - b.date);
 							});
 						}
 				}
