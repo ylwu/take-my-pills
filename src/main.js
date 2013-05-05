@@ -51,6 +51,7 @@
 		document.getElementById("add_startdate").value="";
 		document.getElementById("add_enddate").value="";
 		document.getElementById("selected_times").innerHTML="";
+		document.getElementById("add_dosefrequency").value=0;
 	}
 
 	function save_new() {
@@ -84,8 +85,7 @@
 		if (noSave==true) {
 			clear_add_new();
 
-			var myPillsList=returnAllDrugs();
-			updateManagePills(myPillsList);
+			updateManagePills(myJsonPills);
 			document.getElementById("add_new").style.display="none";
 			document.getElementById("edit_main").style.display="block";
 			document.getElementById("edit_title").innerHTML="Edit Your Pills";
@@ -98,6 +98,10 @@
 		document.getElementById("edit_main").style.display="none";
 		document.getElementById("add_new").style.display="block";
 		document.getElementById("edit_title").innerHTML="Add New Pill";
+
+		$("#cycle").show();
+		$("#specific_time").hide();
+		$("#num_dosage").hide();
 	}			
 
 
@@ -122,10 +126,10 @@
 				//myPill=selectedPill[0];
 
 				var pillSelected;
-				var myPillsList=returnAllDrugs();
-				for (var i=0; i<myPillsList.length; i++) {
-					if (ele.value==myPillsList[i].name) {
-						pillSelected=myPillsList[i]; // finds the selected pill
+				//var myPillsList=returnAllDrugs();
+				for (var i=0; i<myJsonPills.length; i++) {
+					if (ele.value==myJsonPills[i].name) {
+						pillSelected=myJsonPills[i]; // finds the selected pill
 					}
 				}
 			
@@ -202,14 +206,10 @@ function takeDrugEvent(DrugName, dateString, timeString){
 
 	$(document).ready(function() {
 
-			
-
-
-
+		myJsonPills=returnAllDrugs();
 			
   		$('#EditPills').click(function(evt){
-			var myPillsList=returnAllDrugs();
-			updateManagePills(myPillsList);
+			updateManagePills(myJsonPills);
   			document.getElementById("home").style.display="none";
   			document.getElementById("add_new").style.display="none";
 			document.getElementById("edit_main").style.display="block";
@@ -292,11 +292,12 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			$(row).append($(document.createElement('td')).append(drugEvent.dateString));
   			$(row).append($(document.createElement('td')).append(drugEvent.timeString));
   			$(row).append($(document.createElement('td')).append(drugEvent.dosage + "pills"));
-  			$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
   			$(row).addClass('drug');
   			if (drugEvent.state == "taken"){
+  				$(row).append($(document.createElement('td')).append("taken"));
   				$(row).addClass("success");
   			} else {
+  				$(row).append($(document.createElement('td')).append("missed"));
   				$(row).addClass("error");
   			}
   			$('#historytable').append($(row));
