@@ -1,5 +1,6 @@
 var Model = function(){
 	this.historyQueue = [];
+	this.newDrugsQueue = [];
 	this.drugsQueue = [];
 	this.displayQueue = [];
 	this.actionQueue = [];
