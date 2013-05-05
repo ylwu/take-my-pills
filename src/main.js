@@ -85,8 +85,7 @@
 		if (noSave==true) {
 			clear_add_new();
 
-			var myPillsList=returnAllDrugs();
-			updateManagePills(myPillsList);
+			updateManagePills(myJsonPills);
 			document.getElementById("add_new").style.display="none";
 			document.getElementById("edit_main").style.display="block";
 			document.getElementById("edit_title").innerHTML="Edit Your Pills";
@@ -127,10 +126,10 @@
 				//myPill=selectedPill[0];
 
 				var pillSelected;
-				var myPillsList=returnAllDrugs();
-				for (var i=0; i<myPillsList.length; i++) {
-					if (ele.value==myPillsList[i].name) {
-						pillSelected=myPillsList[i]; // finds the selected pill
+				//var myPillsList=returnAllDrugs();
+				for (var i=0; i<myJsonPills.length; i++) {
+					if (ele.value==myJsonPills[i].name) {
+						pillSelected=myJsonPills[i]; // finds the selected pill
 					}
 				}
 			
@@ -206,10 +205,11 @@ function takeDrugEvent(DrugName, dateString, timeString){
 }
 
 	$(document).ready(function() {
+
+		myJsonPills=returnAllDrugs();
 			
   		$('#EditPills').click(function(evt){
-			var myPillsList=returnAllDrugs();
-			updateManagePills(myPillsList);
+			updateManagePills(myJsonPills);
   			document.getElementById("home").style.display="none";
   			document.getElementById("add_new").style.display="none";
 			document.getElementById("edit_main").style.display="block";
