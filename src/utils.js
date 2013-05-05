@@ -93,11 +93,9 @@ function returnAllPatients(){
 		}
 		if (index!=-1) { // if index==-1, is add not edit
 			myJsonPills[index]=aPill;
-			alert("edit " + i);
 		}
 		else {
 			myJsonPills.push(aPill);
-			alert("add " + i);
 		}
 
 
@@ -132,8 +130,7 @@ function returnAllPatients(){
 		}
 
 		newPillsList+=']';
-
-		console.log(newPillsList);
+		
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': newPillsList });
 		updateManagePills(myJsonPills);
 	}
