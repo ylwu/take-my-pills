@@ -278,9 +278,9 @@ document.getElementById("history-header").style.fontSize="13.5px";
   			//$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
   			$(row).addClass('drug');
   			if (drugEvent.state == "future"){
-  				$(row).addClass("ty-success");
+  				$(row).addClass("success untaken_med ty-success");
   			} else {
-  				$(row).addClass("ty-error");
+  				$(row).addClass("error missed_med ty-error"); // might have to remove success and error class for ty-version
   			}
   			$('#drugtable').append($(row));
 
@@ -288,6 +288,7 @@ document.getElementById("history-header").style.fontSize="13.5px";
   			   if ($("input:checked").length != 0){
   			$("#actionbar").show();
   			$("#morepills").hide();
+  			$(row).toggleClass('back-red');
   			} else {
   				$("#actionbar").hide();
   				$("#morepills").show();
@@ -310,10 +311,10 @@ document.getElementById("history-header").style.fontSize="13.5px";
   			$(row).addClass('drug');
   			if (drugEvent.state == "taken"){
   				$(row).append($(document.createElement('td')).append("taken"));
-  				$(row).addClass("success");
+  				$(row).addClass("info");
   			} else {
   				$(row).append($(document.createElement('td')).append("missed"));
-  				$(row).addClass("error");
+  				$(row).addClass("info");
   			}
   			$('#historytable').append($(row));
 
