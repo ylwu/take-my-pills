@@ -28,7 +28,7 @@
 }
 
 .header{
-	background-color: #2fb593;
+	background-color: #30385A; /* navy now; was #2fb593 */
 	
 }
 
@@ -38,7 +38,7 @@
 }
 
 .header_text{
-	text-align:center;
+	/*text-align:left; was center */
 	font-family:"Akzidenz Grotesk";
 	font-size:30px;
 	color:#ffffff;
@@ -54,7 +54,7 @@
 }
 
 #contact-doctor-bar{
-	background-color: #FAA732;
+	background-color: #30385A; /* navy now; was #FAA732 */
 	height:40px;
 }
 
@@ -149,7 +149,6 @@
 .bar_btn_group{
 	position:relative;
 	top:5px;
-
 }
 
 .mesage-area{
@@ -160,7 +159,7 @@
 #doctor_message_submit_btn{
 	position:relative;
 	top:-5px;
-	left: 330px
+	left: 330px;
 }
 
 body{
@@ -171,22 +170,47 @@ body{
 #add_new_pills_btn{
 	position:relative;
 	top:5px;
-	left: 150px
+	left: 150px;
 }
 
 .edit_drug_label{
-	float: left;
+    float: left;
     width: 150px;
     text-align: right;
     margin-right: 0.5em;
 }
 
 
+/* ty design */
+.ty-btn2 {
+	font: bold 10px/1 Akzidenz Grotesk;
+}
 
+.ty-btn {
+    background-color: #003399;
+    background-image: -moz-linear-gradient(center top , #EEEEEE 0%, #DDDDDD 50%, #CCCCCC 50%, #BBBBBB 100%);
+    border: #000000;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    font: bold 15px/1 Akzidenz Grotesk;
+    padding: 3px 0 4px;
+    text-align: center;
+    /* text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.8); */
+    width: 150px;
+}
 
+.drug {
+	font-family: "Akzidenz Grotesk";
+}
 
+.ty-success {
+	background-color: #EEEEEE;
+}
 
+.ty-error {
+	background-color: #F2CECE;
+}
 
-
-
-
+#app_sign_out_btn {
+	font-family: Akzidenz Grotesk;
+}

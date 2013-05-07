@@ -22,7 +22,7 @@
 		        newButton.setAttribute("value", myPillsList[i].name);
 		        newButton.setAttribute("onclick", "editPill(this);");
 		        newButton.setAttribute("class", "btn");
-
+			newButton.setAttribute("style", "width:50%; font-family: Akzidenz Grotesk;");
 		        
 		        pdiv.appendChild(newButton);
 		        pdiv.appendChild(del);
@@ -168,9 +168,6 @@
 			}
 
 
-
-
-
 	//Array Remove - By John Resig (MIT Licensed)
 Array.prototype.remove = function(from, to) {
   var rest = this.slice((to || from) + 1 || this.length);
@@ -212,22 +209,40 @@ function takeDrugEvent(DrugName, dateString, timeString){
 			updateManagePills(myJsonPills);
   			document.getElementById("home").style.display="none";
   			document.getElementById("add_new").style.display="none";
+
+document.getElementById("history").style.display="none";
+
 			document.getElementById("edit_main").style.display="block";
 			document.getElementById("edit_title").innerHTML="Edit Your Pills";
   		})
 
   		$('#history-header').click(function(evt){
-  			showHistory();
-  		})
+			if (document.getElementById("history-header").innerHTML=="See History") {
+				document.getElementById("history-header").innerHTML="See Present";
+document.getElementById("history-header").style.fontSize="13.5px";
+
+				// block Edit stuff from under app
+				document.getElementById("edit_main").style.display="none";
+				document.getElementById("add_new").style.display="none";
+				document.getElementById("edit_title").innerHTML="";
+
+				showHistory();
+			}
+			else {
+				document.getElementById("history-header").innerHTML="See History";
+document.getElementById("history-header").style.fontSize="13.5px";
+  				redirectToHome();
+			}
+  		});
 
 
   		$('#present-header').click(function(evt){
   			redirectToHome();
-  		})
+  		});
 
   		$('#home_btn').click( function(evt){
   			redirectToHome();
-  		})
+  		});
 
   		$("#add").click(function(evt){
 
@@ -260,12 +275,12 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			$(row).append($(document.createElement('td')).append(drugEvent.dateString));
   			$(row).append($(document.createElement('td')).append(drugEvent.timeString));
   			$(row).append($(document.createElement('td')).append(drugEvent.dosage + "pills"));
-  			$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
+  			//$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
   			$(row).addClass('drug');
   			if (drugEvent.state == "future"){
-  				$(row).addClass("success");
+  				$(row).addClass("ty-success");
   			} else {
-  				$(row).addClass("error");
+  				$(row).addClass("ty-error");
   			}
   			$('#drugtable').append($(row));
 
