@@ -278,9 +278,9 @@ document.getElementById("history-header").style.fontSize="13.5px";
   			//$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
   			$(row).addClass('drug');
   			if (drugEvent.state == "future"){
-  				$(row).addClass("success untaken_med ty-success");
+  				$(row).addClass("untaken_med ty-success");
   			} else {
-  				$(row).addClass("error missed_med ty-error"); // might have to remove success and error class for ty-version
+  				$(row).addClass("missed_med ty-error"); // might have to remove success and error class for ty-version
   			}
   			$('#drugtable').append($(row));
 
