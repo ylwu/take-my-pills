@@ -260,12 +260,11 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			$(row).append($(document.createElement('td')).append(drugEvent.dateString));
   			$(row).append($(document.createElement('td')).append(drugEvent.timeString));
   			$(row).append($(document.createElement('td')).append(drugEvent.dosage + "pills"));
-  			$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
   			$(row).addClass('drug');
   			if (drugEvent.state == "future"){
-  				$(row).addClass("success");
+  				$(row).addClass("success untaken_med");
   			} else {
-  				$(row).addClass("error");
+  				$(row).addClass("error missed_med");
   			}
   			$('#drugtable').append($(row));
 
@@ -273,6 +272,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			   if ($("input:checked").length != 0){
   			$("#actionbar").show();
   			$("#morepills").hide();
+  			$(row).toggleClass('back-red');
   			} else {
   				$("#actionbar").hide();
   				$("#morepills").show();
@@ -295,10 +295,10 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			$(row).addClass('drug');
   			if (drugEvent.state == "taken"){
   				$(row).append($(document.createElement('td')).append("taken"));
-  				$(row).addClass("success");
+  				$(row).addClass("info");
   			} else {
   				$(row).append($(document.createElement('td')).append("missed"));
-  				$(row).addClass("error");
+  				$(row).addClass("info");
   			}
   			$('#historytable').append($(row));
 
