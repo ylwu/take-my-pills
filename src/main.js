@@ -76,6 +76,7 @@
 				clear_add_new();
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_main").style.display="block";
+				$("#message_selectDoctors").hide();
 				document.getElementById("edit_title").innerHTML="Edit Your Pills";
 			}
 			
@@ -210,27 +211,31 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			document.getElementById("home").style.display="none";
   			document.getElementById("add_new").style.display="none";
 
-document.getElementById("history").style.display="none";
+			document.getElementById("history").style.display="none";
 
 			document.getElementById("edit_main").style.display="block";
 			document.getElementById("edit_title").innerHTML="Edit Your Pills";
+			$("#message_selectDoctors").hide();
+			$("#message-main").hide();
   		})
 
   		$('#history-header').click(function(evt){
 			if (document.getElementById("history-header").innerHTML=="See History") {
 				document.getElementById("history-header").innerHTML="See Present";
-document.getElementById("history-header").style.fontSize="13.5px";
+				document.getElementById("history-header").style.fontSize="13.5px";
 
 				// block Edit stuff from under app
 				document.getElementById("edit_main").style.display="none";
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_title").innerHTML="";
+				$("#message_selectDoctors").hide();
+				$("#message-main").hide();
 
 				showHistory();
 			}
 			else {
 				document.getElementById("history-header").innerHTML="See History";
-document.getElementById("history-header").style.fontSize="13.5px";
+				document.getElementById("history-header").style.fontSize="13.5px";
   				redirectToHome();
 			}
   		});
@@ -255,9 +260,15 @@ document.getElementById("history-header").style.fontSize="13.5px";
   		});
 
   		$("#contact_doctor_btn").click(function()    {
-            		clear_add_new();
-          window.location="patient_message_app.html";
+          clear_add_new();
+          redirectToMessage();
+          $("#message-main").hide();
         });
+
+        $('#doctor_div').click(function()    {
+            $("#message_selectDoctors").hide();
+            $("#message-main").show();
+        });  
 
         $("#app_sign_out_btn").click(function()    {
             		clear_add_new();
@@ -344,9 +355,21 @@ document.getElementById("history-header").style.fontSize="13.5px";
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_title").innerHTML="";
 				document.getElementById('home').style.display='block';
+				$("#message_selectDoctors").hide();
+				$("#message-main").hide();
 				loadDrugs();
 				//m.initDrugs();
 				reloadHome();
+			}
+
+			function redirectToMessage() {
+				document.getElementById("history").style.display = "none";
+				document.getElementById("edit_main").style.display="none";
+				document.getElementById("add_new").style.display="none";
+				document.getElementById("edit_title").innerHTML="";
+				document.getElementById('home').style.display='none';
+				$("#message_selectDoctors").show();
+				$("#message-main").hide();
 			}
 
 
@@ -357,6 +380,9 @@ document.getElementById("history-header").style.fontSize="13.5px";
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_title").innerHTML="";
 				document.getElementById('home').style.display='block';
+				$("#message_selectDoctors").hide();
+				$("#message-main").hide();
+
 				loadDrugs();
 				m.initDrugs();
 				reloadHome();
