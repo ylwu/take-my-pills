@@ -192,7 +192,7 @@ $(document).ready(function() {
 	
 	global.showHistoryInfo=function(tabIndex){ 
 		jfcalplugin.deleteAllAgendaItems("#mycal");
-		$(drug_textarea).html("Missed drug history summary:\n\n");
+		$(drug_textarea).html("Missed pill history summary:\n\n");
 		var calDate = jfcalplugin.getCurrentDate("#mycal"); // returns Date object
 		var cyear = calDate.getFullYear();
 		// Date month 0-based (0=January)

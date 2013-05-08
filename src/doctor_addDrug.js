@@ -176,7 +176,7 @@ $(document).ready(function() {
 			
 			var drug = drugList[index];
 			
-			$(legend_name).html("Edit Drug");
+			$(legend_name).html("Edit Pill");
 			$(new_drugname).val(drug.name);
 			$(new_drugname).attr("disabled",true); //disable name change to make things easier
 			$(dose).val(drug.dose);
@@ -232,7 +232,7 @@ $(document).ready(function() {
 			
 			//loadup drugTab
 			$(drugTab).html("");
-			$(drugTab).append("<li class='active' id='addTab'><a data-toggle='tab'  href='#' onclick=addDrugTab() >Add New Drug</a></li><hr>");
+			$(drugTab).append("<li class='active' id='addTab'><a data-toggle='tab'  href='#' onclick=addDrugTab() >Add New Pill</a></li><hr>");
 			for (i=0;i<drugList.length;i++){
 				$(drugTab).append("<li ><a data-toggle='tab' href='#' onclick=global.editDrugTab("+i+") >"+drugList[i].name+"</a></li>");
 				drugNameList.push(drugList[i].name);
@@ -273,7 +273,7 @@ $(document).ready(function() {
 		$(am_pm).val("am");
 		$(num_hour).val("1");
 		
-		$(legend_name).html("Add New Drug");
+		$(legend_name).html("Add New Pill");
 		
 		$(add_dosefrequency).val(0);
 		document.getElementById("cycle").style.display="block";

@@ -157,7 +157,8 @@ body {
 }
 
 .bar{
-	margin-bottom: 0px;
+	margin-top:10px;
+	margin-bottom: 10px;
 	border-bottom: 0px;
 }
 
