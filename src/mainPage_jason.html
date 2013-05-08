@@ -12,6 +12,7 @@
 <script src="drugEvent.js"></script>
 <script type = "text/javascript" src="utils.js"></script>
 <script type = "text/javascript" src="main.js"></script>
+<script type = "text/javascript" src= "app_message.js"> </script>
 
 </head>
 
@@ -19,16 +20,17 @@
 	<div class="span6" id="main-page"> 
 	<div class="row">
 	<div class=" header span6 centered">
-			<h4 class="header_text"> <button class= "btn btn-primary" id="home_btn"> <i class="icon-home icon-white"></i></button> Take Your Pills <button class= "btn btn-primary" id="app_sign_out_btn"> Sign Out</button></h4>
+			<h4 style="float:left" class="header_text"> Take Your Pills</h4><button style="float:right" class= "btn btn-inverse" id="app_sign_out_btn">Sign Out</button>
 	</div>
 	</div>
 
 	<div class="row">
 		<div class= "span6 centered" id="contact-doctor-bar">
-			<div class="bar_btn_group">
-				<button class= "btn btn-warning" id="contact_doctor_btn"> Contact Doctor</button> 
-				<button class= "btn btn-warning" id="EditPills"> Manage Pills</button>
-				
+			<div class="bar_btn_group header">
+				<button style="width:10%" class= "btn btn-primary ty-btn2" id="home_btn"><i class="icon-home icon-white"></i></button>
+				<button style="width:28%" class= "btn btn-primary ty-btn2" id="EditPills">Manage Pills</button>
+				<div style="width:20%" class= "btn btn-primary ty-btn2" id= "history-header">See History</div>
+				<button style="width:32%" class= "btn btn-primary ty-btn2" id="contact_doctor_btn">Contact Doctor</button>
 			</div>
     	</div>
 	</div>
@@ -36,9 +38,6 @@
 
 	<div id="history">
 
-	<div class="row span6 centered btn btn-block" id= "present-header">
-			See Present
-	</div>
 	<div class="row">
 		<div class="span6" id="main">
 		<div id="olddrugs">
@@ -51,9 +50,6 @@
 	</div>
 
 	<div id="home">
-		<div class="row span6 centered btn btn-block" id= "history-header">
-			See History
-		</div>
 
 	<div class="row">
 		<div class="span6" id="main">
@@ -72,15 +68,57 @@
 		
 	</div>
 	</div>
+
+	<div id="message_selectDoctors">
+
+	<div>
+		<div class="row">
+		<div class="span6">
+			
+			<div class="doctor-btn" id="doctor_div">
+				<img src="doctor.jpg" alt="Doctor" width="100" height="100">
+				<span class="doctor-name">Dr. Williams</span>
+			</div>
+
+			<div class="doctor-btn">
+				<img src="doctor-02.jpg" alt="Doctor-02" width="100" height="100">
+				<span class="doctor-name">Dr. James</span>
+			</div>
+
+		</div>
+		</div>
+	</div>
+	</div>
+
+	<div id="message-main">
+
+	<div>
+		<div class="row">
+		<div class="span-background span6">
+
+			<div id="message-box-size">
+				<table class= "conversation-text" id="conversation_table"></table>
+			</div>
+
+
+			<div class="mesage-area">
+				<input class="input-block-level" id="doctor_message_box" type="text" placeholder="Enter your message"></input>
+				<button class= "btn" id="doctor_message_submit_btn"> Send Message</button>
+			</div>
+
+		</div>
+	</div>
+	</div>
+	</div>
 	
 
-	<div id="edit_title" style="text-align:center; margin:10px;"></div>
+	<div id="edit_title" style="text-align:center; margin:10px; font-size:20px; font-family:Akzidenz Grotesk;"></div>
 	<div id="edit_main">
 		<div id="drug_section" style="text-align:center;">
 		</div>
-		<div style="width:100%">
-			<input type="button" style="margin-left:18%; margin-top:10px; " class=" btn span4 " id="add_new_drug" onclick="changeDivToAddNewDrug()" value="+">
-		</div>
+		<div style="text-align:center;">
+			<div><input type="button" style="margin-top:10px; width:57%" class="btn" id="add_new_drug" onclick="changeDivToAddNewDrug()" value="+">
+		</div></div>
 	</div>
 		
 		
