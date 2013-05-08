@@ -13,8 +13,27 @@ $(document).ready(function() {
 	//display doctor name
 	$(doctor_name).html("Dr. "+first_name+" "+last_name);
 
+	//load patient info from json
+	var patient = returnAllPatients();
+	
 	//patient lists
-	var all_patient = ["Amy Fox"];
+	var all_patient = [];
+	if (patient.connect == "true"){
+		all_patient.push(patient.name);
+		//load chat, check for new messages		
+		var messages = returnAllMessages();
+		var counter = 0;
+		for (i=0;i<messages.length;i++){
+			if (messages[i].read != "true"){
+				counter +=1;
+			}
+		}
+		
+		if (counter != 0){
+			$(newMsgNum).html(counter);
+		}
+		
+	}
 	
 	//auto complete for patient search
 	$(search_patient).val("");

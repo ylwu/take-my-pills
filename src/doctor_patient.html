@@ -9,6 +9,17 @@
 <script type = "text/javascript" src= "doctor_patient.js"> </script>
 <script type = "text/javascript" src= "model.js"> </script>
 <script type = "text/javascript" src= "utils.js"> </script>
+
+<!-- Include CSS for JQuery Frontier Calendar plugin (Required for calendar plugin) -->
+<link rel="stylesheet" type="text/css" href="external-lib/calendar/css/frontierCalendar/jquery-frontier-cal-1.3.2.css" />
+<!-- Include CSS for JQuery UI (Required for calendar plugin.) -->
+<link rel="stylesheet" type="text/css" href="external-lib/calendar/css/jquery-ui/smoothness/jquery-ui-1.8.1.custom.css" />
+<!-- Include JQuery UI (Required for calendar plugin.) -->
+<script type="text/javascript" src="external-lib/calendar/js/jquery-ui/smoothness/jquery-ui-1.8.1.custom.min.js"></script>
+<script type="text/javascript" src="external-lib/calendar/js/lib/jshashtable-2.1.js"></script>
+<!-- Include JQuery Frontier Calendar plugin -->
+<script type="text/javascript" src="external-lib/calendar/js/frontierCalendar/jquery-frontier-cal-1.3.2.min.js"></script>
+
 <script type = "text/javascript" src= "external-lib/bootstrap/js/bootstrap.js"> </script>
 <link rel="stylesheet" type="text/css" href="doctor.css" />
 
@@ -34,7 +45,7 @@
 									</div>
 								</div>
 							</li>
-							<li class="divider-vertical"><a href="doctor_messages.html">Messages</a></li>
+							<li class="divider-vertical"><a href="doctor_messages.html">Messages <span style="background-color:red; color:white; text-shadow: 0 0px 0 white !important;" id="newMsgNum"></span></a></li>
 							<li class="divider-vertical"><a href="doctor_addPatient.html">Patients</a></li>
 							<li class="divider-vertical"><a href="doctor_login.html">Logout</a></li>
 							
@@ -54,14 +65,26 @@
 			<div class = "row-fluid main-container fullheight">
 				<div class="tabbable tabs-left span2">
 					<ul class="nav nav-pills nav-stacked" id = "drugTab">
-						<li class="active"><a data-toggle="tab" onclick=global.showHistoryInfo(-1) href="#">All</a></li>
+						<li class="active"><a data-toggle="tab" onclick=global.showHistoryInfo(-1) href="#">All Pills</a></li>
 						
 					</ul>
 
 				</div>
 				
 				<div class = "span7">
-					<iframe class="calendar" src="https://www.google.com/calendar/embed?src=qre47unak4dm77r2c9b9hcacok%40group.calendar.google.com&ctz=America/New_York"  frameborder="0" scrolling="no"></iframe>
+					<div style="margin-bottom:20px;  vertical-align:middle; height:30px;"> 
+						<button id="BtnPreviousMonth" class="btn" style="float:left;">Previous Month</button>
+						<span style="height:100%; vertical-align:middle; margin-left:60px; margin-right:40px; display:inline-block;">
+							<span id="displayDrugName" style="font-size:20px; "></span>
+							<span id="displayDrugMonth" style="font-size:20px;"></span>
+						</span>
+						<button id="BtnNextMonth" class="btn" style="float:right;">Next Month</button>
+					</div>
+					<div id="mycal" style="width:100%;"></div>
+					<div id="display-event-form" title="View Missed Event">
+			
+					</div>	
+					<!--rame class="calendar" src="https://www.google.com/calendar/embed?src=qre47unak4dm77r2c9b9hcacok%40group.calendar.google.com&ctz=America/New_York"  frameborder="0" scrolling="no"></iframe-->
 				</div>
 				<div class = "span3 drug-history-box">
 					<textarea  class = "drug-history" id="drug_textarea" readonly>Missed drug history summary:</textarea>

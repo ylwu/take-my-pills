@@ -217,14 +217,14 @@ body {
 .doctor-chat-text{
 	height:150px !important;
 	resize: none;
-
+	word-wrap: break-word;
 
 
 }
 .doctor-chat-right{
 	width:100%;
 	text-align: right;
-
+	word-wrap: break-word;
 	border-top:10px solid #B6B6B6;
 }
 
