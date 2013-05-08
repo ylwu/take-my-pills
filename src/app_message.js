@@ -7,7 +7,7 @@ $(function (){
 			var msgObj = messages[i];
 			
 			if (msgObj.from == "patient"){ //message from patient (right)
-				code += '<tr class="patient-message success"><td><div><img src="patient.jpg" alt="Doctor" width="40" height="40"></div><div><span class="conversation-text">"' + msgObj.message + '</span></div></td></tr>';
+				code += '<tr class="patient-message success"><td><div><img src="patient.jpg" alt="Doctor" width="40" height="40"></div><div><span class="conversation-text">' + msgObj.message + '</span></div></td></tr>';
 			}
 			else{ // message from doctor (left)
 				code += '<tr><td class="doctor-message"><div><img src="doctor.jpg" alt="Doctor" width="40" height="40"></div><div><span>';	
@@ -21,8 +21,9 @@ $(function (){
 			}
 
 		}	
-		//append the message	
-		$(conversation_table).append(code);
+		//append the message
+
+		$("#conversation_table").append(code);
 
 
 	$(doctor_message_box).val("");
