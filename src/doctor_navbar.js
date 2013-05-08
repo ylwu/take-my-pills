@@ -24,7 +24,7 @@ $(document).ready(function() {
 		var messages = returnAllMessages();
 		var counter = 0;
 		for (i=0;i<messages.length;i++){
-			if (messages[i].read != "true"){
+			if (messages[i].read != "true" && messages[i].from =="patient"){
 				counter +=1;
 			}
 		}

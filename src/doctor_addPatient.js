@@ -132,6 +132,7 @@ $(document).ready(function() {
 				}else{
 					var patientEdit = new myPatient(email,name,age,info,"true");
 					
+					
 					$(patient_list).html("");
 					for (i=0;i<all_patient.length;i++){
 						var ul = document.getElementById("patient_list");
