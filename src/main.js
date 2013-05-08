@@ -289,7 +289,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			//$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
   			$(row).addClass('drug');
   			if (drugEvent.state == "future"){
-  				$(row).addClass("untaken_med ty-success");
+  				$(row).addClass("untaken_med warning");
   			} else {
   				$(row).addClass("missed_med ty-error"); // might have to remove success and error class for ty-version
   			}
