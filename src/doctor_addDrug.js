@@ -1,6 +1,10 @@
 //This script extracts parameters from the URL
 //from jquery-howto.blogspot.com
 
+function updateManagePills(myPillsList) {
+	// do nothing for doctor side (this is only patient functionality)
+	}
+
 $.extend({
         getUrlVars : function() {
             var vars = [], hash;
@@ -56,6 +60,7 @@ $(document).ready(function() {
 
 	
 		//load drugList, drugNameList
+		myJsonPills = returnAllDrugs();
 		var drugList= returnAllDrugs();
 		var drugNameList = [];
 		

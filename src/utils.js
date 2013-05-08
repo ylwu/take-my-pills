@@ -140,7 +140,6 @@ function returnAllPatients(){
 
 		// JS GLOBAL WRITE
 		// if edit aPill, must delete aPill first before writing to js global and .JSON
-
 		var index=-1;
 		for (var i=0; i<myJsonPills.length; i++) {
 			if (aPill.name==myJsonPills[i].name) {
