@@ -49,12 +49,17 @@ $(document).ready(function() {
 			$(add_patient_div).show();
 			$(add_patient).show();
 			$(save_patient).hide();
-
+			$(email).attr("disabled",false);
+			$(form_legend).html("Add Patient");
+			$(clear_form).show();
+			$(delete_patient).hide();
+			$(save_patient).hide();
+			$(add_patient).show();
 			
 			$("#email").val("");
-			$(pat_name).val("");
-			$(age).val("");
-			$(info).val("");
+			$("#pat_name").val("");
+			$("#age").val("");
+			$("#info").val("");
 		}
 	);
 	
@@ -67,7 +72,7 @@ $(document).ready(function() {
 			
 			
 			
-			$(message).html("Patient information successfully saved.");
+			
 			
 			//TODO: save to patient file
 			
@@ -79,11 +84,26 @@ $(document).ready(function() {
 			if (email=="" || name=="" ||age==""||info==""){
 				$(message).html("All fields must be filled out.");
 			}else{
-				
+					$(message).html("Patient information successfully saved.");
 					var patientEdit = new myPatient(email,name,age,info,"true");
+					
+					$(patient_list).html("");
+					for (i=0;i<all_patient.length;i++){
+						var ul = document.getElementById("patient_list");
+						var link = document.createElement('a'); // create the link
+						link.setAttribute('href', 'doctor_patient.html?patient_name='+all_patient[i].replaceAll(' ','_'));
+						var newLI = document.createElement("LI");
+						ul.appendChild(newLI);
+						newLI.innerHTML = all_patient[i];
+						link.appendChild(newLI);
+						ul.appendChild(link);
+					}
+					$(add_patient_div).hide();
+					$(patient_list_div).show();
+					
 					changePatientInfo(patientEdit);
 					
-					window.location="doctor_addPatient.html";
+					//window.location="doctor_addPatient.html";
 				
 				
 			}
@@ -111,9 +131,26 @@ $(document).ready(function() {
 					$(message).html("The patient email is not registered.");
 				}else{
 					var patientEdit = new myPatient(email,name,age,info,"true");
+					
+					$(patient_list).html("");
+					for (i=0;i<all_patient.length;i++){
+						var ul = document.getElementById("patient_list");
+						var link = document.createElement('a'); // create the link
+						link.setAttribute('href', 'doctor_patient.html?patient_name='+all_patient[i].replaceAll(' ','_'));
+						var newLI = document.createElement("LI");
+						ul.appendChild(newLI);
+						newLI.innerHTML = all_patient[i];
+						link.appendChild(newLI);
+						ul.appendChild(link);
+					}
+					
+					$(add_patient_div).hide();
+					$(patient_list_div).show();
+					
+					console.log("wtf");
 					changePatientInfo(patientEdit);
 					
-					window.location="doctor_addPatient.html";
+					
 				}
 				
 			}
@@ -128,12 +165,21 @@ $(document).ready(function() {
 			
 			//TODO: disconnect from patient
 			var patientEdit = new myPatient(patient.email,patient.name,patient.age,patient.info,"false");
+			
+			$(patient_list).html("You are not connected to any patient yet!");
+			
+			$(myModal).hide();
+			$(add_patient_div).hide();
+			$(patient_list_div).show();
+			
+			
 			changePatientInfo(patientEdit);
-			window.location="doctor_addPatient.html";
+			//window.location="doctor_addPatient.html";
 		}
 	);
 		
 	if (patient_name != undefined){
+	
 		$(add_patient).hide();
 		$(save_patient).show();
 		$(patient_list_div).hide();

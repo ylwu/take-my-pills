@@ -245,7 +245,7 @@ function returnAllPatients(){
 
 
 	function changePatientInfo(newInfo) {
-		alert(newInfo.connect);
+
 		var newPatientInfo = '{"email": "'+newInfo.email+'", "name": "'+newInfo.name+'", "age": "'+newInfo.age+'", "info": "'+newInfo.info+'", "connect": "'+newInfo.connect+'"}'; // no square brackets for this one only
 
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePatient', 'input': newPatientInfo });
