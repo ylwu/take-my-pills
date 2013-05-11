@@ -33,6 +33,20 @@ function loadDrugs(){
 			});
 		}
 
+function loadHistory(){
+	$.ajax({
+  				dataType: "json",
+  				url: 'drugEventsData.json',
+  				async: false,
+  				success: function(data){
+  					m.drugsQueue.length = 0;
+  					data.forEach(function(entry){
+  						m.historyQueue.push(entry);
+  					})
+				}
+			});
+}
+
 function returnAllMessages(){
   var s;
   $.ajax({

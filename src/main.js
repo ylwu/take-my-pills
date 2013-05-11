@@ -334,10 +334,10 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			$(row).addClass('drug');
   			if (drugEvent.state == "taken"){
   				$(row).append($(document.createElement('td')).append("taken"));
-  				$(row).addClass("info");
+  				$(row).addClass("success");
   			} else {
   				$(row).append($(document.createElement('td')).append("missed"));
-  				$(row).addClass("info");
+  				$(row).addClass("error");
   			}
   			$('#historytable').append($(row));
 
@@ -403,6 +403,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
 			function showHistory(){
 				document.getElementById("history").style.display="block";
 				document.getElementById('home').style.display="none";
+				loadHistory();
 				reloadHistory();
 			}
 
