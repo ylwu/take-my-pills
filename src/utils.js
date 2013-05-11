@@ -105,10 +105,10 @@ function returnAllPatients(){
 				index=i;
 			}
 		}
-		if (index!=-1) { // if index==-1, is add not edit
+		if (index!=-1) { // if index!=-1, is EDIT
 			myJsonPills[index]=aPill;
 		}
-		else {
+		else { // is ADD
 			myJsonPills.push(aPill);
 		}
 
@@ -131,7 +131,7 @@ function returnAllPatients(){
 			}
 		}
 
-		if (index!=-1) { // if index==-1, is add, not edit
+		if (index==-1) { // is ADD
 			if (oldPillsList.length!=0) {
 				newPillsList+=', \n';
 			}
@@ -174,7 +174,7 @@ function returnAllPatients(){
 				if (k!=0) {
 					newPillsList+=', ';
 				}
-				newPillsList+='{"name": "'+oldPillsList[i].name+'", "dose": "'+oldPillsList[i].dose+'", "startdate": "'+oldPillsList[i].startdate+'", "enddate": "'+oldPillsList[i].enddate+'", "frequency": "'+oldPillsList[i].frequency+'", "times": "'+oldPillsList[i].times+'", "nextPillTime": ['+aPill.nextPillTime+'"}';
+				newPillsList+='{"name": "'+oldPillsList[i].name+'", "dose": "'+oldPillsList[i].dose+'", "startdate": "'+oldPillsList[i].startdate+'", "enddate": "'+oldPillsList[i].enddate+'", "frequency": "'+oldPillsList[i].frequency+'", "times": "'+oldPillsList[i].times+'", "nextPillTime": ['+aPill.nextPillTime+']}';
 				k+=1;
 			}
 		}

@@ -105,7 +105,7 @@
 
 		$("#cycle").show();
 		$("#specific_time").hide();
-		$("#specific_times").hide();
+		$("#selected_times").hide();
 		$("#num_dosage").hide();
 	}			
 
@@ -161,7 +161,7 @@
 					document.getElementById("cycle").style.display="block";
 					document.getElementById("num_dosage").style.display="none";
 					document.getElementById("specific_time").style.display="none";
-					document.getElementById("specific_times").style.display="none";
+					document.getElementById("selected_times").style.display="none";
 					parsedTimes=pillTimes.split(",");
 					document.getElementById("cycle_hour").value=parsedTimes[0];
 					document.getElementById("cycle_minute").value=parsedTimes[1];
@@ -171,7 +171,7 @@
 					document.getElementById("cycle").style.display="none";
 					document.getElementById("num_dosage").style.display="none";
 					document.getElementById("specific_time").style.display="block";
-document.getElementById("specific_times").style.display="block";
+					document.getElementById("selected_times").style.display="block";
 					document.getElementById("selected_times").innerHTML=pillTimes; // <p>some:time am</p> listed
 					//console.log(pillTimes);
 
@@ -181,7 +181,7 @@ document.getElementById("specific_times").style.display="block";
 					document.getElementById("cycle").style.display="none";
 					document.getElementById("num_dosage").style.display="block";
 					document.getElementById("specific_time").style.display="none";
-document.getElementById("specific_times").style.display="none";
+					document.getElementById("selected_times").style.display="none";
 					document.getElementById("num_hour").value=pillTimes;
 				}
 
@@ -424,7 +424,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
 					if ($(this).val()==0) {
 						$("#cycle").show();
 						$("#specific_time").hide();
-						$("#specific_times").hide();
+						$("#selected_times").hide();
 						$("#num_dosage").hide();
 						//document.getElementById("cycle").style.display="block";
 						//document.getElementById("specific_time").style.display="none";
@@ -433,7 +433,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
 					else if ($(this).val()==1) {
 						$("#cycle").hide();
 						$("#specific_time").show();
-						$("#specific_times").show();
+						$("#selected_times").show();
 						$("#num_dosage").hide();
 						//document.getElementById("cycle").style.display="none";
 						//document.getElementById("specific_time").style.display="block";
@@ -442,7 +442,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
 					else {
 						$("#cycle").hide();
 						$("#specific_time").hide();
-						$("#specific_times").show();
+						$("#selected_times").show();
 						$("#num_dosage").show();
 						//document.getElementById("cycle").style.display="none";
 						//document.getElementById("specific_time").style.display="none";
