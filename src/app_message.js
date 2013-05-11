@@ -26,9 +26,11 @@ $(function (){
 			}
 
 		}	
+		
 		//append the message	
 		$(conversation_table).append(code);
-
+		var objDiv = document.getElementById("message-box-size");
+		objDiv.scrollTop = objDiv.scrollHeight;
 
 	$(doctor_message_box).val("");
 
@@ -43,6 +45,8 @@ $(function (){
 			$(conversation_table).append(message);
 			$(doctor_message_box).val("");
 			$(doctor_message_box).focus;
+			var objDiv = document.getElementById("message-box-size");
+			objDiv.scrollTop = objDiv.scrollHeight;
 
 			// messaging php - Ty
 			var currentdate = new Date();
@@ -52,7 +56,7 @@ $(function (){
 					+ currentdate.getHours() + ":" 
 					+ currentdate.getMinutes() + ":"
 					+ currentdate.getSeconds();
-
+			
 			var newMsg = new myMessage("patient", datetime, newChat, "false");
 			writeMsg(newMsg);
 		}
