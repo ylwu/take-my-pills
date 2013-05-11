@@ -195,8 +195,6 @@ function missDrugEvent(DrugName, dateString, timeString){
     	entry.state = "missed";
       m.historyQueue.push(entry);
       m.displayQueue.remove(i);
-
-      //To do: Ty, write *entry* (which is a javascript object in the format of drugevent.js); you'll have to change to format according the format in missedPillsData.json
       return entry;
     };
   };
@@ -355,7 +353,6 @@ function takeDrugEvent(DrugName, dateString, timeString){
 				$('#historytable').empty();
 				for (var i=0; i<m.historyQueue.length; i++){
 					addDrugEventToHistory(m.historyQueue[i]);
-					console.log(m.historyQueue);
 				}
 
 			}
@@ -462,7 +459,8 @@ function takeDrugEvent(DrugName, dateString, timeString){
 					var drugName = e[i].parentNode.parentNode.children[0].textContent;
 					var dateString = e[i].parentNode.parentNode.children[1].innerHTML;
 					var timeString = e[i].parentNode.parentNode.children[2].innerHTML;
-					var drugEvent = missDrugEvent(drugName,dateString,timeString);
+					var missedDrugEvent = missDrugEvent(drugName,dateString,timeString);
+					writeMissedDrugEvent(missedDrugEvent);
 
 				}
   					$("input:checked").parent().parent().remove();

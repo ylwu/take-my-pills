@@ -1,9 +1,2 @@
-[
-{"dateString": "5/4/2013", "dosage": 1, "name": "Test2", "timeString": "1 : 00 am", "state": "missed"},
-{"dateString": "5/2/2013", "dosage": 1, "name": "Test2", "timeString": "1 : 00 am", "state": "taken"},
-{"dateString": "5/3/2013", "dosage": 1, "name": "Test2", "timeString": "1 : 00 am", "state": "missed"},
-{"dateString": "5/7/2013", "dosage": 2, "name": "PainKiller", "timeString": "7 : 00 am", "state": "taken"},
-{"dateString": "5/6/2013", "dosage": 2, "name": "PainKiller", "timeString": "7 : 00 am", "state": "missed"},
-{"dateString": "4/28/2013", "dosage": 2, "name": "PainKiller", "timeString": "7 : 00 am", "state": "taken"},
-{"dateString": "4/30/2013", "dosage": 2, "name": "PainKiller", "timeString": "7 : 00 am", "state": "missed"}
-]
+[ 
+{"name": "Test2", "date": "undefined", "dosage": "1", "dateString": "5/4/2013", "timeString": "1 : 00 am", "state": "missed"}, {"name": "Test2", "date": "undefined", "dosage": "1", "dateString": "5/2/2013", "timeString": "1 : 00 am", "state": "taken"}, {"name": "Test2", "date": "undefined", "dosage": "1", "dateString": "5/3/2013", "timeString": "1 : 00 am", "state": "missed"}, {"name": "PainKiller", "date": "undefined", "dosage": "2", "dateString": "5/7/2013", "timeString": "7 : 00 am", "state": "taken"}, {"name": "PainKiller", "date": "undefined", "dosage": "2", "dateString": "5/6/2013", "timeString": "7 : 00 am", "state": "missed"}, {"name": "PainKiller", "date": "undefined", "dosage": "2", "dateString": "4/28/2013", "timeString": "7 : 00 am", "state": "taken"}, {"name": "PainKiller", "date": "undefined", "dosage": "2", "dateString": "4/30/2013", "timeString": "7 : 00 am", "state": "missed"}, {"name": "PainKiller", "date": "Sat May 11 2013 07:00:00 GMT-0400 (EDT)", "dosage": "3", "dateString": "5/11/2013", "timeString": "7 : 00 am", "state": "missed"}, {"name": "Test2", "date": "Sat May 11 2013 00:00:00 GMT-0400 (EDT)", "dosage": "4", "dateString": "5/11/2013", "timeString": "Start Cycle", "state": "missed"}]

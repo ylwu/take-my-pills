@@ -35,8 +35,9 @@ function loadHistory(){
   				url: 'drugEventsData.json',
   				async: false,
   				success: function(data){
-  					m.drugsQueue.length = 0;
+  					m.historyQueue.length = 0;
   					data.forEach(function(entry){
+  						console.log(entry);
   						m.historyQueue.push(entry);
   					})
 				}
@@ -219,7 +220,7 @@ function returnAllPatients(){
 
 		for (var i=0; i<oldMissedList.length; i++) {
 			if (i!=0) {
-				newMissedList+=', ';
+				newMissedList+=',\n';
 			}
 			newMissedList+='{"name": "'+ oldMissedList[i].name+'", "date": "'+oldMissedList[i].date + '", "dosage": "'+oldMissedList[i].dosage+'", "dateString": "'+oldMissedList[i].dateString+'", "timeString": "'+oldMissedList[i].timeString+'", "state": "'+oldMissedList[i].state+'"}';
 		}
