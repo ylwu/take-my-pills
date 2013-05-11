@@ -88,6 +88,7 @@ $(document).ready(function() {
 		
 	//loadup missed event
 	var missList = returnMissedDrugs();
+	console.log(missList);
 	var missListP = [];
 	for (j=0;j<drugList.length;j++){
 		//find all missed event for this drug
@@ -197,16 +198,61 @@ $(document).ready(function() {
 			$(displayDrugName).html("Missed events for: All pills in month ");
 			for (index=0;index<drugList.length;index++){
 				for (i=0;i<missListP[index].length;i++){
-					$(drug_textarea).append("Missed "+missListP[index][i].dosage+" dosage(s) of "+missListP[index][i].name+
-												" on "+missListP[index][i].dateString+" at "+missListP[index][i].timeString+".\n");
+					if (missListP[index][i].state == "missed"){
+						$(drug_textarea).append("Missed "+missListP[index][i].dosage+" dosage(s) of "+missListP[index][i].name+
+													" on "+missListP[index][i].dateString+" at "+missListP[index][i].timeString+".\n");
+													
+						var parseDate = missListP[index][i].dateString.split("/");
+							var parseFullTime = missListP[index][i].timeString.split(" ");
+							/*var parseTime = parseFullTime[0].split(":");
+							var hour = parseInt(parseTime[0]);
+							var minute = parseInt(parseTime[1]);*/
+							var hour = parseFullTime[0];
+							var minute = parseFullTime[2];
+							if (parseFullTime[3] == "pm"){
+								hour += 12;
+							}
+							
+							//jfcalplugin.deleteAllAgendaItems("#mycal");
+							var startDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,0,0);
+							var endDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,30,0);
+			
+							jfcalplugin.addAgendaItem(
+								"#mycal",
+								missListP[index][i].name,
+								startDateObj,
+								endDateObj,
+								false,
+								{
+									Patient_name: "Amy Fox",
+									Missed_drug: missListP[index][i].name,
+									Dose: missListP[index][i].dosage
+								},
+								{
+									backgroundColor: color[index%color.length],
+									foregroundColor: "#FFFFFF"
+								}
+							);							
+						
+					}
+				}
+			}
+		}else{
+			$(displayDrugName).html("Missed events for: "+drugList[tabIndex].name+ " in month ");
+			for (i=0;i<missListP[tabIndex].length;i++){
+				if (missListP[tabIndex][i].state == "missed"){
+					$(drug_textarea).append("Missed "+missListP[tabIndex][i].dosage+" dosage(s) of "+missListP[tabIndex][i].name+
+												" on "+missListP[tabIndex][i].dateString+" at "+missListP[tabIndex][i].timeString+".\n");
 												
-					var parseDate = missListP[index][i].dateString.split("/");
-						var parseFullTime = missListP[index][i].timeString.split(" ");
-						var parseTime = parseFullTime[0].split(":");
-						var hour = parseInt(parseTime[0]);
-						var minute = parseInt(parseTime[1]);
-						if (parseTime[1] == "pm"){
-							hour += 12;
+					var parseDate = missListP[tabIndex][i].dateString.split("/");
+						var parseFullTime = missListP[tabIndex][i].timeString.split(" ");
+						/*var parseTime = parseFullTime[0].split(":");
+							var hour = parseInt(parseTime[0]);
+							var minute = parseInt(parseTime[1]);*/
+						var hour = parseFullTime[0];
+						var minute = parseFullTime[2];
+						if (parseFullTime[3] == "pm"){
+								hour += 12;
 						}
 						
 						//jfcalplugin.deleteAllAgendaItems("#mycal");
@@ -215,62 +261,22 @@ $(document).ready(function() {
 		
 						jfcalplugin.addAgendaItem(
 							"#mycal",
-							missListP[index][i].name,
+							missListP[tabIndex][i].name,
 							startDateObj,
 							endDateObj,
 							false,
 							{
 								Patient_name: "Amy Fox",
-								Missed_drug: missListP[index][i].name,
-								Dose: missListP[index][i].dosage
+								Missed_drug: missListP[tabIndex][i].name,
+								Dose: missListP[tabIndex][i].dosage
 							},
 							{
-								backgroundColor: color[index%color.length],
+								backgroundColor: color[tabIndex%color.length],
 								foregroundColor: "#FFFFFF"
 							}
 						);							
-						
 					
 				}
-			}
-		}else{
-			$(displayDrugName).html("Missed events for: "+drugList[tabIndex].name+ " in month ");
-			for (i=0;i<missListP[tabIndex].length;i++){
-				
-				$(drug_textarea).append("Missed "+missListP[tabIndex][i].dosage+" dosage(s) of "+missListP[tabIndex][i].name+
-											" on "+missListP[tabIndex][i].dateString+" at "+missListP[tabIndex][i].timeString+".\n");
-											
-				var parseDate = missListP[tabIndex][i].dateString.split("/");
-					var parseFullTime = missListP[tabIndex][i].timeString.split(" ");
-					var parseTime = parseFullTime[0].split(":");
-					var hour = parseInt(parseTime[0]);
-					var minute = parseInt(parseTime[1]);
-					if (parseTime[1] == "pm"){
-						hour += 12;
-					}
-					
-					//jfcalplugin.deleteAllAgendaItems("#mycal");
-					var startDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,0,0);
-					var endDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,30,0);
-	
-					jfcalplugin.addAgendaItem(
-						"#mycal",
-						missListP[tabIndex][i].name,
-						startDateObj,
-						endDateObj,
-						false,
-						{
-							Patient_name: "Amy Fox",
-							Missed_drug: missListP[tabIndex][i].name,
-							Dose: missListP[tabIndex][i].dosage
-						},
-						{
-							backgroundColor: color[tabIndex%color.length],
-							foregroundColor: "#FFFFFF"
-						}
-					);							
-					
-				
 			}
 		}
 	}

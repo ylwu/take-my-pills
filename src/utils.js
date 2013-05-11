@@ -60,7 +60,7 @@ function returnMissedDrugs(){
   var s;
   $.ajax({
           dataType: "json",
-          url: 'missedPillsData.json',
+          url: 'drugEventsData.json',
           async: false,
           success: function(data){
             s = data;
