@@ -71,7 +71,7 @@
 
 				var myPill=new myDrug(document.getElementById("new_drugname").value, document.getElementById("new_drugdose").value, document.getElementById("add_startdate").value, document.getElementById("add_enddate").value,  document.getElementById("add_dosefrequency").value, pillTimes);
 
-				var newList=writePill(myPill); // includes updateManagePills
+				var newList=writePill(myPill);
 
 				clear_add_new();
 				document.getElementById("add_new").style.display="none";

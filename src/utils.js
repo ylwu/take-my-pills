@@ -1,5 +1,9 @@
 var m = new Model();
 
+// global json pills queue = js global
+// write to both .json file and jsglobal
+var myJsonPills;
+
 function returnAllDrugs(){
       var t;
 			$.ajax({
@@ -93,38 +97,52 @@ function returnAllPatients(){
 
 	function writePill(aPill) {
 
-		var oldPillsList=returnAllDrugs(); // oldPillsList = list of javascript myPill *objects*
-
-		// if edit aPill:
-		var managePillsList=[]; // this is actually NOT a string!
-		for (var i=0; i<oldPillsList.length; i++) {
-			if (aPill.name!=oldPillsList[i].name) { // delete myPill
-				managePillsList.push(oldPillsList[i]);
+			// JS GLOBAL WRITE
+		// if edit aPill, must delete aPill first before writing to js global and .JSON
+		var index=-1;
+		for (var i=0; i<myJsonPills.length; i++) {
+			if (aPill.name==myJsonPills[i].name) {
+				index=i;
 			}
 		}
+		if (index!=-1) { // if index==-1, is add not edit
+			myJsonPills[index]=aPill;
+		}
+		else {
+			myJsonPills.push(aPill);
+		}
 
+
+		// .JSON WRITE (slower than read)
+		var oldPillsList=returnAllDrugs(); // returns list of javascript myPill *objects*
 		var newPillsList='['; // string list
 
 		for (var i=0; i<oldPillsList.length; i++) {
-			if (aPill.name!=oldPillsList[i].name) { // if aPill existed previously, erase old info to write new info == don't write it
-				if (i!=0) {
-					newPillsList+=', ';
-				}
+			if (i!=0) {
+				newPillsList+=', \n';
+			}
+			if (aPill.name!=oldPillsList[i].name) {
 				var stringifyPill=pillToJsonString(oldPillsList[i]);
 				newPillsList+=stringifyPill;
 			}
+			else { // edit - in-place update a pill
+				var stringifyPill=pillToJsonString(aPill);
+				newPillsList+=stringifyPill;
+			}
 		}
-		if (oldPillsList.length!=0) {
-			newPillsList+=', ';
+
+		if (index!=-1) { // if index==-1, is add, not edit
+			if (oldPillsList.length!=0) {
+				newPillsList+=', \n';
+			}
+			var stringifyPill=pillToJsonString(aPill);
+			newPillsList+=stringifyPill;
 		}
-		var stringifyPill=pillToJsonString(aPill);
-		newPillsList+=stringifyPill;
-		
+
 		newPillsList+=']';
 
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': newPillsList });
-		managePillsList.push(aPill);
-		updateManagePills(managePillsList);
+		updateManagePills(myJsonPills);
 	}
 
 
@@ -148,20 +166,23 @@ function returnAllPatients(){
 
 		// .JSON WRITE (slower than read)
 		var oldPillsList=returnAllDrugs();
-
 		var newPillsList='[';
+		var k=0;
 
 		for (var i=0; i<oldPillsList.length; i++) {
 			if (aPill.name!=oldPillsList[i].name) {
-				if (i!=0) {
+				if (k!=0) {
 					newPillsList+=', ';
 				}
 				newPillsList+='{"name": "'+oldPillsList[i].name+'", "dose": "'+oldPillsList[i].dose+'", "startdate": "'+oldPillsList[i].startdate+'", "enddate": "'+oldPillsList[i].enddate+'", "frequency": "'+oldPillsList[i].frequency+'", "times": "'+oldPillsList[i].times+'", "lasttake": "'+oldPillsList[i].lasttake+'"}';
+				k+=1;
 			}
 		}
 		newPillsList+=']';
 		
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writePill', 'input': newPillsList } );
+		
+		updateManagePills(myJsonPills); // interesting. this is not necessary because of deletePill?
 
 	}
 
@@ -174,7 +195,7 @@ function returnAllPatients(){
 
 		for (var i=0; i<oldMsgsList.length; i++) {
 			if (i!=0) {
-				newMsgsList+=', ';
+				newMsgsList+=', \n';
 			}
 			newMsgsList+='{"from": "'+oldMsgsList[i].from+'", "time": "'+oldMsgsList[i].time+'", "message": "'+oldMsgsList[i].message+'", "read": "'+oldMsgsList[i].read+'"}';
 		}
@@ -201,7 +222,7 @@ function returnAllPatients(){
 		var newMsgsList='[';
 		for (var i=0; i<updatedMsgsList.length; i++) {
 			if (i!=0) {
-				newMsgsList+=', ';
+				newMsgsList+=', \n';
 			}
 			newMsgsList+='{"from": "'+updatedMsgsList[i].from+'", "time": "'+updatedMsgsList[i].time+'", "message": "'+updatedMsgsList[i].message+'", "read": "'+updatedMsgsList[i].read+'"}';
 		}
