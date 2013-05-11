@@ -29,6 +29,20 @@ function loadDrugs(){
 			});
 		}
 
+function loadHistory(){
+	$.ajax({
+  				dataType: "json",
+  				url: 'drugEventsData.json',
+  				async: false,
+  				success: function(data){
+  					m.drugsQueue.length = 0;
+  					data.forEach(function(entry){
+  						m.historyQueue.push(entry);
+  					})
+				}
+			});
+}
+
 function returnAllMessages(){
   var s;
   $.ajax({
@@ -115,6 +129,24 @@ function returnAllPatients(){
 
 
 	function unwritePill(aPill) {
+
+		// JS GLOBAL WRITE
+		// if edit aPill, must delete aPill first before writing to js global and .JSON
+		var index=-1;
+		for (var i=0; i<myJsonPills.length; i++) {
+			if (aPill.name==myJsonPills[i].name) {
+				index=i;
+			}
+		}
+		if (index!=-1) { // if index==-1, is add not edit
+			myJsonPills.splice(index, 1); // SPLICE HERE
+		}
+		else {
+			alert(aPill.name + " does not exist? This should not happen..");
+		}
+
+
+		// .JSON WRITE (slower than read)
 		var oldPillsList=returnAllDrugs();
 
 		var newPillsList='[';
@@ -183,13 +215,13 @@ function returnAllPatients(){
 		var oldMissedList=returnMissedDrugs();
 		oldMissedList.push(missedEvent);
 
-		var newMissedList='[';
+		var newMissedList='[ \n';
 
 		for (var i=0; i<oldMsgsList.length; i++) {
 			if (i!=0) {
 				newMissedList+=', ';
 			}
-			newMissedList+='{"name": "'+oldMissedList[i].name+'", "date": "'+oldMissedList[i].date+'", "dosage": "'+oldMissedList[i].dosage+'", "dateString": "'+oldMissedList[i].dateString+'", "timeString": "'+oldMissedList[i].timeString+'", "state": "missed"}';
+			newMissedList+='{"dateString": "'+ oldMissedList[i].dateString+'", "dosage": "'+oldMissedList[i].dosage + '", "name": "'+oldMissedList[i].name+'", "timeString": "'+oldMissedList[i].timeString+'"}';
 		}
 		newMissedList+=']';
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMissedDrugEvent', 'input': newMissedList });

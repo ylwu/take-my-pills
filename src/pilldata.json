@@ -1,3 +1,3 @@
-[{"name": "Jason1", "dose": "3", "startdate": "05/01/2013", "enddate": "05/11/2013", "frequency": "2", "times": "3", "nextPillTime": [-1,-1]}, 
+[{"name": "Jason1", "dose": "3", "startdate": "05/01/2013", "enddate": "05/15/2013", "frequency": "2", "times": "3", "nextPillTime": [-1,-1]}, 
 {"name": "Test2", "dose": "4", "startdate": "05/01/2013", "enddate": "05/31/2013", "frequency": "0", "times": "5,0", "nextPillTime": [-1,-1]}, 
 {"name": "PainKiller", "dose": "3", "startdate": "05/03/2013", "enddate": "05/27/2013", "frequency": "1", "times": "<p>7 : 00 am</p>", "nextPillTime": [-1,-1]}]

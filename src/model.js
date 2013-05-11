@@ -136,6 +136,7 @@ var Model = function(){
 		for (var i=0; i<this.drugsQueue.length; i++){
 			this.initDrug(this.drugsQueue[i]);
 	}
+	console.log(this.displayQueue);
 	}
 
 	this.moreDrugs= function(){

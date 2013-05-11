@@ -131,6 +131,7 @@
 			
 				document.getElementById("add_new").style.display="block";
 				document.getElementById("edit_main").style.display="none";
+				$(selected_times).html("");
 				document.getElementById("edit_title").innerHTML="Edit " + ele.value;
 
 				var pillName = pillSelected.name;
@@ -147,17 +148,28 @@
 				document.getElementById("add_dosefrequency").value=pillFreq;
 
 				if (pillFreq==0) { // cycle = two numbers
+					$(selected_times).hide();
+					document.getElementById("cycle").style.display="block";
+					document.getElementById("num_dosage").style.display="none";
+					document.getElementById("specific_time").style.display="none";
 					parsedTimes=pillTimes.split(",");
 					document.getElementById("cycle_hour").value=parsedTimes[0];
 					document.getElementById("cycle_minute").value=parsedTimes[1];
 				}
 				else if (pillFreq==1) { // specific time = innerHTML type string
+					$(selected_times).show();
+					document.getElementById("cycle").style.display="none";
+					document.getElementById("num_dosage").style.display="none";
+					document.getElementById("specific_time").style.display="block";
 					document.getElementById("selected_times").innerHTML=pillTimes; // <p>some:time am</p> listed
 					//console.log(pillTimes);
 
 				}
 				else { // number of doses per day = one number (1-10)
-
+					$(selected_times).hide();
+					document.getElementById("cycle").style.display="none";
+					document.getElementById("num_dosage").style.display="block";
+					document.getElementById("specific_time").style.display="none";
 					document.getElementById("num_hour").value=pillTimes;
 				}
 
@@ -263,7 +275,9 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
   			$(row).addClass('drug');
   			if (drugEvent.state == "future"){
-  				$(row).addClass("success");
+
+  				$(row).addClass("untaken_med warning");
+
   			} else {
   				$(row).addClass("error");
   			}
@@ -349,6 +363,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
 			function showHistory(){
 				document.getElementById("history").style.display="block";
 				document.getElementById('home').style.display="none";
+				loadHistory();
 				reloadHistory();
 			}
 
