@@ -18,6 +18,7 @@ body {
 	
 }
 
+
 .login-center {
 
     display:inline-block;
@@ -148,12 +149,33 @@ body {
 
 .halfcenter{
 	width:30%;
+	min-width:300px !important;
 }
 
 .patient{
 
 	font-size: 20px;
 
+}
+
+.minLengthButton{
+	min-width:180px !important;
+}
+
+.minLengthCalendar{
+	min-width:794px !important;
+}
+
+.minLengthForm{
+	min-width:600px !important;
+}
+
+.minLengthLoginForm{
+	min-width:243px !important;
+}
+
+.minLengthNewAccForm{
+	min-width:395px !important;
 }
 
 .bar{
@@ -240,8 +262,10 @@ body {
 
 .patient-tabs{
 	height:560px;
+	min-width: 150px !important;
 
 }
+
 
 .messages-screen {
 
@@ -275,7 +299,13 @@ body {
     border-radius: 5px 0px 0px 5px !important;
 }
 
+.nav-inner{
+	min-width: 950px !important;
+}
 
+.navbar{
+	min-width: 950px !important;
+}
 
 .nav-texts{
 	line-height:40px !important;

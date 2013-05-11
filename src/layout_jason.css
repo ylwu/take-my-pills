@@ -48,6 +48,7 @@
 	font-family:"Akzidenz Grotesk";
 	font-size:30px;
 	color:#ffffff;
+	margin-left:20px;
 }
 
 .btn-primary-m {
@@ -173,6 +174,12 @@ body{
 	font-family: "Akzidenz Grotesk";
 }
 
+.add_new_maxHeight{
+	max-height:350px !important;
+	min-height:350px !important;
+	overflow-y:auto;
+	overflow-x:hidden;
+}
 
 #add_new_pills_btn{
 	position:relative;
@@ -220,4 +227,6 @@ body{
 
 #app_sign_out_btn {
 	font-family: Akzidenz Grotesk;
+	margin-right:5px;
+	margin-top:5px;
 }

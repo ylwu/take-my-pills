@@ -56,14 +56,14 @@
 	
 		<div id="patient_body">
 			<div class = "row-fluid">
-				<span class="patient span2">Patient <span id="patientname"></span></span>
-				<button class="btn span2" id="edit_patient">View/Edit Patient Info</button>
-				<button class="btn span2" id="edit_drug">Manage Patient Pills</button>
+				<span class="patient span2 minLengthButton">Patient <span id="patientname"></span></span>
+				<button class="btn span2 minLengthButton" id="edit_patient">View/Edit Patient Info</button>
+				<button class="btn span2 minLengthButton" id="edit_drug">Manage Patient Pills</button>
 			</div>
 			<hr class="bar">
 		
 			<div class = "row-fluid main-container fullheight">
-				<div class="tabbable tabs-left span2">
+				<div class="tabbable tabs-left span2 minLengthButton">
 					<ul class="nav nav-pills nav-stacked" id = "drugTab">
 						<li class="active"><a data-toggle="tab" onclick=global.showHistoryInfo(-1) href="#">All Pills</a></li>
 						
@@ -71,8 +71,8 @@
 
 				</div>
 				
-				<div class = "span7">
-					<div style="margin-bottom:20px;  vertical-align:middle; height:30px;"> 
+				<div class = "span7 minLengthCalendar">
+					<div style="margin-bottom:20px;  vertical-align:middle; height:30px;" class = "minLengthCalendar"> 
 						<button id="BtnPreviousMonth" class="btn" style="float:left;">Previous Month</button>
 						<span style="height:100%; vertical-align:middle; margin-left:60px; margin-right:40px; display:inline-block;">
 							<span id="displayDrugName" style="font-size:20px; "></span>
