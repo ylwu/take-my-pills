@@ -75,6 +75,9 @@ $(document).ready(function() {
 			$(send_chat).click(function() {
 				var newChat = $(chat_text).val();
 				if (newChat.replaceAll(" ","").length !=0){
+					newChat = newChat.replaceAll("\n"," ");
+					newChat = newChat.replaceAll("\""," ");
+					newChat = newChat.replaceAll("'"," ");
 					var currentdate = new Date(); 
 					var datetime = (currentdate.getMonth()+1)  + "/" 
 						+ currentdate.getDate() + "/"

@@ -22,6 +22,7 @@ $(document).ready(function() {
 		all_patient.push(patient.name);
 		//load chat, check for new messages		
 		var messages = returnAllMessages();
+
 		var counter = 0;
 		for (i=0;i<messages.length;i++){
 			if (messages[i].read != "true" && messages[i].from =="patient"){

@@ -3,5 +3,5 @@
 	{"from": "doctor", "time": "4/21/2013 9:00:00", "message": "Please make stop taking it as soon as possible and schedule an appointment with me.", "read": "true"},
 	{"from": "patient", "time": "4/23/2013 17:00:00", "message": "Should I stop other medications also?", "read": "true"},
 	{"from": "doctor", "time": "4/29/2013 10:00:00", "message": "Yes, please stop all other medication except your fish oil pills.", "read": "true"},
-	{"from": "patient", "time": "4/30/2013 17:00:00", "message": "Done", "read": "false"}
+	{"from": "patient", "time": "4/30/2013 17:00:00", "message": "Done", "read": "true"}
 ]
