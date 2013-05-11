@@ -37,6 +37,9 @@
 
 		var selected=document.getElementById("selected_times");
 		selected.appendChild(p);
+		
+		var objDiv = document.getElementById("add_new");
+		objDiv.scrollTop = objDiv.scrollHeight;
 
 	}
 
