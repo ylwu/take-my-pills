@@ -22,7 +22,7 @@
 		        newButton.setAttribute("value", myPillsList[i].name);
 		        newButton.setAttribute("onclick", "editPill(this);");
 		        newButton.setAttribute("class", "btn");
-			newButton.setAttribute("style", "width:50%; font-family: Akzidenz Grotesk;");
+
 		        
 		        pdiv.appendChild(newButton);
 		        pdiv.appendChild(del);
@@ -51,7 +51,6 @@
 		document.getElementById("add_startdate").value="";
 		document.getElementById("add_enddate").value="";
 		document.getElementById("selected_times").innerHTML="";
-		document.getElementById("add_dosefrequency").value=0;
 	}
 
 	function save_new() {
@@ -76,7 +75,6 @@
 				clear_add_new();
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_main").style.display="block";
-				$("#message_selectDoctors").hide();
 				document.getElementById("edit_title").innerHTML="Edit Your Pills";
 			}
 			
@@ -86,7 +84,8 @@
 		if (noSave==true) {
 			clear_add_new();
 
-			updateManagePills(myJsonPills);
+			var myPillsList=returnAllDrugs();
+			updateManagePills(myPillsList);
 			document.getElementById("add_new").style.display="none";
 			document.getElementById("edit_main").style.display="block";
 			document.getElementById("edit_title").innerHTML="Edit Your Pills";
@@ -99,10 +98,6 @@
 		document.getElementById("edit_main").style.display="none";
 		document.getElementById("add_new").style.display="block";
 		document.getElementById("edit_title").innerHTML="Add New Pill";
-
-		$("#cycle").show();
-		$("#specific_time").hide();
-		$("#num_dosage").hide();
 	}			
 
 
@@ -127,10 +122,10 @@
 				//myPill=selectedPill[0];
 
 				var pillSelected;
-				//var myPillsList=returnAllDrugs();
-				for (var i=0; i<myJsonPills.length; i++) {
-					if (ele.value==myJsonPills[i].name) {
-						pillSelected=myJsonPills[i]; // finds the selected pill
+				var myPillsList=returnAllDrugs();
+				for (var i=0; i<myPillsList.length; i++) {
+					if (ele.value==myPillsList[i].name) {
+						pillSelected=myPillsList[i]; // finds the selected pill
 					}
 				}
 			
@@ -169,6 +164,9 @@
 			}
 
 
+
+
+
 	//Array Remove - By John Resig (MIT Licensed)
 Array.prototype.remove = function(from, to) {
   var rest = this.slice((to || from) + 1 || this.length);
@@ -204,50 +202,32 @@ function takeDrugEvent(DrugName, dateString, timeString){
 
 	$(document).ready(function() {
 
-		myJsonPills=returnAllDrugs();
+			
+
+
+
 			
   		$('#EditPills').click(function(evt){
-			updateManagePills(myJsonPills);
+			var myPillsList=returnAllDrugs();
+			updateManagePills(myPillsList);
   			document.getElementById("home").style.display="none";
   			document.getElementById("add_new").style.display="none";
-
-			document.getElementById("history").style.display="none";
-
 			document.getElementById("edit_main").style.display="block";
 			document.getElementById("edit_title").innerHTML="Edit Your Pills";
-			$("#message_selectDoctors").hide();
-			$("#message-main").hide();
   		})
 
   		$('#history-header').click(function(evt){
-			if (document.getElementById("history-header").innerHTML=="See History") {
-				document.getElementById("history-header").innerHTML="See Present";
-				document.getElementById("history-header").style.fontSize="13.5px";
-
-				// block Edit stuff from under app
-				document.getElementById("edit_main").style.display="none";
-				document.getElementById("add_new").style.display="none";
-				document.getElementById("edit_title").innerHTML="";
-				$("#message_selectDoctors").hide();
-				$("#message-main").hide();
-
-				showHistory();
-			}
-			else {
-				document.getElementById("history-header").innerHTML="See History";
-				document.getElementById("history-header").style.fontSize="13.5px";
-  				redirectToHome();
-			}
-  		});
+  			showHistory();
+  		})
 
 
   		$('#present-header').click(function(evt){
   			redirectToHome();
-  		});
+  		})
 
   		$('#home_btn').click( function(evt){
   			redirectToHome();
-  		});
+  		})
 
   		$("#add").click(function(evt){
 
@@ -260,15 +240,9 @@ function takeDrugEvent(DrugName, dateString, timeString){
   		});
 
   		$("#contact_doctor_btn").click(function()    {
-          clear_add_new();
-          redirectToMessage();
-          $("#message-main").hide();
+            		clear_add_new();
+          window.location="patient_message_app.html";
         });
-
-        $('#doctor_div').click(function()    {
-            $("#message_selectDoctors").hide();
-            $("#message-main").show();
-        });  
 
         $("#app_sign_out_btn").click(function()    {
             		clear_add_new();
@@ -286,12 +260,12 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			$(row).append($(document.createElement('td')).append(drugEvent.dateString));
   			$(row).append($(document.createElement('td')).append(drugEvent.timeString));
   			$(row).append($(document.createElement('td')).append(drugEvent.dosage + "pills"));
-  			//$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
+  			$(row).append($(document.createElement('td')).append($(document.createElement('button')).addClass('btn').addClass('btn-info').append('info')));
   			$(row).addClass('drug');
   			if (drugEvent.state == "future"){
-  				$(row).addClass("untaken_med ty-success");
+  				$(row).addClass("success");
   			} else {
-  				$(row).addClass("missed_med ty-error"); // might have to remove success and error class for ty-version
+  				$(row).addClass("error");
   			}
   			$('#drugtable').append($(row));
 
@@ -299,7 +273,6 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			   if ($("input:checked").length != 0){
   			$("#actionbar").show();
   			$("#morepills").hide();
-  			$(row).toggleClass('back-red');
   			} else {
   				$("#actionbar").hide();
   				$("#morepills").show();
@@ -322,10 +295,10 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			$(row).addClass('drug');
   			if (drugEvent.state == "taken"){
   				$(row).append($(document.createElement('td')).append("taken"));
-  				$(row).addClass("info");
+  				$(row).addClass("success");
   			} else {
   				$(row).append($(document.createElement('td')).append("missed"));
-  				$(row).addClass("info");
+  				$(row).addClass("error");
   			}
   			$('#historytable').append($(row));
 
@@ -355,21 +328,9 @@ function takeDrugEvent(DrugName, dateString, timeString){
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_title").innerHTML="";
 				document.getElementById('home').style.display='block';
-				$("#message_selectDoctors").hide();
-				$("#message-main").hide();
 				loadDrugs();
 				//m.initDrugs();
 				reloadHome();
-			}
-
-			function redirectToMessage() {
-				document.getElementById("history").style.display = "none";
-				document.getElementById("edit_main").style.display="none";
-				document.getElementById("add_new").style.display="none";
-				document.getElementById("edit_title").innerHTML="";
-				document.getElementById('home').style.display='none';
-				$("#message_selectDoctors").show();
-				$("#message-main").hide();
 			}
 
 
@@ -380,9 +341,6 @@ function takeDrugEvent(DrugName, dateString, timeString){
 				document.getElementById("add_new").style.display="none";
 				document.getElementById("edit_title").innerHTML="";
 				document.getElementById('home').style.display='block';
-				$("#message_selectDoctors").hide();
-				$("#message-main").hide();
-
 				loadDrugs();
 				m.initDrugs();
 				reloadHome();

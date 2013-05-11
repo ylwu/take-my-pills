@@ -19,8 +19,3 @@
                 window.location="patient_log_in.html";
         });      
    });
-
-var objDiv = document.getElementById("conversation_table");
-                objDiv.scrollTop = objDiv.scrollHeight;
-
-   

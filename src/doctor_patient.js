@@ -86,59 +86,53 @@ $(document).ready(function() {
 		drugNameList.push(drugList[i].name);
 	}
 		
+	//loadup missed event
+	var missList = returnMissedDrugs();
+	var missListP = [];
+	for (j=0;j<drugList.length;j++){
+		//find all missed event for this drug
+		var list = [];
+		for (i=0;i<missList.length;i++){
+			
+			if (missList[i].name == drugNameList[j]){
+				list.push(missList[i]);
+			}
+		}
+		missListP.push(list);
+	}	
+	//console.log(missListP);
 	
-
+	//console.log(missList);
 	
 	//list of all patient
-	//load patient info from json
-	var patient = returnAllPatients();
-	
-	
-	//patient lists
-	var all_patient = [];
-	all_patient.push(patient.name);
-
+	var all_patient = ["Amy Fox"];
 	
 	//patient info from url
 	var patient_name= $.getUrlVar("patient_name");
 	patient_name = patient_name.replaceAll("_"," ");
 	
-	console.log(all_patient);
-	console.log(patient_name);
 	if (all_patient.indexOf(patient_name) != -1){
 
 		$(patientname).html(patient_name);
 		
-		$("#edit_patient").click(function()	{
+		$(edit_patient).click(function()	{
 			patient_name = patient_name.replaceAll(" ","_");
 			window.location="doctor_addPatient.html?patient_name="+patient_name;
 			}
 		
 		);
 		
-		$("#edit_drug").click(function()	{
+		$(edit_drug).click(function()	{
 				patient_name = patient_name.replaceAll(" ","_");
 				window.location="doctor_addDrug.html?patient_name="+patient_name;
 			}
 		
 		);
 		
-		//loadup missed event
-		var missList = returnMissedDrugs();
 		
-		var missListP = [];
-		for (j=0;j<drugList.length;j++){
-			//find all missed event for this drug
-			var list = [];
-			for (i=0;i<missList.length;i++){
-				
-				if (missList[i].name == drugNameList[j]){
-					list.push(missList[i]);
-				}
-			}
-			missListP.push(list);
-		}	
-	
+	}else{ // patient doesnt exist
+		$(patient_body).html("Given patient "+patient_name+" doesn't exist");
+	}
 	
 	/**
 	 * Called when user clicks and agenda item
@@ -192,7 +186,7 @@ $(document).ready(function() {
 	
 	global.showHistoryInfo=function(tabIndex){ 
 		jfcalplugin.deleteAllAgendaItems("#mycal");
-		$(drug_textarea).html("Missed pill history summary:\n\n");
+		$(drug_textarea).html("Missed drug history summary:\n\n");
 		var calDate = jfcalplugin.getCurrentDate("#mycal"); // returns Date object
 		var cyear = calDate.getFullYear();
 		// Date month 0-based (0=January)
@@ -283,9 +277,6 @@ $(document).ready(function() {
 	
 	global.showHistoryInfo(-1);
 	
-	}else{ // patient doesnt exist
-		$(patient_body).html("Given patient "+patient_name+" doesn't exist");
-	}
 	
 
 });

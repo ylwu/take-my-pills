@@ -6,8 +6,8 @@ $(document).ready(function() {
 	
 	
 	$(login).click(function() {
-		var email = $("#login_email").val();
-		var pw = $("#login_pw").val();
+		var email = $(login_email).val();
+		var pw = $(login_pw).val();
 		
 		if (email=="" || pw==""){ //check for existing acc
 			$(message).html("Cannot have empty account email or password");

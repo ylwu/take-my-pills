@@ -64,8 +64,6 @@ $(document).ready(function() {
 				
 			
 		}
-		var objDiv = document.getElementById("chat_history");
-		objDiv.scrollTop = objDiv.scrollHeight;
 	
 	
 	
