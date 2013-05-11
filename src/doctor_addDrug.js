@@ -32,7 +32,13 @@ var global={};
 $(document).ready(function() {
 
 	//list of all patient
-	var all_patient = ["Amy Fox"];
+	//load patient info from json
+	var patient = returnAllPatients();
+	
+	
+	//patient lists
+	var all_patient = [];
+	all_patient.push(patient.name);
 	
 	//patient info from url
 	var patient_name= $.getUrlVar("patient_name");
@@ -44,7 +50,12 @@ $(document).ready(function() {
 
 		$(patientname).html(patient_name);
 
-
+		$("#go_to_patient").click(function()	{
+			patient_name = patient_name.replaceAll(" ","_");
+			window.location="doctor_patient.html?patient_name="+patient_name;
+			}
+		
+		);
 	
 
 	
@@ -55,14 +66,16 @@ $(document).ready(function() {
 		
 		//console.log(drugList);		
 		
+		//myJsonPills=returnAllDrugs();
+		
 		//loadup drugTab
 		for (i=0;i<drugList.length;i++){
 			$(drugTab).append("<li ><a data-toggle='tab' href='#' onclick=global.editDrugTab("+i+") >"+drugList[i].name+"</a></li>");
 			drugNameList.push(drugList[i].name);
 		}
 		
-		$( "#add_startdate").datepicker();
-		$( "#add_enddate" ).datepicker();
+		$("#add_startdate").datepicker();
+		$("#add_enddate" ).datepicker();
 		
 		//clear all fields, set to add drug tab
 		addDrugTab()
@@ -168,7 +181,7 @@ $(document).ready(function() {
 			
 			var drug = drugList[index];
 			
-			$(legend_name).html("Edit Drug");
+			$(legend_name).html("Edit Pill");
 			$(new_drugname).val(drug.name);
 			$(new_drugname).attr("disabled",true); //disable name change to make things easier
 			$(dose).val(drug.dose);
@@ -215,8 +228,8 @@ $(document).ready(function() {
 		global.deleteDrug=function(index){ //delete drug
 		
 			var pill=drugList[index];
-			//TODO: delete in json file
-			unwritePill(pill);
+			
+			
 			
 			var name=drugNameList[index];
 			drugNameList.splice(index, 1);
@@ -224,7 +237,7 @@ $(document).ready(function() {
 			
 			//loadup drugTab
 			$(drugTab).html("");
-			$(drugTab).append("<li class='active' id='addTab'><a data-toggle='tab'  href='#' onclick=addDrugTab() >Add New Drug</a></li><hr>");
+			$(drugTab).append("<li class='active' id='addTab'><a data-toggle='tab'  href='#' onclick=addDrugTab() >Add New Pill</a></li><hr>");
 			for (i=0;i<drugList.length;i++){
 				$(drugTab).append("<li ><a data-toggle='tab' href='#' onclick=global.editDrugTab("+i+") >"+drugList[i].name+"</a></li>");
 				drugNameList.push(drugList[i].name);
@@ -234,7 +247,8 @@ $(document).ready(function() {
 			addDrugTab();
 			$(top_message).html("You have deleted: "+name);
 			
-			
+			//TODO: delete in json file
+			unwritePill(pill);
 		}
 
 		
@@ -264,7 +278,7 @@ $(document).ready(function() {
 		$(am_pm).val("am");
 		$(num_hour).val("1");
 		
-		$(legend_name).html("Add New Drug");
+		$(legend_name).html("Add New Pill");
 		
 		$(add_dosefrequency).val(0);
 		document.getElementById("cycle").style.display="block";
