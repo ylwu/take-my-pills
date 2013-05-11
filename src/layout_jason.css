@@ -13,17 +13,22 @@
 }
 
 #drugs{
-	overflow: scroll;
+	overflow-y: auto;
+	overflow-x: hidden;
 	height: 330px;
 	background-color: #ffffff;
 }
 
 #olddrugs{
-	overflow: scroll;
+	overflow-y: auto;
+	overflow-x: hidden;
 	background-color: #ffffff;
 	height: 390px;
 }
 
+.checkbox{
+	margin-right:10px !important;
+}
 #actionbar{
 	display: none;
 }
@@ -67,7 +72,7 @@
 .doctor-btn{
 	background-color:#86F6F6;
 	height:100px;
-
+	cursor: pointer;
 	border-width:1px;
     border-style:solid;
     border-color:#027979;
@@ -120,7 +125,8 @@
 
 #message-box-size{
 	height: 310px;
-	overflow:scroll;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 #main-page{

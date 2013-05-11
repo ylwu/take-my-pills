@@ -3,16 +3,16 @@ String.prototype.replaceAll = function(str1, str2, ignore)
 {
    return this.replace(new RegExp(str1.replace(/([\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, function(c){return "\\" + c;}), "g"+(ignore?"i":"")), str2);
 };
-$(function (){
+$(document).ready(function (){
 
-		var messages = returnAllMessages();
+	var messages = returnAllMessages();
 	
 		var code = "";
 		for (var i=0;i<messages.length;i++){
 			var msgObj = messages[i];
 			
 			if (msgObj.from == "patient"){ //message from patient (right)
-				code += '<tr class="patient-message success"><td><div><img src="patient.jpg" alt="Doctor" width="40" height="40"></div><div><span class="conversation-text">"' + msgObj.message + '</span></div></td></tr>';
+				code += '<tr class="patient-message success"><td><div><img src="patient.jpg" alt="Doctor" width="40" height="40"></div><div><span class="conversation-text">' + msgObj.message + '</span></div></td></tr>';
 			}
 			else{ // message from doctor (left)
 				code += '<tr><td class="doctor-message"><div><img src="doctor.jpg" alt="Doctor" width="40" height="40"></div><div><span>';	
