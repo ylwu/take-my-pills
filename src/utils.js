@@ -217,11 +217,11 @@ function returnAllPatients(){
 
 		var newMissedList='[ \n';
 
-		for (var i=0; i<oldMsgsList.length; i++) {
+		for (var i=0; i<oldMissedList.length; i++) {
 			if (i!=0) {
 				newMissedList+=', ';
 			}
-			newMissedList+='{"dateString": "'+ oldMissedList[i].dateString+'", "dosage": "'+oldMissedList[i].dosage + '", "name": "'+oldMissedList[i].name+'", "timeString": "'+oldMissedList[i].timeString+'"}';
+			newMissedList+='{"name": "'+ oldMissedList[i].name+'", "date": "'+oldMissedList[i].date + '", "dosage": "'+oldMissedList[i].dosage+'", "dateString": "'+oldMissedList[i].dateString+'", "timeString": "'+oldMissedList[i].timeString+'", "state": "'+oldMissedList[i].state+'"}';
 		}
 		newMissedList+=']';
 		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMissedDrugEvent', 'input': newMissedList });
