@@ -508,7 +508,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
 				}
   				$("input:checked").parent().parent().remove();
   				$("#actionbar").hide();
-  				$("#morepills").bshow();
+  				$("#morepills").show();
 
   				reloadHome();
   				});
