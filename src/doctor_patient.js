@@ -88,7 +88,7 @@ $(document).ready(function() {
 		
 	//loadup missed event
 	var missList = returnMissedDrugs();
-	console.log(missList);
+	//console.log(missList);
 	var missListP = [];
 	for (j=0;j<drugList.length;j++){
 		//find all missed event for this drug
@@ -194,6 +194,8 @@ $(document).ready(function() {
 		var cmonth = calDate.getMonth();
 		$(displayDrugMonth).html((cmonth+1)+"/"+cyear);
 		
+		var startDateObj;
+		var endDateObj;
 		if (tabIndex == -1){ // clicked "All" tab
 			$(displayDrugName).html("Missed events for: All pills in month ");
 			for (index=0;index<drugList.length;index++){
@@ -202,21 +204,22 @@ $(document).ready(function() {
 						$(drug_textarea).append("Missed "+missListP[index][i].dosage+" dosage(s) of "+missListP[index][i].name+
 													" on "+missListP[index][i].dateString+" at "+missListP[index][i].timeString+".\n");
 													
-						var parseDate = missListP[index][i].dateString.split("/");
+							var parseDate = missListP[index][i].dateString.split("/");
 							var parseFullTime = missListP[index][i].timeString.split(" ");
 							/*var parseTime = parseFullTime[0].split(":");
 							var hour = parseInt(parseTime[0]);
 							var minute = parseInt(parseTime[1]);*/
-							var hour = parseFullTime[0];
-							var minute = parseFullTime[2];
+							var hour = parseInt(parseFullTime[0]);
+							var minute = parseInt(parseFullTime[2]);
 							if (parseFullTime[3] == "pm"){
 								hour += 12;
 							}
 							
-							//jfcalplugin.deleteAllAgendaItems("#mycal");
-							var startDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,0,0);
-							var endDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,30,0);
-			
+							
+							startDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,0,0);
+							endDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,30,0);
+							
+
 							jfcalplugin.addAgendaItem(
 								"#mycal",
 								missListP[index][i].name,
@@ -249,15 +252,15 @@ $(document).ready(function() {
 						/*var parseTime = parseFullTime[0].split(":");
 							var hour = parseInt(parseTime[0]);
 							var minute = parseInt(parseTime[1]);*/
-						var hour = parseFullTime[0];
-						var minute = parseFullTime[2];
+						var hour = parseInt(parseFullTime[0]);
+							var minute = parseInt(parseFullTime[2]);
 						if (parseFullTime[3] == "pm"){
 								hour += 12;
 						}
 						
 						//jfcalplugin.deleteAllAgendaItems("#mycal");
-						var startDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,0,0);
-						var endDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,30,0);
+						startDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,0,0);
+						endDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,30,0);
 		
 						jfcalplugin.addAgendaItem(
 							"#mycal",
