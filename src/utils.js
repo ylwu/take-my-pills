@@ -33,7 +33,7 @@ function loadDrugs(){
 			});
 		}
 
-function loadHistory(){
+function initHistory(){
 	$.ajax({
   				dataType: "json",
   				url: 'drugEventsData.json',
@@ -41,8 +41,12 @@ function loadHistory(){
   				success: function(data){
   					m.historyQueue.length = 0;
   					data.forEach(function(entry){
-  						console.log(entry);
+  						entry.date = new Date(entry.date);
   						m.historyQueue.push(entry);
+  						m.historyQueue.sort(function(a,b)
+							{
+								return (b.date - a.date);
+							});
   					})
 				}
 			});
@@ -53,6 +57,19 @@ function returnAllMessages(){
   $.ajax({
           dataType: "json",
           url: 'messageData.json',
+          async: false,
+          success: function(data){
+            s = data;
+        }
+  });
+  return s;
+}
+
+function returnDrugEvents(){
+  var s;
+  $.ajax({
+          dataType: "json",
+          url: 'drugEventsData.json',
           async: false,
           success: function(data){
             s = data;
@@ -232,21 +249,20 @@ function returnAllPatients(){
 		
 	}
 
+	function writeDrugEvent(event) {
+		var oldEventsList=returnDrugEvents();
+		oldEventsList.push(event);
 
-	function writeMissedDrugEvent(missedEvent) {
-		var oldMissedList=returnMissedDrugs();
-		oldMissedList.push(missedEvent);
+		var newEventsList='[ \n';
 
-		var newMissedList='[ \n';
-
-		for (var i=0; i<oldMissedList.length; i++) {
+		for (var i=0; i<oldEventsList.length; i++) {
 			if (i!=0) {
-				newMissedList+=',\n';
+				newEventsList+=',\n';
 			}
-			newMissedList+='{"name": "'+ oldMissedList[i].name+'", "date": "'+oldMissedList[i].date + '", "dosage": "'+oldMissedList[i].dosage+'", "dateString": "'+oldMissedList[i].dateString+'", "timeString": "'+oldMissedList[i].timeString+'", "state": "'+oldMissedList[i].state+'"}';
+			newEventsList+='{"name": "'+ oldEventsList[i].name+'", "date": "'+oldEventsList[i].date + '", "dosage": "'+oldEventsList[i].dosage+'", "dateString": "'+oldEventsList[i].dateString+'", "timeString": "'+oldEventsList[i].timeString+'", "state": "'+oldEventsList[i].state+'"}';
 		}
-		newMissedList+=']';
-		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMissedDrugEvent', 'input': newMissedList });
+		newEventsList+=']';
+		$.post('/take-my-pills/src/writeToJson.php', { 'function': 'writeMissedDrugEvent', 'input': newEventsList });
 
 	}
 
