@@ -106,6 +106,7 @@ $(document).ready(function() {
 	//console.log(missList);
 	
 	//list of all patient
+	//list of all patient
 	//load patient info from json
 	var patient = returnAllPatients();
 	
@@ -212,19 +213,31 @@ $(document).ready(function() {
 													
 							var parseDate = missListP[index][i].dateString.split("/");
 							var parseFullTime = missListP[index][i].timeString.split(" ");
+							
+							var hour;
+							var minute;
 							if (parseFullTime.length == 2){
-								var hour = 1;
-								var minute = 0;
+								hour = 1;
+								minute = 0;
 							}else{
 								/*var parseTime = parseFullTime[0].split(":");
 								var hour = parseInt(parseTime[0]);
 								var minute = parseInt(parseTime[1]);*/
-								var hour = parseInt(parseFullTime[0]);
-								var minute = parseInt(parseFullTime[2]);
+								hour = parseInt(parseFullTime[0]);
+								minute = parseInt(parseFullTime[2]);
 								if (parseFullTime[3] == "pm"){
 									hour += 12;
 								}
 							}
+							/*var parseTime = parseFullTime[0].split(":");
+							var hour = parseInt(parseTime[0]);
+							var minute = parseInt(parseTime[1]);*/
+							var hour = parseInt(parseFullTime[0]);
+							var minute = parseInt(parseFullTime[2]);
+							if (parseFullTime[3] == "pm"){
+								hour += 12;
+							}
+							
 							
 							startDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,0,0);
 							endDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,30,0);
@@ -259,21 +272,21 @@ $(document).ready(function() {
 												
 					var parseDate = missListP[tabIndex][i].dateString.split("/");
 						var parseFullTime = missListP[tabIndex][i].timeString.split(" ");
-						if (parseFullTime.length == 2){
-								var hour = 1;
-								var minute = 0;
+						var hour;
+							var minute;
+							if (parseFullTime.length == 2){
+								hour = 1;
+								minute = 0;
 							}else{
 								/*var parseTime = parseFullTime[0].split(":");
 								var hour = parseInt(parseTime[0]);
 								var minute = parseInt(parseTime[1]);*/
-								var hour = parseInt(parseFullTime[0]);
-								var minute = parseInt(parseFullTime[2]);
+								hour = parseInt(parseFullTime[0]);
+								minute = parseInt(parseFullTime[2]);
 								if (parseFullTime[3] == "pm"){
 									hour += 12;
 								}
 							}
-						}
-						
 						//jfcalplugin.deleteAllAgendaItems("#mycal");
 						startDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,0,0);
 						endDateObj = new Date(parseInt(parseDate[2]),parseInt(parseDate[0])-1,parseInt(parseDate[1]),hour,minute,30,0);
