@@ -389,10 +389,10 @@ function takeDrugEvent(DrugName, dateString, timeString){
   			$(row).addClass('drug');
   			if (drugEvent.state == "taken"){
   				$(row).append($(document.createElement('td')).append("taken"));
-  				$(row).addClass("success");
+  				$(row).addClass("info");
   			} else {
   				$(row).append($(document.createElement('td')).append("missed"));
-  				$(row).addClass("error");
+  				$(row).addClass("info");
   			}
   			$('#historytable').append($(row));
 
