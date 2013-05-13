@@ -74,8 +74,8 @@ $(document).ready(function() {
 			drugNameList.push(drugList[i].name);
 		}
 		
-		$("#add_startdate").datepicker();
-		$("#add_enddate" ).datepicker();
+		$(add_startdate).datepicker();
+		$(add_enddate).datepicker();
 		
 		//clear all fields, set to add drug tab
 		addDrugTab()
