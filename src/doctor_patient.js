@@ -106,7 +106,13 @@ $(document).ready(function() {
 	//console.log(missList);
 	
 	//list of all patient
-	var all_patient = ["Amy Fox"];
+	//load patient info from json
+	var patient = returnAllPatients();
+	
+	
+	//patient lists
+	var all_patient = [];
+	all_patient.push(patient.name);
 	
 	//patient info from url
 	var patient_name= $.getUrlVar("patient_name");
