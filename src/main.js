@@ -269,9 +269,10 @@ function takeDrugEvent(DrugName, dateString, timeString){
 
 	$(document).ready(function() {
 
-		myJsonPills=returnAllDrugs();
+		
 
   		$('#EditPills').click(function(evt){
+  			myJsonPills=returnAllDrugs();
 			updateManagePills(myJsonPills);
   			document.getElementById("home").style.display="none";
   			document.getElementById("add_new").style.display="none";
@@ -333,6 +334,7 @@ function takeDrugEvent(DrugName, dateString, timeString){
         $('#doctor_div').click(function()    {
             $("#message_selectDoctors").hide();
             $("#message-main").show();
+            refreshMessages();
         });  
 
         $("#app_sign_out_btn").click(function()    {

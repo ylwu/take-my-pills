@@ -3,8 +3,8 @@ String.prototype.replaceAll = function(str1, str2, ignore)
 {
    return this.replace(new RegExp(str1.replace(/([\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g, function(c){return "\\" + c;}), "g"+(ignore?"i":"")), str2);
 };
-$(document).ready(function (){
 
+function refreshMessages(){
 	var messages = returnAllMessages();
 	
 		var code = "";
@@ -31,6 +31,10 @@ $(document).ready(function (){
 		$(conversation_table).append(code);
 		var objDiv = document.getElementById("message-box-size");
 		objDiv.scrollTop = objDiv.scrollHeight;
+}
+$(document).ready(function (){
+
+	refreshMessages();	
 
 	$(doctor_message_box).val("");
 

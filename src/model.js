@@ -46,7 +46,7 @@ var Model = function(){
 		min = date.getMinutes().toString();
 		hour = date.getHours();
 		if (min.length == 1){
-			min+= "0";
+			min= "0" + min;
 		}
 
 		if (hour<12){
